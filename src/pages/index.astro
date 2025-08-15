@@ -1,11 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import NavBar from '../components/NavBar.astro';
 import Hero from '../components/Hero.astro';
 import Team from '../components/Team.astro';
 ---
 
-<Layout>
+<BaseLayout>
 	<NavBar currentPage="home" />
 
 	<main class="main mt-20">
@@ -41,5 +41,5 @@ import Team from '../components/Team.astro';
 
 		<Team />
 	</main>
-</Layout>
+</BaseLayout>
 

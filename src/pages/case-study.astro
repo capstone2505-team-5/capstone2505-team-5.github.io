@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import NavBar from '../components/NavBar.astro';
 ---
 
-<Layout>
+<BaseLayout>
 	<NavBar currentPage="case-study" />
 
 	<div class="case-study-layout">
@@ -223,7 +223,7 @@ import NavBar from '../components/NavBar.astro';
 			</section>
 		</main>
 	</div>
-</Layout>
+</BaseLayout>
 
 <script>
 	// Intersection Observer for highlighting active navigation items
