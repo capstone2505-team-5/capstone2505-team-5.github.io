@@ -93,7 +93,6 @@ const sections = [
 	<div class="case-study-layout">
 		<aside class="sidebar">
 			<nav class="sidebar-nav">
-				<h3>Table of Contents</h3>
 				<ul class="sidebar-nav-list">
 					{sections.map((section) => (
 						<li>
@@ -249,7 +248,7 @@ const sections = [
 		position: fixed;
 		left: 0;
 		top: 80px;
-		width: 280px;
+		width: 300px;
 		height: calc(100vh - 80px);
 		background: var(--gray-50);
 		border-right: 1px solid var(--gray-200);
@@ -282,7 +281,8 @@ const sections = [
 		text-decoration: none;
 		border-radius: 0.5rem;
 		transition: all 0.2s ease;
-		font-size: 0.9rem;
+		font-size: 1.1rem;
+		font-weight: 600;
 	}
 
 	.sidebar-nav-item:hover {
@@ -328,9 +328,9 @@ const sections = [
 
 	.main-content {
 		flex: 1;
-		margin-left: 280px;
+		margin-left: 320px;
 		padding: 2rem 3rem;
-		max-width: calc(100vw - 280px);
+		max-width: calc(100vw - 320px);
 	}
 
 	.content-section {
