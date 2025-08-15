@@ -1,11 +1,45 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import NavBar from '../components/NavBar.astro';
+import Hero from '../components/Hero.astro';
+import Team from '../components/Team.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<NavBar currentPage="home" />
+
+	<main class="main mt-20">
+		<Hero />
+
+		<section id="about" class="section features">
+			<div class="container">
+				<h2 class="text-center mb-12">About This Project</h2>
+				<div class="features-grid">
+					<div class="feature-card">
+						<div class="feature-icon">📊</div>
+						<h3 class="feature-title">Research</h3>
+						<p class="feature-description">Comprehensive analysis and data collection to understand the problem space.</p>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">🎨</div>
+						<h3 class="feature-title">Design</h3>
+						<p class="feature-description">User-centered design process with multiple iterations and user testing.</p>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">⚙️</div>
+						<h3 class="feature-title">Development</h3>
+						<p class="feature-description">Implementation of the solution using modern technologies and best practices.</p>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">📈</div>
+						<h3 class="feature-title">Results</h3>
+						<p class="feature-description">Measurable outcomes and impact of the implemented solution.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<Team />
+	</main>
 </Layout>
+

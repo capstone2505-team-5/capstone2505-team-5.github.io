@@ -1,0 +1,587 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavBar from '../components/NavBar.astro';
+---
+
+<Layout>
+	<NavBar currentPage="case-study" />
+
+	<div class="case-study-layout">
+		<aside class="sidebar">
+			<nav class="sidebar-nav">
+				<h3>Table of Contents</h3>
+				<ul class="sidebar-nav-list">
+					<li><a href="#overview" class="sidebar-nav-item" data-section="overview">Overview</a></li>
+					<li><a href="#problem" class="sidebar-nav-item" data-section="problem">Problem Statement</a></li>
+					<li><a href="#research" class="sidebar-nav-item" data-section="research">Research & Analysis</a></li>
+					<li><a href="#design" class="sidebar-nav-item" data-section="design">Design Process</a></li>
+					<li><a href="#solution" class="sidebar-nav-item" data-section="solution">Solution</a></li>
+					<li><a href="#implementation" class="sidebar-nav-item" data-section="implementation">Implementation</a></li>
+					<li><a href="#results" class="sidebar-nav-item" data-section="results">Results & Impact</a></li>
+					<li><a href="#conclusion" class="sidebar-nav-item" data-section="conclusion">Conclusion</a></li>
+				</ul>
+			</nav>
+		</aside>
+
+		<main class="main-content">
+			<section id="overview" class="content-section">
+				<h2>Overview</h2>
+				<p>
+					This case study presents a comprehensive analysis of our project, covering the entire journey from initial problem identification through to final implementation and results. We'll explore the challenges faced, the solutions developed, and the measurable impact achieved.
+				</p>
+				<div class="highlight-box">
+					<h4>Key Highlights</h4>
+					<ul>
+						<li>Comprehensive user research with 50+ participants</li>
+						<li>Iterative design process with 3 major iterations</li>
+						<li>40% improvement in user satisfaction scores</li>
+						<li>25% reduction in task completion time</li>
+					</ul>
+				</div>
+			</section>
+
+			<section id="problem" class="content-section">
+				<h2>Problem Statement</h2>
+				<p>
+					The project began with the identification of a critical user experience issue that was affecting thousands of users daily. Through initial observations and user feedback, we discovered that the existing system was causing significant friction in the user workflow.
+				</p>
+				<h3>Key Challenges Identified</h3>
+				<ul>
+					<li>Complex navigation structure causing user confusion</li>
+					<li>Inconsistent design patterns across different sections</li>
+					<li>Slow loading times affecting user engagement</li>
+					<li>Lack of mobile responsiveness</li>
+				</ul>
+			</section>
+
+			<section id="research" class="content-section">
+				<h2>Research & Analysis</h2>
+				<p>
+					Our research phase involved multiple methodologies to ensure we had a comprehensive understanding of the problem space and user needs.
+				</p>
+				<h3>Research Methods</h3>
+				<div class="research-grid">
+					<div class="research-card">
+						<h4>User Interviews</h4>
+						<p>Conducted 25 in-depth interviews with users across different demographics and use cases.</p>
+					</div>
+					<div class="research-card">
+						<h4>Usability Testing</h4>
+						<p>Performed usability tests with 30 participants to identify pain points and opportunities.</p>
+					</div>
+					<div class="research-card">
+						<h4>Analytics Review</h4>
+						<p>Analyzed user behavior data from the existing system to understand usage patterns.</p>
+					</div>
+					<div class="research-card">
+						<h4>Competitive Analysis</h4>
+						<p>Studied 15 competitor solutions to identify best practices and differentiation opportunities.</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="design" class="content-section">
+				<h2>Design Process</h2>
+				<p>
+					The design process followed a user-centered approach with multiple iterations based on feedback and testing results.
+				</p>
+				<h3>Design Phases</h3>
+				<div class="timeline">
+					<div class="timeline-item">
+						<div class="timeline-marker">1</div>
+						<div class="timeline-content">
+							<h4>Wireframing</h4>
+							<p>Created low-fidelity wireframes to explore different layout and navigation options.</p>
+						</div>
+					</div>
+					<div class="timeline-item">
+						<div class="timeline-marker">2</div>
+						<div class="timeline-content">
+							<h4>Prototyping</h4>
+							<p>Developed interactive prototypes for user testing and stakeholder review.</p>
+						</div>
+					</div>
+					<div class="timeline-item">
+						<div class="timeline-marker">3</div>
+						<div class="timeline-content">
+							<h4>Visual Design</h4>
+							<p>Applied visual design principles and created a cohesive design system.</p>
+						</div>
+					</div>
+					<div class="timeline-item">
+						<div class="timeline-marker">4</div>
+						<div class="timeline-content">
+							<h4>Refinement</h4>
+							<p>Iterated on the design based on user feedback and technical constraints.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="solution" class="content-section">
+				<h2>Solution</h2>
+				<p>
+					Based on our research and design process, we developed a comprehensive solution that addressed the key challenges identified.
+				</p>
+				<h3>Core Solution Components</h3>
+				<div class="solution-grid">
+					<div class="solution-card">
+						<h4>Simplified Navigation</h4>
+						<p>Redesigned the navigation structure to be more intuitive and reduce cognitive load.</p>
+					</div>
+					<div class="solution-card">
+						<h4>Design System</h4>
+						<p>Created a consistent design system with reusable components and clear guidelines.</p>
+					</div>
+					<div class="solution-card">
+						<h4>Performance Optimization</h4>
+						<p>Implemented various optimization techniques to improve loading times and responsiveness.</p>
+					</div>
+					<div class="solution-card">
+						<h4>Mobile-First Approach</h4>
+						<p>Adopted a mobile-first design approach to ensure excellent experience across all devices.</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="implementation" class="content-section">
+				<h2>Implementation</h2>
+				<p>
+					The implementation phase involved careful planning and execution to ensure the solution was delivered on time and met all requirements.
+				</p>
+				<h3>Technical Stack</h3>
+				<div class="tech-stack">
+					<div class="tech-category">
+						<h4>Frontend</h4>
+						<ul>
+							<li>React.js</li>
+							<li>TypeScript</li>
+							<li>Tailwind CSS</li>
+						</ul>
+					</div>
+					<div class="tech-category">
+						<h4>Backend</h4>
+						<ul>
+							<li>Node.js</li>
+							<li>Express.js</li>
+							<li>PostgreSQL</li>
+						</ul>
+					</div>
+					<div class="tech-category">
+						<h4>Tools</h4>
+						<ul>
+							<li>Git & GitHub</li>
+							<li>Docker</li>
+							<li>AWS</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section id="results" class="content-section">
+				<h2>Results & Impact</h2>
+				<p>
+					The implementation of our solution resulted in significant improvements across multiple key metrics.
+				</p>
+				<div class="results-grid">
+					<div class="metric-card">
+						<div class="metric-value">40%</div>
+						<div class="metric-label">Improvement in User Satisfaction</div>
+					</div>
+					<div class="metric-card">
+						<div class="metric-value">25%</div>
+						<div class="metric-label">Reduction in Task Completion Time</div>
+					</div>
+					<div class="metric-card">
+						<div class="metric-value">60%</div>
+						<div class="metric-label">Decrease in User Errors</div>
+					</div>
+					<div class="metric-card">
+						<div class="metric-value">35%</div>
+						<div class="metric-label">Increase in User Engagement</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="conclusion" class="content-section">
+				<h2>Conclusion</h2>
+				<p>
+					This case study demonstrates the importance of a user-centered design approach and the impact that thoughtful design can have on user experience and business outcomes.
+				</p>
+				<h3>Key Learnings</h3>
+				<ul>
+					<li>User research is crucial for understanding real problems and needs</li>
+					<li>Iterative design processes lead to better solutions</li>
+					<li>Performance optimization is essential for user satisfaction</li>
+					<li>Consistent design systems improve maintainability and user experience</li>
+				</ul>
+				<div class="cta-box">
+					<h4>Ready to Start Your Project?</h4>
+					<p>Get in touch to discuss how we can help you achieve similar results.</p>
+					<a href="/" class="btn btn-primary">Contact Us</a>
+				</div>
+			</section>
+		</main>
+	</div>
+</Layout>
+
+<script>
+	// Intersection Observer for highlighting active navigation items
+	const observerOptions = {
+		rootMargin: '-20% 0px -70% 0px',
+		threshold: 0
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			const id = entry.target.getAttribute('id');
+			const navItem = document.querySelector(`[data-section="${id}"]`);
+			
+			if (entry.isIntersecting) {
+				// Remove active class from all nav items
+				document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+					item.classList.remove('active');
+				});
+				// Add active class to current nav item
+				if (navItem) {
+					navItem.classList.add('active');
+				}
+			}
+		});
+	}, observerOptions);
+
+	// Observe all sections
+	document.addEventListener('DOMContentLoaded', () => {
+		const sections = document.querySelectorAll('.content-section');
+		sections.forEach(section => {
+			observer.observe(section);
+		});
+
+		// Smooth scrolling for navigation links
+		const navLinks = document.querySelectorAll('.sidebar-nav-item');
+		navLinks.forEach(link => {
+			link.addEventListener('click', (e) => {
+				e.preventDefault();
+				const targetId = link.getAttribute('href')?.substring(1);
+				const targetSection = document.getElementById(targetId || '');
+				if (targetSection) {
+					targetSection.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
+				}
+			});
+		});
+	});
+</script>
+
+<style>
+	/* Case Study specific styles */
+	.case-study-layout {
+		display: flex;
+		margin-top: 80px;
+		min-height: calc(100vh - 80px);
+	}
+
+	.sidebar {
+		position: fixed;
+		left: 0;
+		top: 80px;
+		width: 280px;
+		height: calc(100vh - 80px);
+		background: var(--gray-50);
+		border-right: 1px solid var(--gray-200);
+		overflow-y: auto;
+		z-index: 50;
+	}
+
+	.sidebar-nav {
+		padding: 2rem 1.5rem;
+	}
+
+	.sidebar-nav h3 {
+		margin: 0 0 1.5rem 0;
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: var(--gray-700);
+	}
+
+	.sidebar-nav-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.sidebar-nav-item {
+		display: block;
+		padding: 0.75rem 1rem;
+		margin-bottom: 0.5rem;
+		color: var(--gray-600);
+		text-decoration: none;
+		border-radius: 0.5rem;
+		transition: all 0.2s ease;
+		font-size: 0.9rem;
+	}
+
+	.sidebar-nav-item:hover {
+		background: var(--gray-200);
+		color: var(--gray-800);
+	}
+
+	.sidebar-nav-item.active {
+		background: var(--primary-blue);
+		color: white;
+		font-weight: 500;
+	}
+
+	.main-content {
+		flex: 1;
+		margin-left: 280px;
+		padding: 2rem 3rem;
+		max-width: calc(100vw - 280px);
+	}
+
+	.content-section {
+		margin-bottom: 4rem;
+		scroll-margin-top: 100px;
+	}
+
+	.content-section h2 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: var(--gray-900);
+		margin-bottom: 1.5rem;
+		border-bottom: 3px solid var(--primary-blue);
+		padding-bottom: 0.5rem;
+	}
+
+	.content-section h3 {
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: var(--gray-800);
+		margin: 2rem 0 1rem 0;
+	}
+
+	.content-section h4 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: var(--gray-700);
+		margin: 1.5rem 0 0.75rem 0;
+	}
+
+	.content-section p {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: var(--gray-600);
+		margin-bottom: 1rem;
+	}
+
+	.content-section ul {
+		margin: 1rem 0;
+		padding-left: 1.5rem;
+	}
+
+	.content-section li {
+		margin-bottom: 0.5rem;
+		line-height: 1.6;
+		color: var(--gray-600);
+	}
+
+	.highlight-box {
+		background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+		color: white;
+		padding: 2rem;
+		border-radius: 1rem;
+		margin: 2rem 0;
+	}
+
+	.highlight-box h4 {
+		color: white;
+		margin-top: 0;
+	}
+
+	.highlight-box ul {
+		margin: 1rem 0 0 0;
+		padding-left: 1.5rem;
+	}
+
+	.highlight-box li {
+		color: rgba(255, 255, 255, 0.9);
+	}
+
+	.research-grid,
+	.solution-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 1.5rem;
+		margin: 2rem 0;
+	}
+
+	.research-card,
+	.solution-card {
+		background: white;
+		padding: 1.5rem;
+		border-radius: 0.75rem;
+		border: 1px solid var(--gray-200);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+		transition: transform 0.2s ease;
+	}
+
+	.research-card:hover,
+	.solution-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.research-card h4,
+	.solution-card h4 {
+		color: var(--primary-blue);
+		margin-top: 0;
+	}
+
+	.timeline {
+		margin: 2rem 0;
+	}
+
+	.timeline-item {
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 2rem;
+	}
+
+	.timeline-marker {
+		background: var(--primary-blue);
+		color: white;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 600;
+		font-size: 0.9rem;
+		margin-right: 1rem;
+		flex-shrink: 0;
+	}
+
+	.timeline-content h4 {
+		margin-top: 0;
+		color: var(--gray-800);
+	}
+
+	.tech-stack {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 2rem;
+		margin: 2rem 0;
+	}
+
+	.tech-category {
+		background: var(--gray-50);
+		padding: 1.5rem;
+		border-radius: 0.75rem;
+		border: 1px solid var(--gray-200);
+	}
+
+	.tech-category h4 {
+		color: var(--primary-blue);
+		margin-top: 0;
+	}
+
+	.tech-category ul {
+		margin: 1rem 0 0 0;
+		padding-left: 1.5rem;
+	}
+
+	.results-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1.5rem;
+		margin: 2rem 0;
+	}
+
+	.metric-card {
+		background: white;
+		padding: 2rem;
+		border-radius: 1rem;
+		text-align: center;
+		border: 1px solid var(--gray-200);
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+		transition: transform 0.2s ease;
+	}
+
+	.metric-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+	}
+
+	.metric-value {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: var(--primary-blue);
+		margin-bottom: 0.5rem;
+	}
+
+	.metric-label {
+		color: var(--gray-500);
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+
+	.cta-box {
+		background: var(--gray-50);
+		padding: 2rem;
+		border-radius: 1rem;
+		text-align: center;
+		margin: 2rem 0;
+		border: 1px solid var(--gray-200);
+	}
+
+	.cta-box h4 {
+		color: var(--gray-800);
+		margin-top: 0;
+	}
+
+	@media (max-width: 1024px) {
+		.sidebar {
+			width: 240px;
+		}
+
+		.main-content {
+			margin-left: 240px;
+			max-width: calc(100vw - 240px);
+			padding: 2rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.case-study-layout {
+			flex-direction: column;
+		}
+
+		.sidebar {
+			position: static;
+			width: 100%;
+			height: auto;
+			border-right: none;
+			border-bottom: 1px solid var(--gray-200);
+		}
+
+		.main-content {
+			margin-left: 0;
+			max-width: 100%;
+			padding: 1.5rem;
+		}
+
+		.content-section h2 {
+			font-size: 2rem;
+		}
+
+		.research-grid,
+		.solution-grid,
+		.tech-stack,
+		.results-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

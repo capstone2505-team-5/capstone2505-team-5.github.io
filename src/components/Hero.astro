@@ -1,0 +1,59 @@
+---
+import ogSymbol from '../assets/Updated OG Symbol.png';
+import ogTagDark from '../assets/Updated OG Tag Dark.png';
+---
+
+<section class="hero">
+	<div class="hero-content container-sm">
+		<div class="hero-logos">
+			<img src={ogSymbol.src} alt="Updated OG Symbol" class="hero-symbol" />
+			<img src={ogTagDark.src} alt="Updated OG Tag Dark" class="hero-tag" />
+		</div>
+		<p class="hero-subtitle">
+      A refreshingly simple process to get your LLM evals started and improve your LLM powered applications.		</p>
+		<div class="hero-actions">
+			<a href="/case-study" class="btn btn-primary">View Case Study</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero-logos {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 2rem;
+	}
+
+	.hero-symbol {
+		width: 275px;
+		height: auto;
+		margin-bottom: 1.5rem;
+	}
+
+	.hero-tag {
+		width: 450px;
+		height: auto;
+	}
+
+	.hero-actions .btn-primary {
+		padding: 1rem 2rem;
+		font-size: 1.1rem;
+		font-weight: 600;
+	}
+
+	@media (max-width: 768px) {
+		.hero-symbol {
+			width: 150px;
+		}
+
+		.hero-tag {
+			width: 220px;
+		}
+
+		.hero-actions .btn-primary {
+			padding: 0.875rem 1.75rem;
+			font-size: 1rem;
+		}
+	}
+</style>
