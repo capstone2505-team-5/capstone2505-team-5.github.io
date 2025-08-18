@@ -3,95 +3,25 @@
 ---
 
 <div class="future-work-content">
-  <h3 id="the-future">The Future</h3>
-  <p>
-    The implementation of our observability platform involved careful consideration 
-    of various technical challenges and requirements. We chose technologies that 
-    would provide the best balance of performance, scalability, and ease of use.
-  </p>
+  <h3 id="integrate-with-more-ai-observability-platforms">Integrate with More AI Observability Platforms</h3>
+  <p>Currently, we only offer our evaluation to those who are using Phoenix as their observability platform. There are many other observability platforms such as Braintrust, Langfuse, and Langsmith that we could integrate with so that users aren’t locked in to Phoenix. Furthermore, in addition to automated trace collection, we would like to offer users the option to directly upload trace data through CSV or JSON files to have more direct management over what traces they want to evaluate.</p>
 
-  <div class="highlight-box">
-    <h4>Key Highlights</h4>
-    <ul>
-      <li>Comprehensive user research with 50+ participants</li>
-      <li>Iterative design process with 3 major iterations</li>
-      <li>40% improvement in user satisfaction scores</li>
-      <li>25% reduction in task completion time</li>
-    </ul>
-  </div>
+  <h3 id="expand-deployment-options">Expand Deployment Options</h3>
+  <p>Because AI applications are so new, there are many developers who haven’t set up an observability tool yet. We could provide an option in our CLI to deploy Phoenix tracing infrastructure within the same AWS architecture as LLMonade - an all in one package to get setup with LLM observability and evaluation.</p>
 
-  <div class="tech-stack">
-    <div class="tech-category">
-      <h4>Frontend Technologies</h4>
-      <ul>
-        <li>React.js for interactive dashboards</li>
-        <li>TypeScript for type safety</li>
-        <li>D3.js for data visualization</li>
-        <li>Tailwind CSS for styling</li>
-      </ul>
-    </div>
-    
-    <div class="tech-category">
-      <h4>Backend Services</h4>
-      <ul>
-        <li>AWS Lambda for serverless functions</li>
-        <li>Amazon DynamoDB for data storage</li>
-        <li>AWS API Gateway for REST APIs</li>
-        <li>Amazon CloudWatch for monitoring</li>
-      </ul>
-    </div>
-    
-    <div class="tech-category">
-      <h4>Data Processing</h4>
-      <ul>
-        <li>Apache Kafka for event streaming</li>
-        <li>Apache Flink for real-time processing</li>
-        <li>Elasticsearch for search and analytics</li>
-        <li>Redis for caching</li>
-      </ul>
-    </div>
-  </div>
+  <p>Since LLM data, especially user inputs, can contain sensitive information, we would also like to offer deployment mechanisms that support different security constraints such as access through VPN.</p>
 
-  <h3>Development Process</h3>
-  <p>
-    Our development process followed an iterative approach with regular feedback 
-    loops and continuous integration. This ensured that we could quickly adapt 
-    to changing requirements and user feedback.
-  </p>
+  <p>Finally, not every team uses AWS, so in the future we would like to transition from using AWS CDK and instead use Terraform to allow users to deploy to other cloud providers such as Microsoft Azure and Google Cloud Platform (GCP).</p>
 
-  <div class="process-timeline">
-    <div class="timeline-item">
-      <div class="timeline-marker">1</div>
-      <div class="timeline-content">
-        <h4>Research & Planning</h4>
-        <p>Comprehensive analysis of existing observability solutions and identification of gaps for LLM applications.</p>
-      </div>
-    </div>
-    
-    <div class="timeline-item">
-      <div class="timeline-marker">2</div>
-      <div class="timeline-content">
-        <h4>Prototype Development</h4>
-        <p>Rapid prototyping of core functionality to validate technical approaches and gather early feedback.</p>
-      </div>
-    </div>
-    
-    <div class="timeline-item">
-      <div class="timeline-marker">3</div>
-      <div class="timeline-content">
-        <h4>Core Implementation</h4>
-        <p>Development of the main platform components with focus on scalability and performance.</p>
-      </div>
-    </div>
-    
-    <div class="timeline-item">
-      <div class="timeline-marker">4</div>
-      <div class="timeline-content">
-        <h4>Testing & Optimization</h4>
-        <p>Comprehensive testing across different scenarios and performance optimization based on real-world usage.</p>
-      </div>
-    </div>
-  </div>
+  <h3 id="provide-more-app-functionality">Provide More App Functionality</h3>
+  <p>Future development will focus on more comprehensive evaluation processes. We could enable viewing of entire traces across multiple spans, beyond our current root span focus, to give users a deeper insight into their LLM applications. </p>
+
+  <p>Context enhancement also represents a major area for future improvement. Future iterations can incorporate richer metadata on traces, API calls to external services, and introduce moveable and resizeable interface components for a more customizable user experience.</p>
+
+  <p>Finally, using synthetic datasets alongside real traces could enable experimental testing scenarios for applications still in development, allowing teams to evaluate their LLM systems before they have real user data. </p>
+
+  <p>As companies scale and generate larger volumes of traces, manual evaluation becomes unfeasible so we could add LLM-as-a-judge functionality. This would enable automated evaluation scoring allowing our application to support teams as their evaluation workloads grow. These enhancements would allow users to start out with a simplified error analysis workflow and gradually transition to an automated evaluation platform with guidance at every step.</p>
+
 </div>
 
 <style>
