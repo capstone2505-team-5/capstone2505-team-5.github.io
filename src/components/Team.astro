@@ -3,7 +3,7 @@
 const teamMembers = [
   {
     name: "Alex Harnett",
-    image: "",
+    image: "/images/team/Alex.jpeg",
     social: {
       linkedin: "https://www.linkedin.com/in/alex-harnett/",
       github: "https://github.com/AlexHarnett1",
@@ -12,7 +12,7 @@ const teamMembers = [
   },
   {
     name: "Josh Cutts",
-    image: "",
+    image: "/images/team/Josh.png",
     social: {
       linkedin: "https://www.linkedin.com/in/josh-cutts/",
       github: "https://github.com/joshcutts",
@@ -21,7 +21,7 @@ const teamMembers = [
   },
   {
     name: "Justin Shaber",
-    image: "",
+    image: "/images/team/Justin.jpg",
     social: {
       linkedin: "https://www.linkedin.com/in/justinshaber/",
       github: "https://github.com/justinshaber",
@@ -30,7 +30,7 @@ const teamMembers = [
   },
   {
     name: "Noah Raynor",
-    image: "",
+    image: "/images/team/Noah.jpg",
     social: {
       linkedin: "https://www.linkedin.com/in/noah-raynor-74318187/",
       github: "https://github.com/noahraynor",
@@ -47,9 +47,7 @@ const teamMembers = [
       {teamMembers.map((member) => (
         <div class="team-member">
           <div class="member-avatar">
-            <div class="avatar-placeholder">
-              <span>{member.name.split(' ').map(n => n[0]).join('')}</span>
-            </div>
+            <img src={member.image} alt={member.name} class="avatar-placeholder" />
           </div>
           <h3 class="member-name">{member.name}</h3>
           <div class="social-links">
