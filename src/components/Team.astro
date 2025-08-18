@@ -87,21 +87,21 @@ const teamMembers = [
   .team-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    max-width: 1000px;
+    gap: 3rem;
+    max-width: 1200px;
     margin: 0 auto;
     justify-items: center;
   }
 
   .team-member {
     text-align: center;
-    padding: 2rem 1rem;
+    padding: 3rem 2rem;
     background: var(--white);
-    border-radius: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     width: 100%;
-    max-width: 220px;
+    max-width: 280px;
   }
 
   .team-member:hover {
@@ -114,8 +114,8 @@ const teamMembers = [
   }
 
   .avatar-placeholder {
-    width: 80px;
-    height: 80px;
+    width: 160px;
+    height: 160px;
     background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
     border-radius: 50%;
     display: flex;
@@ -123,7 +123,7 @@ const teamMembers = [
     justify-content: center;
     margin: 0 auto;
     color: var(--white);
-    font-size: 1.5rem;
+    font-size: 3rem;
     font-weight: 600;
     letter-spacing: 0.5px;
   }
@@ -162,24 +162,29 @@ const teamMembers = [
   @media (max-width: 1024px) {
     .team-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+      gap: 2rem;
+    }
+    
+    .team-member {
+      max-width: 320px;
     }
   }
 
   @media (max-width: 640px) {
     .team-grid {
       grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: 2rem;
     }
 
     .team-member {
-      padding: 1.5rem 1rem;
+      padding: 2.5rem 1.5rem;
+      max-width: 350px;
     }
 
     .avatar-placeholder {
-      width: 60px;
-      height: 60px;
-      font-size: 1.25rem;
+      width: 120px;
+      height: 120px;
+      font-size: 2.25rem;
     }
   }
 </style>
