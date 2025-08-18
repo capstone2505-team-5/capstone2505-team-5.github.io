@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NavBar from '../components/NavBar.astro';
+import Background from '../components/case-study/Background.astro';
+import Architecture from '../components/case-study/Architecture.astro';
+import OurSolution from '../components/case-study/OurSolution.astro';
+import Introduction from '../components/case-study/Introduction.astro';
+import EngineeringChallenges from '../components/case-study/EngineeringChallenges.astro';
+import FutureWork from '../components/case-study/FutureWork.astro';
 
 const sections = [
 	{
@@ -112,74 +118,12 @@ const sections = [
 			{sections.map((section) => (
 				<section id={section.id} class="content-section">
 					<h2>{section.title}</h2>
-					{section.children.map((child) => (
-						<h3>{child.title}</h3>
-						<p>
-							This case study presents a comprehensive analysis of our project, covering the entire journey from initial problem identification through to final implementation and results. We'll explore the challenges faced, the solutions developed, and the measurable impact achieved.
-						</p>
-												<p>
-							This case study presents a comprehensive analysis of our project, covering the entire journey from initial problem identification through to final implementation and results. We'll explore the challenges faced, the solutions developed, and the measurable impact achieved.
-						</p>
-						<div class="highlight-box">
-							<h4>Key Highlights</h4>
-							<ul>
-								<li>Comprehensive user research with 50+ participants</li>
-								<li>Iterative design process with 3 major iterations</li>
-								<li>40% improvement in user satisfaction scores</li>
-								<li>25% reduction in task completion time</li>
-							</ul>
-						</div>
-
-						<div class="timeline">
-							<div class="timeline-item">
-								<div class="timeline-marker">1</div>
-								<div class="timeline-content">
-									<h4>Wireframing</h4>
-									<p>Created low-fidelity wireframes to explore different layout and navigation options.</p>
-								</div>
-							</div>
-							<div class="timeline-item">
-								<div class="timeline-marker">2</div>
-								<div class="timeline-content">
-									<h4>Prototyping</h4>
-									<p>Developed interactive prototypes for user testing and stakeholder review.</p>
-								</div>
-							</div>
-							<div class="timeline-item">
-								<div class="timeline-marker">3</div>
-								<div class="timeline-content">
-									<h4>Visual Design</h4>
-									<p>Applied visual design principles and created a cohesive design system.</p>
-								</div>
-							</div>
-							<div class="timeline-item">
-								<div class="timeline-marker">4</div>
-								<div class="timeline-content">
-									<h4>Refinement</h4>
-									<p>Iterated on the design based on user feedback and technical constraints.</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="results-grid">
-							<div class="metric-card">
-								<div class="metric-value">40%</div>
-								<div class="metric-label">Improvement in User Satisfaction</div>
-							</div>
-							<div class="metric-card">
-								<div class="metric-value">25%</div>
-								<div class="metric-label">Reduction in Task Completion Time</div>
-							</div>
-							<div class="metric-card">
-								<div class="metric-value">60%</div>
-								<div class="metric-label">Decrease in User Errors</div>
-							</div>
-							<div class="metric-card">
-								<div class="metric-value">35%</div>
-								<div class="metric-label">Increase in User Engagement</div>
-							</div>
-						</div>
-					))}
+					{section.id === 'introduction' && <Introduction />}
+					{section.id === 'background' && <Background />}
+					{section.id === 'architecture' && <Architecture />}
+					{section.id === 'our-solution' && <OurSolution />}
+					{section.id === 'engineering-challenges' && <EngineeringChallenges />}
+					{section.id === 'future-work' && <FutureWork />}
 				</section>
 			))}
 		</main>

@@ -1,0 +1,199 @@
+---
+// Results.astro - Case Study Results Section
+---
+
+<div class="engineering-challenges-content">
+  <h3>Engineering Challenges</h3>
+  <p>
+    Our observability platform has delivered significant improvements across 
+    multiple key performance indicators. The results demonstrate the effectiveness of our approach to monitoring LLM-based applications.
+  </p>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-value">85%</div>
+      <div class="metric-label">Faster Issue Detection</div>
+      <div class="metric-description">Reduced time to identify and diagnose problems in LLM applications</div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="metric-value">60%</div>
+      <div class="metric-label">Reduced Debugging Time</div>
+      <div class="metric-description">Faster resolution of issues through better observability</div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="metric-value">40%</div>
+      <div class="metric-label">Cost Optimization</div>
+      <div class="metric-description">Better resource utilization through improved monitoring</div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="metric-value">95%</div>
+      <div class="metric-label">Uptime Improvement</div>
+      <div class="metric-description">Enhanced reliability through proactive monitoring</div>
+    </div>
+  </div>
+
+  <h3>User Experience Impact</h3>
+  <p>
+    The implementation of our observability platform has had a profound impact 
+    on the user experience for both developers and end users of LLM applications.
+  </p>
+
+  <div class="impact-section">
+    <div class="impact-card">
+      <h4>Developer Experience</h4>
+      <ul>
+        <li>Faster debugging and troubleshooting</li>
+        <li>Better understanding of application behavior</li>
+        <li>Improved confidence in deployments</li>
+        <li>Reduced time spent on support issues</li>
+      </ul>
+    </div>
+    
+    <div class="impact-card">
+      <h4>End User Experience</h4>
+      <ul>
+        <li>More reliable and consistent responses</li>
+        <li>Faster response times</li>
+        <li>Better error handling and recovery</li>
+        <li>Improved overall satisfaction</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Business Impact</h3>
+  <p>
+    Beyond technical metrics, our observability platform has delivered 
+    measurable business value through improved operational efficiency 
+    and reduced costs.
+  </p>
+
+  <div class="business-metrics">
+    <div class="business-metric">
+      <h4>Operational Efficiency</h4>
+      <p>Reduced mean time to resolution (MTTR) by 70% through better visibility into system performance and faster issue identification.</p>
+    </div>
+    
+    <div class="business-metric">
+      <h4>Cost Savings</h4>
+      <p>Achieved 30% reduction in infrastructure costs through better resource utilization and proactive scaling.</p>
+    </div>
+    
+    <div class="business-metric">
+      <h4>Scalability</h4>
+      <p>Successfully handled 10x increase in traffic without proportional increase in operational overhead.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .engineering-challenges-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--gray-800);
+  }
+
+  .engineering-challenges-content h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--gray-700);
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .metric-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    border: 1px solid var(--gray-200);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+  }
+
+  .metric-label {
+    color: var(--gray-800);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .metric-description {
+    color: var(--gray-600);
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .impact-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .impact-card {
+    background: var(--gray-50);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--primary-green);
+  }
+
+  .impact-card h4 {
+    margin-top: 0;
+    color: var(--gray-800);
+  }
+
+  .impact-card ul {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+
+  .impact-card li {
+    margin-bottom: 0.5rem;
+    color: var(--gray-600);
+  }
+
+  .business-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .business-metric {
+    background: var(--gray-50);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--primary-yellow);
+  }
+
+  .business-metric h4 {
+    margin-top: 0;
+    color: var(--gray-800);
+  }
+
+  .business-metric p {
+    margin-bottom: 0;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+// Architecture.astro - Case Study Architecture Section
+---
+
+<div class="architecture-content">
+  <h3>Collecting Traces</h3>
+  <p>
+    Our approach to collecting traces from LLM-based applications involves 
+    instrumenting key points in the request flow to capture both traditional 
+    metrics and LLM-specific data points.
+  </p>
+
+  <div class="content-block">
+    <h4>Trace Collection Strategy</h4>
+    <ul>
+      <li>Request/response instrumentation</li>
+      <li>LLM API call tracking</li>
+      <li>Token usage monitoring</li>
+      <li>Context and prompt capture</li>
+    </ul>
+  </div>
+
+  <h3>Data Ingestion</h3>
+  <p>
+    The data ingestion pipeline processes and transforms raw trace data 
+    into a format suitable for analysis and visualization. This includes 
+    normalization, enrichment, and storage optimization.
+  </p>
+
+  <div class="content-block">
+    <h4>Ingestion Pipeline</h4>
+    <ul>
+      <li>Real-time data processing</li>
+      <li>Schema validation and normalization</li>
+      <li>Data enrichment with metadata</li>
+      <li>Efficient storage optimization</li>
+    </ul>
+  </div>
+
+  <h3>Standardizing our Platform</h3>
+  <p>
+    To ensure consistency across different LLM applications, we developed 
+    a standardized platform that provides common interfaces, data formats, 
+    and monitoring capabilities.
+  </p>
+
+  <div class="content-block">
+    <h4>Platform Standards</h4>
+    <ul>
+      <li>Unified data schema</li>
+      <li>Common API interfaces</li>
+      <li>Standardized metrics</li>
+      <li>Consistent visualization</li>
+    </ul>
+  </div>
+
+  <h3>Serverless Architecture</h3>
+  <p>
+    Our observability platform leverages serverless architecture to provide 
+    scalable, cost-effective monitoring without the overhead of managing 
+    infrastructure.
+  </p>
+
+  <div class="content-block">
+    <h4>Serverless Benefits</h4>
+    <ul>
+      <li>Automatic scaling</li>
+      <li>Pay-per-use pricing</li>
+      <li>Reduced operational overhead</li>
+      <li>Built-in high availability</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .architecture-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--gray-800);
+  }
+
+  .architecture-content h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--gray-700);
+  }
+
+  .content-block {
+    background: var(--gray-50);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--primary-green);
+  }
+
+  .content-block ul {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+
+  .content-block li {
+    margin-bottom: 0.5rem;
+    color: var(--gray-600);
+  }
+</style>

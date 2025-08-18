@@ -1,0 +1,90 @@
+---
+// Background.astro - Case Study Background Section
+---
+
+<div class="background-content">
+  <h3>Observability of Traditional Apps</h3>
+  <p>
+    Traditional applications follow well-established patterns for observability. 
+    These applications typically have predictable request flows, clear error boundaries, 
+    and structured data that makes monitoring and debugging straightforward.
+  </p>
+  
+  <div class="content-block">
+    <h4>Key Characteristics</h4>
+    <ul>
+      <li>Predictable request/response patterns</li>
+      <li>Structured error handling</li>
+      <li>Clear data flow boundaries</li>
+      <li>Established monitoring patterns</li>
+    </ul>
+  </div>
+
+  <h3>AI, LLMs, and LLM-based Apps</h3>
+  <p>
+    The emergence of Large Language Models (LLMs) and AI-powered applications 
+    has introduced new challenges for observability. These applications often 
+    have non-deterministic outputs, complex reasoning chains, and unique 
+    performance characteristics.
+  </p>
+
+  <div class="content-block">
+    <h4>New Challenges</h4>
+    <ul>
+      <li>Non-deterministic outputs</li>
+      <li>Complex reasoning chains</li>
+      <li>Variable response times</li>
+      <li>Context-dependent behavior</li>
+    </ul>
+  </div>
+
+  <h3>Observability of LLM-based Apps</h3>
+  <p>
+    Observing LLM-based applications requires new approaches and tools. 
+    Traditional metrics like response time and error rates are still important, 
+    but we need additional insights into the quality, relevance, and reasoning 
+    behind AI-generated responses.
+  </p>
+
+  <div class="content-block">
+    <h4>Observability Requirements</h4>
+    <ul>
+      <li>Response quality assessment</li>
+      <li>Reasoning chain analysis</li>
+      <li>Token usage monitoring</li>
+      <li>Context tracking</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .background-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--gray-800);
+  }
+
+  .background-content h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--gray-700);
+  }
+
+  .content-block {
+    background: var(--gray-50);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--primary-blue);
+  }
+
+  .content-block ul {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+
+  .content-block li {
+    margin-bottom: 0.5rem;
+    color: var(--gray-600);
+  }
+</style>
