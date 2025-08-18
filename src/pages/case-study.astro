@@ -141,28 +141,54 @@ const sections = [
 		entries.forEach(entry => {
 			const id = entry.target.getAttribute('id');
 			const navItem = document.querySelector(`[data-section="${id}"]`);
+			const subNavItem = document.querySelector(`[data-section="${id}"]`);
 			
 			if (entry.isIntersecting) {
-				// Remove active class from all nav items
-				document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+				// Remove active class from all nav items and sub-items
+				document.querySelectorAll('.sidebar-nav-item, .sidebar-nav-sub-item').forEach(item => {
 					item.classList.remove('active');
 				});
-				// Add active class to current nav item
-				if (navItem) {
-					navItem.classList.add('active');
+				
+				// Check if this is a subsection (h3 element)
+				if (entry.target.tagName === 'H3') {
+					// Find the parent section of this subsection
+					const parentSection = entry.target.closest('.content-section');
+					if (parentSection) {
+						const parentSectionId = parentSection.getAttribute('id');
+						const parentNavItem = document.querySelector(`[data-section="${parentSectionId}"]`);
+						if (parentNavItem) {
+							parentNavItem.classList.add('active');
+						}
+					}
+					
+					// Add active class to the subsection nav item
+					if (subNavItem) {
+						subNavItem.classList.add('active');
+					}
+				} else {
+					// This is a main section, just highlight the main nav item
+					if (navItem) {
+						navItem.classList.add('active');
+					}
 				}
 			}
 		});
 	}, observerOptions);
 
-	// Observe all sections
+	// Observe all sections and subsections
 	document.addEventListener('DOMContentLoaded', () => {
 		const sections = document.querySelectorAll('.content-section');
+		const subsections = document.querySelectorAll('h3[id]'); // All h3 elements with IDs
+		
 		sections.forEach(section => {
 			observer.observe(section);
 		});
+		
+		subsections.forEach(subsection => {
+			observer.observe(subsection);
+		});
 
-		// Smooth scrolling for navigation links
+		// Smooth scrolling for main navigation links
 		const navLinks = document.querySelectorAll('.sidebar-nav-item');
 		navLinks.forEach(link => {
 			link.addEventListener('click', (e) => {
@@ -170,9 +196,29 @@ const sections = [
 				const targetId = link.getAttribute('href')?.substring(1);
 				const targetSection = document.getElementById(targetId || '');
 				if (targetSection) {
-					targetSection.scrollIntoView({
-						behavior: 'smooth',
-						block: 'start'
+					const headerHeight = 80; // Height of the fixed header
+					const targetPosition = targetSection.offsetTop - headerHeight;
+					window.scrollTo({
+						top: targetPosition,
+						behavior: 'smooth'
+					});
+				}
+			});
+		});
+
+		// Smooth scrolling for sub-navigation links
+		const subNavLinks = document.querySelectorAll('.sidebar-nav-sub-item');
+		subNavLinks.forEach(link => {
+			link.addEventListener('click', (e) => {
+				e.preventDefault();
+				const targetId = link.getAttribute('href')?.substring(1);
+				const targetSubsection = document.getElementById(targetId || '');
+				if (targetSubsection) {
+					const headerHeight = 80; // Height of the fixed header
+					const targetPosition = targetSubsection.offsetTop - headerHeight;
+					window.scrollTo({
+						top: targetPosition,
+						behavior: 'smooth'
 					});
 				}
 			});

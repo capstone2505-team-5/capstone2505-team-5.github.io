@@ -3,88 +3,72 @@
 ---
 
 <div class="engineering-challenges-content">
-  <h3>Engineering Challenges</h3>
+  <h3 id="collecting-traces">Collecting Traces</h3>
   <p>
-    Our observability platform has delivered significant improvements across 
-    multiple key performance indicators. The results demonstrate the effectiveness of our approach to monitoring LLM-based applications.
+    Our approach to collecting traces from LLM-based applications involves 
+    instrumenting key points in the request flow to capture both traditional 
+    metrics and LLM-specific data points.
   </p>
 
-  <div class="metrics-grid">
-    <div class="metric-card">
-      <div class="metric-value">85%</div>
-      <div class="metric-label">Faster Issue Detection</div>
-      <div class="metric-description">Reduced time to identify and diagnose problems in LLM applications</div>
-    </div>
-    
-    <div class="metric-card">
-      <div class="metric-value">60%</div>
-      <div class="metric-label">Reduced Debugging Time</div>
-      <div class="metric-description">Faster resolution of issues through better observability</div>
-    </div>
-    
-    <div class="metric-card">
-      <div class="metric-value">40%</div>
-      <div class="metric-label">Cost Optimization</div>
-      <div class="metric-description">Better resource utilization through improved monitoring</div>
-    </div>
-    
-    <div class="metric-card">
-      <div class="metric-value">95%</div>
-      <div class="metric-label">Uptime Improvement</div>
-      <div class="metric-description">Enhanced reliability through proactive monitoring</div>
-    </div>
+  <div class="content-block">
+    <h4>Trace Collection Strategy</h4>
+    <ul>
+      <li>Request/response instrumentation</li>
+      <li>LLM API call tracking</li>
+      <li>Token usage monitoring</li>
+      <li>Context and prompt capture</li>
+    </ul>
   </div>
 
-  <h3>User Experience Impact</h3>
+  <h3 id="data-ingestion">Data Ingestion</h3>
   <p>
-    The implementation of our observability platform has had a profound impact 
-    on the user experience for both developers and end users of LLM applications.
+    The data ingestion pipeline processes and transforms raw trace data 
+    into a format suitable for analysis and visualization. This includes 
+    normalization, enrichment, and storage optimization.
   </p>
 
-  <div class="impact-section">
-    <div class="impact-card">
-      <h4>Developer Experience</h4>
-      <ul>
-        <li>Faster debugging and troubleshooting</li>
-        <li>Better understanding of application behavior</li>
-        <li>Improved confidence in deployments</li>
-        <li>Reduced time spent on support issues</li>
-      </ul>
-    </div>
-    
-    <div class="impact-card">
-      <h4>End User Experience</h4>
-      <ul>
-        <li>More reliable and consistent responses</li>
-        <li>Faster response times</li>
-        <li>Better error handling and recovery</li>
-        <li>Improved overall satisfaction</li>
-      </ul>
-    </div>
+  <div class="content-block">
+    <h4>Ingestion Pipeline</h4>
+    <ul>
+      <li>Real-time data processing</li>
+      <li>Schema validation and normalization</li>
+      <li>Data enrichment with metadata</li>
+      <li>Efficient storage optimization</li>
+    </ul>
   </div>
 
-  <h3>Business Impact</h3>
+  <h3 id="standardizing-our-platform">Standardizing our Platform</h3>
   <p>
-    Beyond technical metrics, our observability platform has delivered 
-    measurable business value through improved operational efficiency 
-    and reduced costs.
+    To ensure consistency across different LLM applications, we developed 
+    a standardized platform that provides common interfaces, data formats, 
+    and monitoring capabilities.
   </p>
 
-  <div class="business-metrics">
-    <div class="business-metric">
-      <h4>Operational Efficiency</h4>
-      <p>Reduced mean time to resolution (MTTR) by 70% through better visibility into system performance and faster issue identification.</p>
-    </div>
-    
-    <div class="business-metric">
-      <h4>Cost Savings</h4>
-      <p>Achieved 30% reduction in infrastructure costs through better resource utilization and proactive scaling.</p>
-    </div>
-    
-    <div class="business-metric">
-      <h4>Scalability</h4>
-      <p>Successfully handled 10x increase in traffic without proportional increase in operational overhead.</p>
-    </div>
+  <div class="content-block">
+    <h4>Platform Standards</h4>
+    <ul>
+      <li>Unified data schema</li>
+      <li>Common API interfaces</li>
+      <li>Standardized metrics</li>
+      <li>Consistent visualization</li>
+    </ul>
+  </div>
+
+  <h3 id="serverless-architecture">Serverless Architecture</h3>
+  <p>
+    Our observability platform leverages serverless architecture to provide 
+    scalable, cost-effective monitoring without the overhead of managing 
+    infrastructure.
+  </p>
+
+  <div class="content-block">
+    <h4>Serverless Benefits</h4>
+    <ul>
+      <li>Automatic scaling</li>
+      <li>Pay-per-use pricing</li>
+      <li>Reduced operational overhead</li>
+      <li>Built-in high availability</li>
+    </ul>
   </div>
 </div>
 
