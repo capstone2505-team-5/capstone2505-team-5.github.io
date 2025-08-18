@@ -1,6 +1,6 @@
 ---
-import ogSymbol from '../assets/Updated OG Symbol.png';
-import ogTagDark from '../assets/Updated OG Tag Dark.png';
+// import ogSymbol from '../../public/images/Updated OG Symbol.png';
+// import ogTagDark from '../../public/images/Updated OG Tag Dark.png';
 
 export interface Props {
 	currentPage?: string;
@@ -13,8 +13,8 @@ const { currentPage = "home" } = Astro.props;
 	<nav class="nav">
 		<div class="nav-brand">
 			<a href="/" class="nav-brand-link">
-				<img src={ogSymbol.src} alt="OG Symbol" class="nav-symbol" />
-				<img src={ogTagDark.src} alt="OG Tag Dark" class="nav-tag" />
+				<img src='images/Updated OG Symbol.png' alt="LLMonade" class="nav-symbol" />
+				<img src='images/Updated OG Tag Dark.png' alt="" class="nav-tag" />
 			</a>
 		</div>
 		<div class="nav-links">
