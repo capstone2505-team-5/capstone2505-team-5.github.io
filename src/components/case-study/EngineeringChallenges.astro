@@ -3,22 +3,20 @@
 ---
 
 <div class="case-study-content">
-  <h3 id="collecting-traces">Collecting Traces</h3>
-  <p>
-    Our approach to collecting traces from LLM-based applications involves 
-    instrumenting key points in the request flow to capture both traditional 
-    metrics and LLM-specific data points.
-  </p>
+  <h3 id="collecting-root-spans">Collecting Root Spans</h3>
+  <h4>The Challenge</h4>
+  <p>We needed a reliable, automated way to collect root spans from a user’s LLM application. The collection method had to work across diverse environments, minimize integration complexity, and support both current and historical trace data for evaluation.</p>
 
-  <div class="content-block">
-    <h4>Trace Collection Strategy</h4>
-    <ul>
-      <li>Request/response instrumentation</li>
-      <li>LLM API call tracking</li>
-      <li>Token usage monitoring</li>
-      <li>Context and prompt capture</li>
-    </ul>
-  </div>
+  <h4>Options</h4>
+  <p>We evaluated several approaches to ingestion, each with distinct advantages and drawbacks. We considered creating our own SDK that users would integrate into their applications to send traces directly to LLMonade. This would provide us with direct trace collection and full control over the ingestion process.  However, real time ingestion would not retrieve historical traces. This is a critical shortcoming for teams needing to analyze applications already running in production. Lastly, building efficient trace collection infrastructure is complex: it must handle high trace volumes while maintaining zero performance impact on user applications.</p>
+  
+  <h4>Our Solution</h4>
+  <p>We chose to leverage the proven observability tool Phoenix to collect trace data. Phoenix is open source with no licensing cost or vendor lock-in, supports self-deployment in user environments, and provides well-documented GraphQL endpoints. These features align with LLMonade’s own goals of supporting small teams who want to maintain ownership over their data.</p>
+
+  <p>Many AI teams already use Phoenix for observability. This allows us to integrate into existing workflows and create a consistent, dependable ecosystem for LLM observability and evaluation without building our own tracing infrastructure. We view our application as a stepping stone for AI application developers. Retaining trace data in Phoenix benefits our users as their applications scale to serve more users.</p>
+
+  <h4>Tradeoffs</h4>
+  <p>The main issue with choosing Phoenix as our trace provider is that it becomes a single point of failure for our application. Pulling Phoenix trace data and storing it in our own database helps to mitigate this dependency. By having redundant data, our users can still evaluate root spans even if Phoenix’s API is down. While relying on Phoenix to provide traces simplifies many of the trace collection challenges, ingesting data from it to populate LLMonade’s databases still was not a trivial task. </p>
 
   <h3 id="data-ingestion">Data Ingestion</h3>
   <p>
