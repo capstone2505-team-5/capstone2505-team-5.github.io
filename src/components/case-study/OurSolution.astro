@@ -60,51 +60,19 @@ const images: {
     </div>
   </div>
 
-  </div>
+  <h4>Deployment Command Line Interface</h4>
+  <p>The deployment Command Line Interface (CLI) is a tool that automatically spins up all required infrastructure to Amazon Web Services. It utilizes AWS Cloud Development Kit (CDK) to provision and connect the entire architecture without any manual configuration. LLMonade is an ideal solution for small teams to get started quickly with a self-hosted, AI evaluation workflow.</p>
+  
+  <h4>Root Spans Extract, Transform, Load Pipeline</h4>
+  <p>Looking at real application data is the foundation of manual error analysis.  LLMonade integrates seamlessly with the AI observability tool Phoenix.  Once deployed, the ETL pipeline automatically ingests existing traces from Phoenix and any new traces that get generated. The highest level spans, the root spans, are formatted and saved to a database. This guarantees that the latest application behavior is always available for error analysis and review in the web application.</p>
 
+
+  <h3 id="fullstack-error-analysis-web-application">Fullstack Error Analysis Web Application</h3>
+  <p>At the heart of LLMonade is a full-stack web application.  The application features a simplified error analysis workflow that walks developers through their first manual evaluations.  The error analysis is accomplished through an optimized human review interface. This facilitates the viewing, annotating, and analysis of their LLM-powered application outputs.</p>
+  <Carousel media={images} title="Error Analysis Workflow"/>
   <p>LLMonade walks users through a simplified five step workflow to quickly get started evaluating their application. This simplified workflow reflects Hamel Husain’s best practices for error analysis.  The inspection results provide data driven targets for developers to focus on.  Progress through the workflow is visually tracked in a persistent footer. It highlights the current error analysis step and clearly indicates what comes next, ensuring users new to evaluations can navigate the process with ease. </p>
-  <Carousel media={images} title="Error Analysis Workflow" />
 
-  <h3>Development Process</h3>
-  <p>
-    Our development process followed an iterative approach with regular feedback 
-    loops and continuous integration. This ensured that we could quickly adapt 
-    to changing requirements and user feedback.
-  </p>
 
-  <div class="process-timeline">
-    <div class="timeline-item">
-      <div class="timeline-marker">1</div>
-      <div class="timeline-content">
-        <h4>Research & Planning</h4>
-        <p>Comprehensive analysis of existing observability solutions and identification of gaps for LLM applications.</p>
-      </div>
-    </div>
-    
-    <div class="timeline-item">
-      <div class="timeline-marker">2</div>
-      <div class="timeline-content">
-        <h4>Prototype Development</h4>
-        <p>Rapid prototyping of core functionality to validate technical approaches and gather early feedback.</p>
-      </div>
-    </div>
-    
-    <div class="timeline-item">
-      <div class="timeline-marker">3</div>
-      <div class="timeline-content">
-        <h4>Core Implementation</h4>
-        <p>Development of the main platform components with focus on scalability and performance.</p>
-      </div>
-    </div>
-    
-    <div class="timeline-item">
-      <div class="timeline-marker">4</div>
-      <div class="timeline-content">
-        <h4>Testing & Optimization</h4>
-        <p>Comprehensive testing across different scenarios and performance optimization based on real-world usage.</p>
-      </div>
-    </div>
-  </div>
 </div>
 
 
