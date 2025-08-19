@@ -1,0 +1,112 @@
+---
+// Image.astro - Reusable image component for diagrams and other images
+export interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  width?: string;
+  height?: string;
+  clickable?: boolean;
+  centered?: boolean;
+  bordered?: boolean;
+  shadow?: boolean;
+  rounded?: boolean;
+}
+
+const { 
+  src, 
+  alt, 
+  caption, 
+  width = "100%", 
+  height = "auto", 
+  clickable = false,
+  centered = true,
+  bordered = false,
+  shadow = true,
+  rounded = false
+} = Astro.props;
+---
+
+<div class={`image-container ${centered ? 'centered' : ''}`}>
+  <img 
+    src={src} 
+    alt={alt} 
+    class={`image-component ${clickable ? 'clickable' : ''} ${bordered ? 'bordered' : ''} ${shadow ? 'shadow' : ''} ${rounded ? 'rounded' : ''}`}
+    style={`width: ${width}; height: ${height};`}
+  />
+  {caption && (
+    <div class="image-caption">
+      <p>{caption}</p>
+    </div>
+  )}
+</div>
+
+<style>
+  .image-container {
+    margin: 2rem 0;
+  }
+
+  .image-container.centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-component {
+    max-width: 100%;
+    object-fit: contain;
+    transition: all 0.2s ease;
+  }
+
+  .image-component.shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .image-component.bordered {
+    border: 1px solid var(--gray-200);
+  }
+
+  .image-component.rounded {
+    border-radius: 0.5rem;
+  }
+
+  .image-component.clickable {
+    cursor: pointer;
+  }
+
+  .image-component.clickable:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .image-caption {
+    margin-top: 0.75rem;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .image-caption p {
+    margin: 0;
+    color: var(--gray-600);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    font-style: italic;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .image-container {
+      margin: 1.5rem 0;
+    }
+    
+    .image-caption p {
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .image-container {
+      margin: 1rem 0;
+    }
+  }
+</style>
