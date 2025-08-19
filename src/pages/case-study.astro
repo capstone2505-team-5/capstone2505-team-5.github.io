@@ -7,6 +7,7 @@ import OurSolution from '../components/case-study/OurSolution.astro';
 import Introduction from '../components/case-study/Introduction.astro';
 import EngineeringChallenges from '../components/case-study/EngineeringChallenges.astro';
 import FutureWork from '../components/case-study/FutureWork.astro';
+import ExistingSolutions from '../components/case-study/ExistingSolutions.astro';
 
 const sections = [
 	{
@@ -47,6 +48,24 @@ const sections = [
 				title: "Effective Human Review Interface",
 				id: "effective-human-review-interface"
 			}
+		]
+	},
+	{
+		title: "Existing Solutions",
+		id: "existing-solutions",
+		children: [
+			{
+				title: "AI Evaluation Software",
+				id: "ai-evaluation-software"
+			},
+			{
+				title: "Data Labeling Software",
+				id: "data-labeling-software"
+			},
+			{
+				title: "Gap in Service",
+				id: "gap-in-service"
+			},
 		]
 	},
 	{
@@ -140,8 +159,9 @@ const sections = [
 					<h2>{section.title}</h2>
 					{section.id === 'introduction' && <Introduction />}
 					{section.id === 'background' && <Background />}
-					{section.id === 'architecture' && <Architecture />}
+					{section.id === 'existing-solutions' && <ExistingSolutions />}
 					{section.id === 'our-solution' && <OurSolution />}
+					{section.id === 'architecture' && <Architecture />}
 					{section.id === 'engineering-challenges' && <EngineeringChallenges />}
 					{section.id === 'future-work' && <FutureWork />}
 				</section>
