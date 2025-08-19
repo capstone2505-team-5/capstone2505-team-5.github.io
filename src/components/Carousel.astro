@@ -248,7 +248,23 @@ const { images, title } = Astro.props;
       this.currentIndex = index;
       this.modal?.classList.add('active');
       document.body.style.overflow = 'hidden';
-      this.updateModalSlides();
+      
+      // Force immediate update without transitions for modal slides
+      this.modalSlides.forEach((slide, slideIndex) => {
+        slide.style.transition = 'none';
+        slide.style.transform = `translateX(${(slideIndex - this.currentIndex) * 100}%)`;
+        slide.setAttribute('aria-hidden', slideIndex !== this.currentIndex ? 'true' : 'false');
+      });
+      
+      // Re-enable transitions after a brief delay
+      setTimeout(() => {
+        this.modalSlides.forEach(slide => {
+          slide.style.transition = 'transform 0.3s ease-in-out';
+        });
+      }, 50);
+      
+      this.updateSlides();
+      this.updateIndicators();
       this.updateModalIndicators();
     }
     
@@ -277,18 +293,24 @@ const { images, title } = Astro.props;
     
     modalPrevious() {
       this.currentIndex = this.currentIndex === 0 ? this.totalSlides - 1 : this.currentIndex - 1;
+      this.updateSlides();
+      this.updateIndicators();
       this.updateModalSlides();
       this.updateModalIndicators();
     }
     
     modalNext() {
       this.currentIndex = this.currentIndex === this.totalSlides - 1 ? 0 : this.currentIndex + 1;
+      this.updateSlides();
+      this.updateIndicators();
       this.updateModalSlides();
       this.updateModalIndicators();
     }
     
     modalGoTo(index: number) {
       this.currentIndex = index;
+      this.updateSlides();
+      this.updateIndicators();
       this.updateModalSlides();
       this.updateModalIndicators();
     }
