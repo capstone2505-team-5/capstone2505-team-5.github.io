@@ -1,15 +1,16 @@
 ---
-// Carousel.astro - Image carousel with navigation and captions
+// Carousel.astro - Image and video carousel with navigation and captions
 export interface Props {
-  images: {
+  media: {
     src: string;
     alt: string;
     caption: string;
+    type: 'image' | 'video';
   }[];
   title?: string;
 }
 
-const { images, title } = Astro.props;
+const { media, title } = Astro.props;
 ---
 
 <div class="carousel-container">
@@ -23,11 +24,26 @@ const { images, title } = Astro.props;
     </button>
     
     <div class="carousel-track">
-      {images.map((image, index) => (
+      {media.map((item, index) => (
         <div class="carousel-slide" data-index={index}>
-          <img src={image.src} alt={image.alt} class="carousel-image" />
+          {item.type === 'video' ? (
+            <video 
+              src={item.src} 
+              class="carousel-media" 
+              controls
+              preload="metadata"
+              poster={item.src.replace(/\.[^/.]+$/, '.jpg')}
+              autoplay
+              loop
+              muted
+            >
+              <track kind="captions" />
+            </video>
+          ) : (
+            <img src={item.src} alt={item.alt} class="carousel-media" />
+          )}
           <div class="carousel-caption">
-            <p>{image.caption}</p>
+            <p>{item.caption}</p>
           </div>
         </div>
       ))}
@@ -41,11 +57,71 @@ const { images, title } = Astro.props;
   </div>
   
   <div class="carousel-indicators">
-    {images.map((_, index) => (
-      <button class="carousel-indicator" data-index={index} aria-label={`Go to image ${index + 1}`}>
+    {media.map((_, index) => (
+      <button class="carousel-indicator" data-index={index} aria-label={`Go to item ${index + 1}`}>
         <span class="indicator-dot"></span>
       </button>
     ))}
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="carousel-modal" id="carousel-modal">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Close modal">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+    
+    <div class="modal-carousel-wrapper">
+      <button class="modal-arrow modal-arrow-left" aria-label="Previous image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </button>
+      
+      <div class="modal-carousel-track">
+        {media.map((item, index) => (
+          <div class="modal-carousel-slide" data-index={index}>
+            {item.type === 'video' ? (
+                          <video 
+              src={item.src} 
+              class="modal-carousel-media" 
+              controls
+              preload="metadata"
+              poster={item.src.replace(/\.[^/.]+$/, '.jpg')}
+              autoplay
+              loop
+              muted
+            >
+              <track kind="captions" />
+            </video>
+            ) : (
+              <img src={item.src} alt={item.alt} class="modal-carousel-image" />
+            )}
+            <div class="modal-carousel-caption">
+              <p>{item.caption}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <button class="modal-arrow modal-arrow-right" aria-label="Next image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+      </button>
+    </div>
+    
+      <div class="modal-carousel-indicators">
+    {media.map((_, index) => (
+      <button class="modal-carousel-indicator" data-index={index} aria-label={`Go to item ${index + 1}`}>
+        <span class="modal-indicator-dot"></span>
+      </button>
+    ))}
+  </div>
   </div>
 </div>
 
@@ -59,6 +135,13 @@ const { images, title } = Astro.props;
     private rightArrow: HTMLButtonElement | null;
     private currentIndex: number;
     private totalSlides: number;
+    private modal: HTMLElement | null;
+    private modalTrack: HTMLElement | null;
+    private modalSlides: HTMLElement[];
+    private modalIndicators: HTMLElement[];
+    private modalLeftArrow: HTMLButtonElement | null;
+    private modalRightArrow: HTMLButtonElement | null;
+    private modalClose: HTMLButtonElement | null;
 
     constructor(container: HTMLElement) {
       this.container = container;
@@ -67,6 +150,15 @@ const { images, title } = Astro.props;
       this.indicators = Array.from(container.querySelectorAll('.carousel-indicator')) as HTMLElement[];
       this.leftArrow = container.querySelector('.carousel-arrow-left') as HTMLButtonElement;
       this.rightArrow = container.querySelector('.carousel-arrow-right') as HTMLButtonElement;
+      
+      // Modal elements
+      this.modal = document.getElementById('carousel-modal') as HTMLElement;
+      this.modalTrack = this.modal?.querySelector('.modal-carousel-track') as HTMLElement;
+      this.modalSlides = Array.from(this.modal?.querySelectorAll('.modal-carousel-slide') || []) as HTMLElement[];
+      this.modalIndicators = Array.from(this.modal?.querySelectorAll('.modal-carousel-indicator') || []) as HTMLElement[];
+      this.modalLeftArrow = this.modal?.querySelector('.modal-arrow-left') as HTMLButtonElement;
+      this.modalRightArrow = this.modal?.querySelector('.modal-arrow-right') as HTMLButtonElement;
+      this.modalClose = this.modal?.querySelector('.modal-close') as HTMLButtonElement;
       
       this.currentIndex = 0;
       this.totalSlides = this.slides.length;
@@ -88,6 +180,25 @@ const { images, title } = Astro.props;
         indicator.addEventListener('click', () => this.goTo(index));
       });
       
+      // Media click to open modal
+      this.slides.forEach((slide, index) => {
+        const media = slide.querySelector('.carousel-media') as HTMLImageElement | HTMLVideoElement;
+        media?.addEventListener('click', () => this.openModal(index));
+      });
+      
+      // Modal events
+      this.modalLeftArrow?.addEventListener('click', () => this.modalPrevious());
+      this.modalRightArrow?.addEventListener('click', () => this.modalNext());
+      this.modalClose?.addEventListener('click', () => this.closeModal());
+      
+      this.modalIndicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => this.modalGoTo(index));
+      });
+      
+      // Close modal on overlay click
+      const overlay = this.modal?.querySelector('.modal-overlay') as HTMLElement;
+      overlay?.addEventListener('click', () => this.closeModal());
+      
       // Keyboard navigation
       this.container.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') {
@@ -96,6 +207,21 @@ const { images, title } = Astro.props;
         } else if (e.key === 'ArrowRight') {
           e.preventDefault();
           this.next();
+        }
+      });
+      
+      // Modal keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (this.modal?.classList.contains('active')) {
+          if (e.key === 'Escape') {
+            this.closeModal();
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            this.modalPrevious();
+          } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            this.modalNext();
+          }
         }
       });
       
@@ -111,6 +237,16 @@ const { images, title } = Astro.props;
         endX = e.changedTouches[0].clientX;
         this.handleSwipe(startX, endX);
       });
+      
+      // Modal touch/swipe support
+      this.modal?.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+      });
+      
+      this.modal?.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        this.handleModalSwipe(startX, endX);
+      });
     }
     
     handleSwipe(startX: number, endX: number) {
@@ -124,6 +260,48 @@ const { images, title } = Astro.props;
           this.previous();
         }
       }
+    }
+    
+    handleModalSwipe(startX: number, endX: number) {
+      const threshold = 50;
+      const diff = startX - endX;
+      
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0) {
+          this.modalNext();
+        } else {
+          this.modalPrevious();
+        }
+      }
+    }
+    
+    openModal(index: number) {
+      this.currentIndex = index;
+      this.modal?.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      // Force immediate update without transitions for modal slides
+      this.modalSlides.forEach((slide, slideIndex) => {
+        slide.style.transition = 'none';
+        slide.style.transform = `translateX(${(slideIndex - this.currentIndex) * 100}%)`;
+        slide.setAttribute('aria-hidden', slideIndex !== this.currentIndex ? 'true' : 'false');
+      });
+      
+      // Re-enable transitions after a brief delay
+      setTimeout(() => {
+        this.modalSlides.forEach(slide => {
+          slide.style.transition = 'transform 0.3s ease-in-out';
+        });
+      }, 50);
+      
+      this.updateSlides();
+      this.updateIndicators();
+      this.updateModalIndicators();
+    }
+    
+    closeModal() {
+      this.modal?.classList.remove('active');
+      document.body.style.overflow = '';
     }
     
     previous() {
@@ -144,21 +322,94 @@ const { images, title } = Astro.props;
       this.updateIndicators();
     }
     
+    modalPrevious() {
+      this.currentIndex = this.currentIndex === 0 ? this.totalSlides - 1 : this.currentIndex - 1;
+      this.updateSlides();
+      this.updateIndicators();
+      this.updateModalSlides();
+      this.updateModalIndicators();
+    }
+    
+    modalNext() {
+      this.currentIndex = this.currentIndex === this.totalSlides - 1 ? 0 : this.currentIndex + 1;
+      this.updateSlides();
+      this.updateIndicators();
+      this.updateModalSlides();
+      this.updateModalIndicators();
+    }
+    
+    modalGoTo(index: number) {
+      this.currentIndex = index;
+      this.updateSlides();
+      this.updateIndicators();
+      this.updateModalSlides();
+      this.updateModalIndicators();
+    }
+    
     updateSlides() {
       this.slides.forEach((slide, index) => {
         slide.style.transform = `translateX(${(index - this.currentIndex) * 100}%)`;
         slide.setAttribute('aria-hidden', index !== this.currentIndex ? 'true' : 'false');
         
-        // Update track height based on current slide
-        if (index === this.currentIndex) {
+        // Handle video autoplay
+        const video = slide.querySelector('video') as HTMLVideoElement;
+        if (video) {
+          if (index === this.currentIndex) {
+            // Play video when it becomes active
+            video.play().catch(() => {
+              // Autoplay might fail due to browser policies, that's okay
+            });
+          } else {
+            // Pause video when it becomes inactive
+            video.pause();
+            video.currentTime = 0; // Reset to beginning
+          }
+        }
+      });
+    }
+    
+    updateModalSlides() {
+      this.modalSlides.forEach((slide, index) => {
+        slide.style.transform = `translateX(${(index - this.currentIndex) * 100}%)`;
+        slide.setAttribute('aria-hidden', index !== this.currentIndex ? 'true' : 'false');
+        
+        // Handle video autoplay in modal
+        const video = slide.querySelector('video') as HTMLVideoElement;
+        if (video) {
+          if (index === this.currentIndex) {
+            // Play video when it becomes active
+            video.play().catch(() => {
+              // Autoplay might fail due to browser policies, that's okay
+            });
+          } else {
+            // Pause video when it becomes inactive
+            video.pause();
+            video.currentTime = 0; // Reset to beginning
+          }
+        }
+        
+        // Update modal track height based on current slide
+        if (index === this.currentIndex && this.modalTrack) {
           const slideHeight = slide.scrollHeight;
-          this.track.style.height = `${slideHeight}px`;
+          this.modalTrack.style.height = `${slideHeight}px`;
         }
       });
     }
     
     updateIndicators() {
       this.indicators.forEach((indicator, index) => {
+        if (index === this.currentIndex) {
+          indicator.classList.add('active');
+          indicator.setAttribute('aria-current', 'true');
+        } else {
+          indicator.classList.remove('active');
+          indicator.removeAttribute('aria-current');
+        }
+      });
+    }
+    
+    updateModalIndicators() {
+      this.modalIndicators.forEach((indicator, index) => {
         if (index === this.currentIndex) {
           indicator.classList.add('active');
           indicator.setAttribute('aria-current', 'true');
@@ -201,12 +452,13 @@ const { images, title } = Astro.props;
     position: relative;
     display: flex;
     align-items: center;
+    height: 500px;
   }
   
   .carousel-track {
     position: relative;
     width: 100%;
-    min-height: 400px;
+    height: 100%;
     overflow: hidden;
   }
   
@@ -215,25 +467,31 @@ const { images, title } = Astro.props;
     top: 0;
     left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     transition: transform 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 1rem;
   }
   
-  .carousel-image {
+  .carousel-media {
     width: 100%;
     max-height: 400px;
     object-fit: contain;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .carousel-media:hover {
+    transform: scale(1.02);
   }
   
   .carousel-caption {
     padding: 1rem 1.5rem;
-    background: var(--gray-50);
     width: 100%;
     display: flex;
     align-items: center;
@@ -267,6 +525,7 @@ const { images, title } = Astro.props;
     transition: all 0.2s ease;
     z-index: 10;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    pointer-events: auto;
   }
   
   .carousel-arrow:hover {
@@ -322,6 +581,203 @@ const { images, title } = Astro.props;
     transform: scale(1.2);
   }
   
+  /* Modal Styles */
+  .carousel-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .carousel-modal.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+  }
+  
+  .modal-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.2s ease;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+  }
+  
+  .modal-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    transform: scale(1.1);
+  }
+  
+  .modal-carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-height: 0;
+  }
+  
+  .modal-carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .modal-carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  .modal-carousel-image,
+  .modal-carousel-media {
+    width: 100%;
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .modal-carousel-caption {
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    width: 100%;
+    max-width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    min-height: 60px;
+    backdrop-filter: blur(5px);
+  }
+  
+  .modal-carousel-caption p {
+    margin: 0;
+    color: var(--gray-800);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: center;
+    font-weight: 500;
+  }
+  
+  .modal-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.2s ease;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+  }
+  
+  .modal-arrow:hover {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  .modal-arrow-left {
+    left: 1rem;
+  }
+  
+  .modal-arrow-right {
+    right: 1rem;
+  }
+  
+  .modal-carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: transparent;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .modal-carousel-indicator {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+  
+  .modal-carousel-indicator:hover {
+    background: var(--gray-100);
+  }
+  
+  .modal-indicator-dot {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.2s ease;
+  }
+  
+  .modal-carousel-indicator.active .modal-indicator-dot {
+    background: white;
+    transform: scale(1.2);
+  }
+  
   /* Responsive design */
   @media (max-width: 768px) {
     .carousel-container {
@@ -329,14 +785,14 @@ const { images, title } = Astro.props;
       border-radius: 0.5rem;
     }
     
-    .carousel-track {
-      height: 350px;
+    .carousel-wrapper {
+      height: 400px;
     }
     
-    .carousel-image {
-      max-height: 300px;
-      margin: 0 0.5rem;
-    }
+         .carousel-media {
+       max-height: 300px;
+       margin: 0 0.5rem;
+     }
     
     .carousel-arrow {
       width: 40px;
@@ -358,18 +814,80 @@ const { images, title } = Astro.props;
     .carousel-caption p {
       font-size: 0.9rem;
     }
+    
+    /* Modal responsive */
+     .modal-content {
+       width: 100%;
+       height: 100%;
+     }
+    
+    .modal-carousel-slide {
+      padding: 1rem;
+    }
+    
+         .modal-carousel-image,
+     .modal-carousel-media {
+       max-height: 70vh;
+     }
+    
+    .modal-carousel-caption {
+      padding: 1rem 1.5rem;
+      min-height: 60px;
+    }
+    
+    .modal-carousel-caption p {
+      font-size: 1rem;
+    }
+    
+    .modal-arrow {
+      width: 48px;
+      height: 48px;
+    }
+    
+    .modal-close {
+      width: 40px;
+      height: 40px;
+    }
   }
   
   @media (max-width: 480px) {
-    .carousel-track {
-      height: 300px;
+    .carousel-wrapper {
+      height: 350px;
     }
     
-    .carousel-image {
-      max-height: 250px;
-    }
+         .carousel-media {
+       max-height: 250px;
+     }
     
     .carousel-arrow {
+      width: 36px;
+      height: 36px;
+    }
+    
+    /* Modal responsive */
+    .modal-carousel-slide {
+      padding: 0.75rem;
+    }
+    
+         .modal-carousel-image,
+     .modal-carousel-media {
+       max-height: 60vh;
+     }
+    
+    .modal-carousel-caption {
+      padding: 0.75rem 1rem;
+    }
+    
+    .modal-carousel-caption p {
+      font-size: 0.9rem;
+    }
+    
+    .modal-arrow {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .modal-close {
       width: 36px;
       height: 36px;
     }
