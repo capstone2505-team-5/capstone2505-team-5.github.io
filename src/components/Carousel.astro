@@ -1,15 +1,16 @@
 ---
-// Carousel.astro - Image carousel with navigation and captions
+// Carousel.astro - Image and video carousel with navigation and captions
 export interface Props {
-  images: {
+  media: {
     src: string;
     alt: string;
     caption: string;
+    type: 'image' | 'video';
   }[];
   title?: string;
 }
 
-const { images, title } = Astro.props;
+const { media, title } = Astro.props;
 ---
 
 <div class="carousel-container">
@@ -23,11 +24,26 @@ const { images, title } = Astro.props;
     </button>
     
     <div class="carousel-track">
-      {images.map((image, index) => (
+      {media.map((item, index) => (
         <div class="carousel-slide" data-index={index}>
-          <img src={image.src} alt={image.alt} class="carousel-image" />
+          {item.type === 'video' ? (
+            <video 
+              src={item.src} 
+              class="carousel-media" 
+              controls
+              preload="metadata"
+              poster={item.src.replace(/\.[^/.]+$/, '.jpg')}
+              autoplay
+              loop
+              muted
+            >
+              <track kind="captions" />
+            </video>
+          ) : (
+            <img src={item.src} alt={item.alt} class="carousel-media" />
+          )}
           <div class="carousel-caption">
-            <p>{image.caption}</p>
+            <p>{item.caption}</p>
           </div>
         </div>
       ))}
@@ -41,8 +57,8 @@ const { images, title } = Astro.props;
   </div>
   
   <div class="carousel-indicators">
-    {images.map((_, index) => (
-      <button class="carousel-indicator" data-index={index} aria-label={`Go to image ${index + 1}`}>
+    {media.map((_, index) => (
+      <button class="carousel-indicator" data-index={index} aria-label={`Go to item ${index + 1}`}>
         <span class="indicator-dot"></span>
       </button>
     ))}
@@ -67,11 +83,26 @@ const { images, title } = Astro.props;
       </button>
       
       <div class="modal-carousel-track">
-        {images.map((image, index) => (
+        {media.map((item, index) => (
           <div class="modal-carousel-slide" data-index={index}>
-            <img src={image.src} alt={image.alt} class="modal-carousel-image" />
+            {item.type === 'video' ? (
+                          <video 
+              src={item.src} 
+              class="modal-carousel-media" 
+              controls
+              preload="metadata"
+              poster={item.src.replace(/\.[^/.]+$/, '.jpg')}
+              autoplay
+              loop
+              muted
+            >
+              <track kind="captions" />
+            </video>
+            ) : (
+              <img src={item.src} alt={item.alt} class="modal-carousel-image" />
+            )}
             <div class="modal-carousel-caption">
-              <p>{image.caption}</p>
+              <p>{item.caption}</p>
             </div>
           </div>
         ))}
@@ -84,13 +115,13 @@ const { images, title } = Astro.props;
       </button>
     </div>
     
-    <div class="modal-carousel-indicators">
-      {images.map((_, index) => (
-        <button class="modal-carousel-indicator" data-index={index} aria-label={`Go to image ${index + 1}`}>
-          <span class="modal-indicator-dot"></span>
-        </button>
-      ))}
-    </div>
+      <div class="modal-carousel-indicators">
+    {media.map((_, index) => (
+      <button class="modal-carousel-indicator" data-index={index} aria-label={`Go to item ${index + 1}`}>
+        <span class="modal-indicator-dot"></span>
+      </button>
+    ))}
+  </div>
   </div>
 </div>
 
@@ -149,10 +180,10 @@ const { images, title } = Astro.props;
         indicator.addEventListener('click', () => this.goTo(index));
       });
       
-      // Image click to open modal
+      // Media click to open modal
       this.slides.forEach((slide, index) => {
-        const image = slide.querySelector('.carousel-image') as HTMLImageElement;
-        image?.addEventListener('click', () => this.openModal(index));
+        const media = slide.querySelector('.carousel-media') as HTMLImageElement | HTMLVideoElement;
+        media?.addEventListener('click', () => this.openModal(index));
       });
       
       // Modal events
@@ -319,6 +350,21 @@ const { images, title } = Astro.props;
       this.slides.forEach((slide, index) => {
         slide.style.transform = `translateX(${(index - this.currentIndex) * 100}%)`;
         slide.setAttribute('aria-hidden', index !== this.currentIndex ? 'true' : 'false');
+        
+        // Handle video autoplay
+        const video = slide.querySelector('video') as HTMLVideoElement;
+        if (video) {
+          if (index === this.currentIndex) {
+            // Play video when it becomes active
+            video.play().catch(() => {
+              // Autoplay might fail due to browser policies, that's okay
+            });
+          } else {
+            // Pause video when it becomes inactive
+            video.pause();
+            video.currentTime = 0; // Reset to beginning
+          }
+        }
       });
     }
     
@@ -326,6 +372,21 @@ const { images, title } = Astro.props;
       this.modalSlides.forEach((slide, index) => {
         slide.style.transform = `translateX(${(index - this.currentIndex) * 100}%)`;
         slide.setAttribute('aria-hidden', index !== this.currentIndex ? 'true' : 'false');
+        
+        // Handle video autoplay in modal
+        const video = slide.querySelector('video') as HTMLVideoElement;
+        if (video) {
+          if (index === this.currentIndex) {
+            // Play video when it becomes active
+            video.play().catch(() => {
+              // Autoplay might fail due to browser policies, that's okay
+            });
+          } else {
+            // Pause video when it becomes inactive
+            video.pause();
+            video.currentTime = 0; // Reset to beginning
+          }
+        }
         
         // Update modal track height based on current slide
         if (index === this.currentIndex && this.modalTrack) {
@@ -415,7 +476,7 @@ const { images, title } = Astro.props;
     padding: 1rem;
   }
   
-  .carousel-image {
+  .carousel-media {
     width: 100%;
     max-height: 400px;
     object-fit: contain;
@@ -425,7 +486,7 @@ const { images, title } = Astro.props;
     transition: transform 0.2s ease;
   }
   
-  .carousel-image:hover {
+  .carousel-media:hover {
     transform: scale(1.02);
   }
   
@@ -613,7 +674,8 @@ const { images, title } = Astro.props;
     padding: 1rem;
   }
   
-  .modal-carousel-image {
+  .modal-carousel-image,
+  .modal-carousel-media {
     width: 100%;
     max-width: 90vw;
     max-height: 80vh;
@@ -727,10 +789,10 @@ const { images, title } = Astro.props;
       height: 400px;
     }
     
-    .carousel-image {
-      max-height: 300px;
-      margin: 0 0.5rem;
-    }
+         .carousel-media {
+       max-height: 300px;
+       margin: 0 0.5rem;
+     }
     
     .carousel-arrow {
       width: 40px;
@@ -763,9 +825,10 @@ const { images, title } = Astro.props;
       padding: 1rem;
     }
     
-    .modal-carousel-image {
+         .modal-carousel-image,
+     .modal-carousel-media {
        max-height: 70vh;
-    }
+     }
     
     .modal-carousel-caption {
       padding: 1rem 1.5rem;
@@ -792,9 +855,9 @@ const { images, title } = Astro.props;
       height: 350px;
     }
     
-    .carousel-image {
-      max-height: 250px;
-    }
+         .carousel-media {
+       max-height: 250px;
+     }
     
     .carousel-arrow {
       width: 36px;
@@ -806,9 +869,10 @@ const { images, title } = Astro.props;
       padding: 0.75rem;
     }
     
-    .modal-carousel-image {
+         .modal-carousel-image,
+     .modal-carousel-media {
        max-height: 60vh;
-    }
+     }
     
     .modal-carousel-caption {
       padding: 0.75rem 1rem;
