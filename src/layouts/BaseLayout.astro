@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import ogSymbolWhite from '../../public/images/Updated OG Symbol White.svg';
 
 export interface Props {
 	title?: string;
@@ -14,7 +13,7 @@ const { title = "LLMonade" } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href={ogSymbolWhite.src} />
+		<link rel="icon" type="image/svg+xml" href="/images/Updated OG Symbol White.svg" />
 		<title>{title}</title>
 	</head>
 	<body>
