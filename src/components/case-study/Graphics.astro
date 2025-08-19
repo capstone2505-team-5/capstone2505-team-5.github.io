@@ -1,0 +1,179 @@
+---
+// Background.astro - Case Study Background Section
+import Carousel from '../Carousel.astro';
+const images = [
+  {
+    src: '/images/team/Alex.jpeg',
+    alt: 'Alex',
+    caption: 'This is and example of a caption for the photo of Alex'
+  }
+]
+---
+
+<div class="case-study-content">
+  <h3 id="graphics">Graphics</h3>
+
+<!-- Bulleted list in highlighted(green/blue)container -->
+  <div class="highlight-box">
+    <h4>Key Highlights</h4>
+    <ul>
+      <li>Comprehensive user research with 50+ participants</li>
+      <li>Iterative design process with 3 major iterations</li>
+      <li>40% improvement in user satisfaction scores</li>
+      <li>25% reduction in task completion time</li>
+    </ul>
+  </div>
+  
+<!-- Bulleted list in container -->
+  <div class="content-block">
+    <h4>Key Characteristics</h4>
+    <ul>
+      <li>Predictable request/response patterns</li>
+      <li>Structured error handling</li>
+      <li>Clear data flow boundaries</li>
+      <li>Established monitoring patterns</li>
+    </ul>
+  </div>
+
+<!-- Image Carousel -->
+  <Carousel images={images} title="Graphics" />
+
+<!-- Three columns -->
+  <div class="tech-stack">
+    <div class="tech-category">
+      <h4>Frontend Technologies</h4>
+      <ul>
+        <li>React.js for interactive dashboards</li>
+        <li>TypeScript for type safety</li>
+        <li>D3.js for data visualization</li>
+        <li>Tailwind CSS for styling</li>
+      </ul>
+    </div>
+    
+    <div class="tech-category">
+      <h4>Backend Services</h4>
+      <ul>
+        <li>AWS Lambda for serverless functions</li>
+        <li>Amazon DynamoDB for data storage</li>
+        <li>AWS API Gateway for REST APIs</li>
+        <li>Amazon CloudWatch for monitoring</li>
+      </ul>
+    </div>
+    
+    <div class="tech-category">
+      <h4>Data Processing</h4>
+      <ul>
+        <li>Apache Kafka for event streaming</li>
+        <li>Apache Flink for real-time processing</li>
+        <li>Elasticsearch for search and analytics</li>
+        <li>Redis for caching</li>
+      </ul>
+    </div>
+  </div>
+
+<!-- Numbered list -->
+  <div class="process-timeline">
+    <div class="timeline-item">
+      <div class="timeline-marker">1</div>
+      <div class="timeline-content">
+        <h4>Research & Planning</h4>
+        <p>Comprehensive analysis of existing observability solutions and identification of gaps for LLM applications.</p>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-marker">2</div>
+      <div class="timeline-content">
+        <h4>Prototype Development</h4>
+        <p>Rapid prototyping of core functionality to validate technical approaches and gather early feedback.</p>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-marker">3</div>
+      <div class="timeline-content">
+        <h4>Core Implementation</h4>
+        <p>Development of the main platform components with focus on scalability and performance.</p>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-marker">4</div>
+      <div class="timeline-content">
+        <h4>Testing & Optimization</h4>
+        <p>Comprehensive testing across different scenarios and performance optimization based on real-world usage.</p>
+      </div>
+    </div>
+  </div>
+
+<!-- Metrics Grid -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-value">85%</div>
+      <div class="metric-label">Faster Issue Detection</div>
+      <div class="metric-description">Reduced time to identify and diagnose problems in LLM applications</div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="metric-value">60%</div>
+      <div class="metric-label">Reduced Debugging Time</div>
+      <div class="metric-description">Faster resolution of issues through better observability</div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="metric-value">40%</div>
+      <div class="metric-label">Cost Optimization</div>
+      <div class="metric-description">Better resource utilization through improved monitoring</div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="metric-value">95%</div>
+      <div class="metric-label">Uptime Improvement</div>
+      <div class="metric-description">Enhanced reliability through proactive monitoring</div>
+    </div>
+  </div>
+
+<!-- Green Impact Section -->
+  <div class="impact-section">
+    <div class="impact-card">
+      <h4>Developer Experience</h4>
+      <ul>
+        <li>Faster debugging and troubleshooting</li>
+        <li>Better understanding of application behavior</li>
+        <li>Improved confidence in deployments</li>
+        <li>Reduced time spent on support issues</li>
+      </ul>
+    </div>
+    
+    <div class="impact-card">
+      <h4>End User Experience</h4>
+      <ul>
+        <li>More reliable and consistent responses</li>
+        <li>Faster response times</li>
+        <li>Better error handling and recovery</li>
+        <li>Improved overall satisfaction</li>
+      </ul>
+    </div>
+  </div>
+
+<!-- Yellow Impact Section -->
+  <div class="business-metrics">
+    <div class="business-metric">
+      <h4>Operational Efficiency</h4>
+      <p>Reduced mean time to resolution (MTTR) by 70% through better visibility into system performance and faster issue identification.</p>
+    </div>
+    
+    <div class="business-metric">
+      <h4>Cost Savings</h4>
+      <p>Achieved 30% reduction in infrastructure costs through better resource utilization and proactive scaling.</p>
+    </div>
+    
+    <div class="business-metric">
+      <h4>Scalability</h4>
+      <p>Successfully handled 10x increase in traffic without proportional increase in operational overhead.</p>
+    </div>
+  </div>
+
+</div>
+
+

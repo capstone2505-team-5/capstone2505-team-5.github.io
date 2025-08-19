@@ -416,25 +416,38 @@ a:hover {
 .timeline-marker {
   background: var(--primary-blue);
   color: white;
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  font-size: 0.875rem;
   margin-right: 1rem;
   flex-shrink: 0;
 }
 
-.timeline-content h4 {
+.timeline-content h4,
+.timeline-content h5 {
   margin-top: 0;
   color: var(--gray-800);
+  font-weight: 600;
+}
+
+.timeline-content h5 {
+  font-size: 1.125rem;
 }
 
 .timeline-content p {
-  margin-bottom: 0;
+  margin: 0;
+  line-height: 1.6;
   color: var(--gray-600);
+}
+
+.timeline-content strong {
+  color: var(--gray-800);
+  font-weight: 600;
 }
 
 .metrics-grid {
@@ -531,6 +544,22 @@ a:hover {
   margin-bottom: 0;
   color: var(--gray-600);
   line-height: 1.6;
+}
+
+.business-metric-wide {
+  grid-column: span 2;
+}
+
+.start-at-zero {
+  counter-reset: list-counter -1;
+}
+
+.start-at-zero li {
+  counter-increment: list-counter;
+}
+
+.start-at-zero li::marker {
+  content: counter(list-counter) ". ";
 }
 
 .highlight-box {

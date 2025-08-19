@@ -3,68 +3,195 @@
 ---
 
 <div class="case-study-content">
-  <h3 id="observability-of-traditional-apps">Observability of Traditional Apps</h3>
-  <p>
-    Traditional applications follow well-established patterns for observability. 
-    These applications typically have predictable request flows, clear error boundaries, 
-    and structured data that makes monitoring and debugging straightforward.
-  </p>
+  <h3 id="deterministic-applications">Deterministic Applications</h3>
+  <p>In traditional applications, software that does not involve AI, developers work with systems that are deterministic. A deterministic application follows rule-based logic where the same input, under the same conditions, always produces the same output. The same URL will always route to the same endpoint. A function either returns the expected output, or it does not. Static templates render the same data every time the user logs in, or an error is returned. Observability and testing verify that deterministic systems are operating as expected.</p>
 
-  <div class="highlight-box">
-    <h4>Key Highlights</h4>
-    <ul>
-      <li>Comprehensive user research with 50+ participants</li>
-      <li>Iterative design process with 3 major iterations</li>
-      <li>40% improvement in user satisfaction scores</li>
-      <li>25% reduction in task completion time</li>
-    </ul>
+  <h4>Observability in Traditional Applications</h4>
+  <p>Observability measures and infers the internal state of a complex system based solely on the data it produces. Traditionally, observability has three pillars:</p>
+
+
+  <!-- Option 1: 3 bubbles -->
+  <div class="business-metrics">
+    <div class="business-metric">
+      <h4>Metrics</h4>
+      <p>Represent numerical data points that quantify system performance over time. </p>      
+    </div>
+    
+    <div class="business-metric">
+      <h4>Logs</h4>
+      <p>Context-rich records of specific events within an application that include both user defined logs and uncaught exceptions. </p>
+    </div>
+    
+    <div class="business-metric business-metric-wide">
+      <h4>Traces</h4>
+      <p>A log of events, usually the end-to-end journey of a single request as it flows through multiple services in a distributed system. They are composed of a series of timed operations, where each individual operation is captured as a span. This end-to-end visibility of a single request is crucial for understanding where a problem has occurred.</p>
+    </div>
   </div>
+
+  <p>Metrics, logs and traces work together to show a complete picture of where a developer can improve their application. Metrics identify what issues are occurring, logs provide context about specific events, and traces pinpoint where the problem originated.</p>
+
+  <h4>Testing Traditional Applications</h4>
+  <p>The deterministic nature of traditional applications enables developers to write precise assertions that definitively validate application behavior.  These assertions are built into test suites, which specify and enforce an application’s correct behavior. Correctness in traditional software is not a matter or opinion or quality; it is a binary proven state.</p>
+
+  <h4>Improving Traditional Applications</h4>
+
+  <p>The improvement process for traditional software is a direct, logical, and repeatable cycle of debugging and fixing.</p>
+
+  <!-- Numbered list -->
+  <div class="process-timeline">
+    <div class="timeline-item">
+      <div class="timeline-marker">1</div>
+      <div class="timeline-content">
+        <p><strong>A Bug is Identified:</strong> A problem is found either through testing, user feedback, or an alert from the observability system ("The error rate just spiked!").</p>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-marker">2</div>
+      <div class="timeline-content">
+        <p><strong>The Code is Debugged:</strong> A developer uses logs, traces, and debugging tools to find the exact line of code that is causing the problem.</p>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-marker">3</div>
+      <div class="timeline-content">
+        <p><strong>A Direct Fix is Applied:</strong> The developer changes the explicit logic of the code.</p>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-marker">4</div>
+      <div class="timeline-content">
+        <p><strong>The Fix is Verified:</strong> The developer re-runs the tests to prove that the bug is gone and that the fix didn't accidentally break anything else (a "regression").</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-marker">5</div>
+      <div class="timeline-content">
+        <p><strong>The Fix is Deployed:</strong> The updated code is released to users.</p>
+      </div>
+    </div>
+  </div>
+
+  
+  
+  <h3 id="artificial-intelligence-and-large-language-models">Artificial Intelligence and Large Language Models</h3>
+
+  <p><strong>Artificial Intelligence (AI)</strong> is a broad field encompassing machines and software capable of performing tasks that typically require human intelligence, such as reasoning, learning, planning, perception, and understanding language.</p>
+  <p><strong>Large Language Models (LLMs)</strong> are an increasingly popular and powerful subset of AI applications.  They are trained on an enormous amount of text to recognize patterns in language and generate human-like responses based on a given input. LLMs enable both new ways of interacting with existing applications through natural language and entirely new classes of applications. </p>
+  <p>The input provided to an LLM is called a prompt. A prompt is simply the instruction, question, or text you give to the model to get it to do something. It is the starting point that guides the AI toward the response you want.  The output is the response the LLM generates after processing your prompt. This is the text, code, or other content that the model creates for you.</p>
+  <p>Prompt engineering is the process of carefully crafting and refining the instructions given to an LLM to ensure it performs a task accurately, safely, and consistently.  It is the primary and most direct control surface for steering an LLM’s behavior.</p>
+
+  <h4>LLM-Powered Software</h4>
+  <p>LLM-based applications integrate LLM capabilities into traditional software workflows.  The most popular use cases today include chatbots, content creation, and code generation.  The use of the LLM in the application can be as simple as a single request to an LLM. Alternatively, the use could be much more complex.  This could include calls to multiple LLMs, or even provide tools for an LLM to utilize at its own discretion.</p>
+
+  <h4>The Non-Deterministic Nature of LLMs</h4>
+  <p>LLMs are non-deterministic, meaning that identical inputs can yield different responses.  At its heart, an LLM is a prediction engine. When you give it a prompt, it doesn't search a database for a pre-written answer. Instead, it randomly selects from the next most likely words, one after another, based on the vast amount of text it was trained on.  Think of it like a very advanced autocomplete.</p>
+  <p>How this differs from traditional applications becomes clear when considering a simple example. In a traditional application, a user profile query either returns the correct user data or fails with an error. With an LLM powered application, the same query might return a correct response, partially correct information, completely fabricated data (hallucination), properly formatted responses with incorrect content, or numerous other combinations of expected and unexpected responses.</p>
+  <p>In each of these scenarios the LLM returns what looks like a valid response.  Thus, traditional monitoring tools would report all of them as "successful" requests, with acceptable latency and no error codes.  Consequently, new methods and tools are required to determine if an LLM-based application is behaving correctly.</p>
+  
+
+  <h3 id="observability-in-llm-powered-software">Observability in LLM-Powered Software</h3>
+
+  <p>Observability in LLM-based applications includes and expands on the metrics, logs, and traces used in deterministic applications. Metrics expand from system performance to include AI quality and cost, while logs shift from capturing system events to recording the multi-step journey of inputs and outputs. Traces and spans capture essential details about an LLM-based applications behavior.</p>
+  
+  <!-- Traces/Spans/Root Spans Yellow Impact Section -->
+  <div class="business-metrics">
+    <div class="business-metric">
+      <h4>Traces</h4>
+      <p>A trace shows the internal, step-by-step journey of a single prompt as it is processed by the application to generate a final answer. This includes not just the call to the LLM itself, but all the preparatory and follow-up steps involved. A trace is made of one or more spans.</p>
+    </div>
+    
+    <div class="business-metric">
+      <h4>Spans</h4>
+      <p>A span represents a single, distinct operation or unit of work within a trace.  In a call to an LLM, spans represent a single logical task in the sequence (e.g., a vector search, a call to an LLM, a data transformation).</p>
+    </div>
+    
+    <div class="business-metric">
+      <h4>Root Spans</h4>
+      <p>A root span is the topmost span which encapsulates the request from start to finish. The input will be the initial input from the user, and the output of a root span will be the final output that is returned to the user after any intermediate steps or tasks are completed.</p>
+    </div>
+  </div>
+
+
+  <h4>Traditional Testing of LLM Powered Software</h4>
+  <p>In an LLM-powered application traditional unit tests are still an effective part of testing.  Unit tests can be used to test all of the deterministic code around the LLM piece of your application. Assertions can also be used to test the output of your LLM calls by checking the structure or format, checking the length of the output, checking for key phrases, and security checks for sensitive data.  Although they involve a network call, they can be referred to as unit tests because they test a specific piece or feature of your application.</p>
+  
+
+  <h3 id="evaluating-llm-based-applications">Evaluating LLM-based Applications</h3>
+
+  <p>To understand if your LLM-integrated application is functioning “correctly”, traditional tests meant for deterministic software are not enough. Instead of a static, singular correct output, there are a variety of outputs that can all be considered correct. Thus, in addition to traditional binary tests, one must also judge the quality and acceptability of the application's probabilistic outputs. This type of test is called an evaluation.</p>
+  <p>The two most powerful ways to evaluate an LLM-based application are manual human error analysis and LLM-as-a-Judge. A large production application, with full test coverage, would likely include a combination of unit testing with assertions, manual error analysis, and LLM as a Judge evaluation.</p>
+  
+  <h4>Manual Human Error Analysis</h4>
+  <p>Manual human error analysis is the process of looking at real traces from an application, notating errors found in each trace, categorizing those errors into distinct categories, and finding the most common failures.  By finding the most common errors, developers can now make targeted improvements to their application.  Additionally, they can create custom LLM-as-a-Judge evaluation tests that are targeted to the most common errors.</p>
+
+  <h4>LLM as a Judge</h4>
+  <p>When evaluating LLM applications at scale, having a human annotator evaluating every output becomes infeasible. By using LLMs as evaluators, teams can automate quality control at scale. LLM-as-a-Judge is an evaluation technique that leverages LLMs to assess the quality, relevance, and reliability of outputs generated by an LLM powered application. </p>
+
+<!--Image here for the Greg Brockman Tweet -->
+
+  <h3 id="emerging-best-practices">Emerging Best Practices</h3>
+  <h4>Don't Skip Error Analysis!</h4>
+  <p>Hamel Husain is an ML Engineer and researcher with a proven track record shipping seminal LLM work and helping teams rapidly improve their AI powered applications. One of the recurring themes in Hamel's writing is the importance of manual error analysis. In his words, "Error analysis is the single most valuable activity in AI development and consistently the highest-ROI activity."  He elaborates, "In the projects we’ve worked on, we’ve spent 60-80% of our development time on error analysis and evaluation."</p>
+  <p>Error analysis is one of the most frequently skipped or superficially performed steps in the AI development lifecycle, especially by teams that are new to building with LLMs.  Hamel says, “Many vendors want to sell you tools that claim to eliminate the need for a human to look at the data … The tools first mindset is the most common mistake in AI development. Teams get caught up in architecture diagrams, frameworks, and dashboards while neglecting the process of actually understanding what’s working and what isn’t.”  </p>
+  <p>Hamel cautions against using generic solutions, like prebuilt LLM-as-a-judge evaluators, without spending the time to understand an application's specific domain and problems. He suggests beginning with manual error analysis.</p>
   
   <div class="content-block">
-    <h4>Key Characteristics</h4>
-    <ul>
-      <li>Predictable request/response patterns</li>
-      <li>Structured error handling</li>
-      <li>Clear data flow boundaries</li>
-      <li>Established monitoring patterns</li>
-    </ul>
+    <h4>Advised Workflow</h4>
+    <ol class="start-at-zero">
+      <li>Prerequisite - Implement Observability</li>
+      <li>Curate A Dataset</li>
+      <li>Manually Review the Data</li>
+      <li>Categorize And Analyze The Data</li>
+      <li>Fix And Improve The Most Common Issues</li>
+      <li>Iterate</li>
+    </ol>
   </div>
 
-  <h3 id="ai-llms-and-llm-based-apps">AI, LLMs, and LLM-based Apps</h3>
-  <p>
-    The emergence of Large Language Models (LLMs) and AI-powered applications 
-    has introduced new challenges for observability. These applications often 
-    have non-deterministic outputs, complex reasoning chains, and unique 
-    performance characteristics.
-  </p>
+  <h4>Implement Observability</h4>
+  <p>Error analysis builds on basic observability.  At a minimum, you need to collect the inputs and corresponding outputs that your application produces. The inputs consist of real-world examples of what users will ask your application.  The outputs are the results produced by your application. This can be done by a simple logging mechanism or using existing LLM observability tools that store full traces.</p>
+
+  <h4>Curate a Dataset</h4>
+  <p>Once traces are being collected, the next step is to select the specific traces that you want to analyze.   This should be anywhere from 10 to 100 traces. The more traces you look at, the more information you will glean from the process. The traces should be diverse and represent different parts of your system.  </p>
+
+  <h4>Human Review of the Data</h4>
+  <p>Next, each pair of inputs and outputs should be manually reviewed. The review captures whether the response is positive or negative and free form annotation describing the most significant error found in the set.  The reviewer needs to be someone that is capable of assessing the quality of the output.  Sometimes this may be the developer, but other times it will need to be a domain expert that knows more about the specific subject at hand.</p>
+
+  <h4>Categorize and Analyze The Data</h4>
+  <p>Once all of the data has been reviewed, the annotations should be categorized by failure mode.  An LLM can be used to create the categories from the free form notes and then put each piece of feedback into the correct error category.  The result is a list of categories representing the errors found in the dataset and a count of how often they occur in the dataset.</p>
+
+  <h4>Fix And Improve The Most Common Issues</h4>
+  <p>Now that you have analyzed actual data from your application, you should have a much better idea of how it behaves. The failure modes that are most frequent in your dataset are a high ROI target for your application developers to fix.  Prompt engineering is the most straightforward way to make changes to an LLM based application.  Other options can include changes to your code or changes to more advanced AI systems within your software.</p>
+
+  <h4>Iterate</h4>
+  <p>The entire process, from viewing your data to implementing fixes, is a cycle.  Once an update has been made to your application, go back to the beginning, step 1, and start error analysis again.  You should test similar inputs again until you are happy with the improvements.  Then, continue working through this loop with new and varied inputs to find additional failure modes.</p>
+
+  <h4>Post Error Analysis</h4>
+  <p>There is no exact science on when to move on from error analysis.  Shreya Shanker is an AI systems researcher in the UC Berkeley Data Systems and Foundations Group.  Regarding error analysis, she recommends,  “Collect representative examples and categorise failure modes. You must look at your data until you reach “theoretical saturation” - the point where reviewing additional examples reveals no new failure modes.” Both Hamel Husain and Shreya Shankar advocate for starting with this manual, in-depth analysis of your data before building complex evaluation infrastructure. </p>
+  <p>Once the error analysis cycle has hit “theoretical saturation”, the next step is setting up automated evaluations with LLM-as-a-Judge. You can now create custom evaluations that target the error categories that you have improved and/or fixed.  The goal of the automated tests is to "lock in" your progress and ensure that these specific problems don’t reappear in the future.  They become regression tests.</p>
+
+  <h3 id="effective-human-review-interface">Effective Human Review Interface</h3>
+  <p>When performing error analysis, both Hamel Husain and Shreya Shankar emphasize the need for a well-designed review interface. While the reviewer must be a subject matter expert, they may not always be technically savvy. Thus, the interface is not meant to be a complex, feature-bloated dashboard, but rather a purpose-built tool that removes all friction from data inspection. The interface is designed to help rapidly select data and provide feedback.</p>
 
   <div class="content-block">
-    <h4>New Challenges</h4>
+    <h4>Essential Components</h4>
     <ul>
-      <li>Non-deterministic outputs</li>
-      <li>Complex reasoning chains</li>
-      <li>Variable response times</li>
-      <li>Context-dependent behavior</li>
+      <li><strong>Unified Data View -</strong> All relevant information is displayed in one place, so an analyst doesn't have to hunt for context.</li>
+      <li><strong>Keyboard Shortcuts:</strong> Hotkeys should be built in to allow users to submit feedback and move quickly between traces.</li>
+      <li><strong>Binary Scoring:</strong> A straightforward thumbs-up/thumbs-down or pass/fail button to quickly gauge the quality of the output.</li>
+      <li><strong>Free-Form Notes:</strong> Open ended feedback lets the analyst capture nuanced issues that can later be categorized.</li>
+      <li><strong>Filtering and Sorting:</strong> Allows filtering and sorting to help the analyst select which data to review.</li>
+      <li><strong>Progress Indicator:</strong> When analyzing a set of traces, a progress bar shows how many input and output sets have been reviewed and how many are left.</li>
+      <li><strong>Context-Dependent Formatted Data:</strong> The inputs and outputs should be formatted similarly to how the user would view the data in production.</li>
     </ul>
   </div>
 
-  <h3 id="observability-of-llm-based-apps">Observability of LLM-based Apps</h3>
-  <p>
-    Observing LLM-based applications requires new approaches and tools. 
-    Traditional metrics like response time and error rates are still important, 
-    but we need additional insights into the quality, relevance, and reasoning 
-    behind AI-generated responses.
-  </p>
+  <p>In essence, the ideal data viewer, as envisioned by experts like Husain and Shankar, is less of a generic logging tool and more of a bespoke, interactive workbench. It is built to be the fastest path to understanding where an LLM application is failing, empowering developers and domain experts to turn raw data into actionable insights. If you have the resources available, Husain and Shankar make the case for a custom review interface.  For teams that do not have the resources to make a custom interface, they suggest using existing solutions to get started.</p>
 
-  <div class="content-block">
-    <h4>Observability Requirements</h4>
-    <ul>
-      <li>Response quality assessment</li>
-      <li>Reasoning chain analysis</li>
-      <li>Token usage monitoring</li>
-      <li>Context tracking</li>
-    </ul>
-  </div>
+
 </div>
 
 
