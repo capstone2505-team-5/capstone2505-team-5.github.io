@@ -1,5 +1,29 @@
 ---
 // Implementation.astro - Case Study Implementation Section
+import Carousel from '../Carousel.astro';
+const images = [
+  {
+    src: '/images/team/Justin.jpg',
+    alt: 'Justin',
+    caption: 'This is and example of a caption for the photo of Justin'
+  },
+  {
+    src: '/images/team/Josh.png',
+    alt: 'Josh',
+    caption: 'This is and example of a caption for the photo of Josh'
+  },
+  {
+    src: '/images/team/Noah.jpg',
+    alt: 'Noah',
+    caption: 'This is and example of a caption for the photo of Noah'
+  },
+  {
+    src: '/images/team/Alex.jpeg',
+    alt: 'Alex',
+    caption: 'This is and example of a caption for the photo of Alex. This is a long caption that should wrap around to the next line. It should keep wrapping around until the end of the next line and the next line and the next line and the next line.'
+  }
+]
+
 ---
 
 <div class="case-study-content">
@@ -9,6 +33,9 @@
     of various technical challenges and requirements. We chose technologies that 
     would provide the best balance of performance, scalability, and ease of use.
   </p>
+
+  <Carousel images={images} title="The Team" />
+
 
   <div class="tech-stack">
     <div class="tech-category">
