@@ -2,72 +2,60 @@
 // Implementation.astro - Case Study Implementation Section
 import Carousel from '../Carousel.astro';
 const images = [
-  {
-    src: '/images/team/Justin.jpg',
-    alt: 'Justin',
-    caption: 'This is and example of a caption for the photo of Justin'
-  },
-  {
-    src: '/images/team/Josh.png',
-    alt: 'Josh',
-    caption: 'This is and example of a caption for the photo of Josh'
-  },
-  {
-    src: '/images/team/Noah.jpg',
-    alt: 'Noah',
-    caption: 'This is and example of a caption for the photo of Noah'
-  },
-  {
-    src: '/images/team/Alex.jpeg',
+{
+    src: '/images/solution-carousel/SelectProjectNarrow.png',
     alt: 'Alex',
     caption: 'This is and example of a caption for the photo of Alex. This is a long caption that should wrap around to the next line. It should keep wrapping around until the end of the next line and the next line and the next line and the next line.'
-  }
+  },
+  {
+    src: '/images/solution-carousel/1-SelectProjectScreenshot.png',
+    alt: '1',
+    caption: 'Choose a Phoenix project to get started analyzing'
+  },
+  {
+    src: '/images/solution-carousel/2-CreateBatchScreenshotFODMAP.png',
+    alt: '2',
+    caption: 'Filter, sort, and select the root spans you want to review'
+  },
+  {
+    src: '/images/solution-carousel/3-FastManualReview-10s-edit.mp4',
+    alt: '3',
+    caption: 'Rate with a binary score and add freeform notes describing any errors found'
+  },
+
 ]
 
 ---
 
 <div class="case-study-content">
-  <h3 id="the-solution">The Solution</h3>
-  <p>
-    The implementation of our observability platform involved careful consideration 
-    of various technical challenges and requirements. We chose technologies that 
-    would provide the best balance of performance, scalability, and ease of use.
-  </p>
-
-  <Carousel images={images} title="The Team" />
+  <h3 id="introducing-llmonade">Introducing LLMonade</h3>
+  <p>LLMonade is a free, lightweight, self-hosted platform that guides developers of LLM-powered applications through their first evaluations.  Our software is designed for small engineering teams that have already instrumented their application with Phoenix.  Traces are being collected, but the developers don’t know where to start assessing and improving the quality of their application.  LLMonade pulls traces from Phoenix and provides an annotation interface inspired by Hamel Husain’s recommendations.  Then, guides the developer through the most important evaluation activity, manual error analysis.</p>
 
 
-  <div class="tech-stack">
-    <div class="tech-category">
-      <h4>Frontend Technologies</h4>
-      <ul>
-        <li>React.js for interactive dashboards</li>
-        <li>TypeScript for type safety</li>
-        <li>D3.js for data visualization</li>
-        <li>Tailwind CSS for styling</li>
-      </ul>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-value">85%</div>
+      <div class="metric-label">Deployment Command Line Interface (CLI)</div>
+      <div class="metric-description">Quickly deploys required infrastructure to AWS.</div>
     </div>
     
-    <div class="tech-category">
-      <h4>Backend Services</h4>
-      <ul>
-        <li>AWS Lambda for serverless functions</li>
-        <li>Amazon DynamoDB for data storage</li>
-        <li>AWS API Gateway for REST APIs</li>
-        <li>Amazon CloudWatch for monitoring</li>
-      </ul>
+    <div class="metric-card">
+      <div class="metric-value">60%</div>
+      <div class="metric-label">Root Spans Extract, Transform, Load Pipeline (ETL)</div>
+      <div class="metric-description">Automatically ingests root spans from Phoenix.</div>
     </div>
     
-    <div class="tech-category">
-      <h4>Data Processing</h4>
-      <ul>
-        <li>Apache Kafka for event streaming</li>
-        <li>Apache Flink for real-time processing</li>
-        <li>Elasticsearch for search and analytics</li>
-        <li>Redis for caching</li>
-      </ul>
+    <div class="metric-card">
+      <div class="metric-value">40%</div>
+      <div class="metric-label">Fullstack Error Analysis Web Application</div>
+      <div class="metric-description">Guides error analysis on an ideal review interface</div>
     </div>
   </div>
+
+  </div>
+
+  <p>LLMonade walks users through a simplified five step workflow to quickly get started evaluating their application. This simplified workflow reflects Hamel Husain’s best practices for error analysis.  The inspection results provide data driven targets for developers to focus on.  Progress through the workflow is visually tracked in a persistent footer. It highlights the current error analysis step and clearly indicates what comes next, ensuring users new to evaluations can navigate the process with ease. </p>
+  <Carousel images={images} title="Error Analysis Workflow" />
 
   <h3>Development Process</h3>
   <p>
