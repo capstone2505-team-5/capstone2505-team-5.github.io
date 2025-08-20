@@ -231,6 +231,45 @@ const sections = [
 		});
 	}, observerOptions);
 
+	// Function to update sidebar expansion based on current scroll position
+	function updateSidebarExpansion() {
+		const sections = document.querySelectorAll('.content-section');
+		const sectionIds = Array.from(sections).map(section => section.getAttribute('id'));
+		
+		// Find which section is currently most visible
+		let currentSectionIndex = -1;
+		const scrollPosition = window.scrollY + 200; // Offset for better detection
+		
+		sections.forEach((section, index) => {
+			const rect = section.getBoundingClientRect();
+			const sectionTop = rect.top + window.scrollY;
+			const sectionBottom = sectionTop + rect.height;
+			
+			if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+				currentSectionIndex = index;
+			}
+		});
+		
+		// Update sidebar expansion
+		sectionIds.forEach((sectionId, index) => {
+			const navItem = document.querySelector(`[data-section="${sectionId}"]`);
+			const subList = navItem?.nextElementSibling;
+			
+			if (navItem && subList && subList.classList.contains('sidebar-nav-sub-list')) {
+				// Only expand the current section, collapse all others
+				const shouldExpand = index === currentSectionIndex;
+				
+				if (shouldExpand) {
+					(subList as HTMLElement).style.display = 'block';
+					navItem.classList.add('expanded');
+				} else {
+					(subList as HTMLElement).style.display = 'none';
+					navItem.classList.remove('expanded');
+				}
+			}
+		});
+	}
+
 	// Observe all sections and subsections
 	document.addEventListener('DOMContentLoaded', () => {
 		const sections = document.querySelectorAll('.content-section');
@@ -243,6 +282,15 @@ const sections = [
 		subsections.forEach(subsection => {
 			observer.observe(subsection);
 		});
+
+		// Initialize sidebar expansion state
+		updateSidebarExpansion();
+		
+		// Add scroll listener for dynamic sidebar expansion
+		window.addEventListener('scroll', () => {
+			updateSidebarExpansion();
+		});
+	});
 
 		// Smooth scrolling for main navigation links
 		const navLinks = document.querySelectorAll('.sidebar-nav-item');
@@ -279,7 +327,7 @@ const sections = [
 				}
 			});
 		});
-	});
+
 </script>
 
 <style>
@@ -371,6 +419,8 @@ const sections = [
 		background: var(--gray-200);
 		color: var(--gray-800);
 	}
+
+
 
 	.main-content {
 		flex: 1;
