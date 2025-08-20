@@ -480,6 +480,26 @@ a:hover {
   margin-bottom: 0.5rem;
 }
 
+.metric-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  color: var(--primary-blue);
+}
+
+.metric-icon svg,
+.metric-icon img {
+  width: 128px;
+  height: 128px;
+  transition: transform 0.2s ease;
+}
+
+.metric-card:hover .metric-icon svg,
+.metric-card:hover .metric-icon img {
+  transform: scale(1.1);
+}
+
 .metric-label {
   color: var(--gray-800);
   font-size: 1.1rem;
