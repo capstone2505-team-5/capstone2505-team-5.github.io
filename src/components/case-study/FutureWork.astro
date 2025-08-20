@@ -1,5 +1,6 @@
 ---
 // Implementation.astro - Case Study Implementation Section
+import Image from "../Image.astro";
 ---
 
 <div class="case-study-content">
@@ -12,6 +13,8 @@
   <p>Since LLM data, especially user inputs, can contain sensitive information, we would also like to offer deployment mechanisms that support different security constraints such as access through VPN.</p>
 
   <p>Finally, not every team uses AWS, so in the future we would like to transition from using AWS CDK and instead use Terraform to allow users to deploy to other cloud providers such as Microsoft Azure and Google Cloud Platform (GCP).</p>
+
+  <Image src="/images/cloud-providers-light-gradient.png" alt="Cloud providers" caption="" />
 
   <h3 id="provide-more-app-functionality">Provide More App Functionality</h3>
   <p>Future development will focus on more comprehensive evaluation processes. We could enable viewing of entire traces across multiple spans, beyond our current root span focus, to give users a deeper insight into their LLM applications. </p>
