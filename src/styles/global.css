@@ -167,6 +167,7 @@ a:hover {
 .nav-link:hover,
 .nav-link.active {
   color: var(--primary-blue);
+  font-weight: 500;
 }
 
 .nav-link::after {

@@ -1,91 +1,44 @@
 ---
 // Architecture.astro - Case Study Architecture Section
+import Image from '../Image.astro';
 ---
 
 <div class="case-study-content">
-  <h3 id="the-architecture">The Architecture</h3>
-  <p>
-    Our observability platform has delivered significant improvements across 
-    multiple key performance indicators. The results demonstrate the effectiveness of our approach to monitoring LLM-based applications.
-  </p>
+  <p>The architecture of LLMonade can be best understood by following the lifecycle of a root span as it moves through the ingestion stage and evaluation workflow. This will highlight how each component fits together and how the serverless architecture minimizes operational overhead and ensures scalability.</p>
+  <ol>
+    <li>Trace Generation with Phoenix</li>
+    <li>Root Spans ETL Pipeline</li>
+    <li>Evaluation Data Persistence</li>
+    <li>Error Analysis Fullstack Application</li>
+  </ol>
 
-  <div class="metrics-grid">
-    <div class="metric-card">
-      <div class="metric-value">85%</div>
-      <div class="metric-label">Faster Issue Detection</div>
-      <div class="metric-description">Reduced time to identify and diagnose problems in LLM applications</div>
-    </div>
-    
-    <div class="metric-card">
-      <div class="metric-value">60%</div>
-      <div class="metric-label">Reduced Debugging Time</div>
-      <div class="metric-description">Faster resolution of issues through better observability</div>
-    </div>
-    
-    <div class="metric-card">
-      <div class="metric-value">40%</div>
-      <div class="metric-label">Cost Optimization</div>
-      <div class="metric-description">Better resource utilization through improved monitoring</div>
-    </div>
-    
-    <div class="metric-card">
-      <div class="metric-value">95%</div>
-      <div class="metric-label">Uptime Improvement</div>
-      <div class="metric-description">Enhanced reliability through proactive monitoring</div>
-    </div>
-  </div>
+  <Image 
+  src="/images/LLMonade-Architecture-Overview.png" 
+  alt="System Architecture" 
+  caption="High Level System Architecture"
+  width="600px"
+  height="400px"
+  bordered={true}
+  rounded={true}
+  clickable={true}
+/>
 
-  <h3>User Experience Impact</h3>
-  <p>
-    The implementation of our observability platform has had a profound impact 
-    on the user experience for both developers and end users of LLM applications.
-  </p>
+  <h3 id="trace-generation">Trace Generation with Phoenix</h3>
+  <p>Traces are generated in a user’s LLM-powered application and are structured, organized, and stored by the observability platform Phoenix.  LLMonade builds upon this existing architecture to retrieve the highest level spans, the root spans, from the Phoenix database.</p>
 
-  <div class="impact-section">
-    <div class="impact-card">
-      <h4>Developer Experience</h4>
-      <ul>
-        <li>Faster debugging and troubleshooting</li>
-        <li>Better understanding of application behavior</li>
-        <li>Improved confidence in deployments</li>
-        <li>Reduced time spent on support issues</li>
-      </ul>
-    </div>
-    
-    <div class="impact-card">
-      <h4>End User Experience</h4>
-      <ul>
-        <li>More reliable and consistent responses</li>
-        <li>Faster response times</li>
-        <li>Better error handling and recovery</li>
-        <li>Improved overall satisfaction</li>
-      </ul>
-    </div>
-  </div>
+  <h3 id="root-spans-etl-pipeline">Root Spans ETL Pipeline</h3>
+  <p>The Root Spans ETL Pipeline is a serverless workflow, powered by AWS Lambda, that ingests data from Phoenix and loads it into LLMonade’s database. When LLMonade is deployed, the data pipeline immediately performs API requests to Phoenix and starts ingesting the pre-existing root spans.</p>
 
-  <h3>Business Impact</h3>
-  <p>
-    Beyond technical metrics, our observability platform has delivered 
-    measurable business value through improved operational efficiency 
-    and reduced costs.
-  </p>
+  <h3 id="evaluation-data-persistence">Evaluation Data Persistence</h3>
 
-  <div class="business-metrics">
-    <div class="business-metric">
-      <h4>Operational Efficiency</h4>
-      <p>Reduced mean time to resolution (MTTR) by 70% through better visibility into system performance and faster issue identification.</p>
-    </div>
-    
-    <div class="business-metric">
-      <h4>Cost Savings</h4>
-      <p>Achieved 30% reduction in infrastructure costs through better resource utilization and proactive scaling.</p>
-    </div>
-    
-    <div class="business-metric">
-      <h4>Scalability</h4>
-      <p>Successfully handled 10x increase in traffic without proportional increase in operational overhead.</p>
-    </div>
-  </div>
+  <p>All ingested root spans and associated evaluation data are persisted in a PostgreSQL database hosted on AWS Relational Database Service (RDS). The database stores both the raw trace data from Phoenix and associated data generated during LLMonade’s evaluation workflow.  This includes formatted span data, batch groupings, grading notes, and custom error categories. A relational model is well-suited for this use case due to the structured nature of spans and associated evaluation data.</p>
+
+  <h3 id="error-analysis-fullstack-application">Error Analysis Fullstack Application</h3>
+
+  <p>When users access LLMonade, they connect through a CloudFront endpoint. On first access, requests are redirected through Lambda@Edge and Cognito, which enforce authentication and issue valid tokens. Once authenticated, users are served the React frontend from Amazon S3 via CloudFront, ensuring fast and secure delivery. From there, authenticated requests from the frontend are routed via the API Gateway to the backend API hosted on AWS Lambda. </p>
+  <p>In addition to the API Lambda, we implemented a dedicated, asynchronous worker Lambda.  This Lambda function handles the time-intensive task of formatting spans. When a formatting job is initiated, our primary application API invokes multiple instances of this worker function. This offloads the heavy processing, ensuring the main API remains responsive and available for user requests.</p>
+  <p>LLMonade leverages a serverless architecture, which is highly cost-effective for periodic workloads like error analysis. The pay-per-use model of AWS Lambda eliminates idle infrastructure costs, while its scalability seamlessly handles concurrent user activity.</p>
+
 </div>
 
 

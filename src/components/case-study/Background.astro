@@ -1,5 +1,6 @@
 ---
 // Background.astro - Case Study Background Section
+import Image from '../Image.astro';
 ---
 
 <div class="case-study-content">
@@ -139,17 +140,16 @@
   <p>Error analysis is one of the most frequently skipped or superficially performed steps in the AI development lifecycle, especially by teams that are new to building with LLMs.  Hamel says, “Many vendors want to sell you tools that claim to eliminate the need for a human to look at the data … The tools first mindset is the most common mistake in AI development. Teams get caught up in architecture diagrams, frameworks, and dashboards while neglecting the process of actually understanding what’s working and what isn’t.”  </p>
   <p>Hamel cautions against using generic solutions, like prebuilt LLM-as-a-judge evaluators, without spending the time to understand an application's specific domain and problems. He suggests beginning with manual error analysis.</p>
   
-  <div class="content-block">
-    <h4>Advised Workflow</h4>
-    <ol class="start-at-zero">
-      <li>Prerequisite - Implement Observability</li>
-      <li>Curate A Dataset</li>
-      <li>Manually Review the Data</li>
-      <li>Categorize And Analyze The Data</li>
-      <li>Fix And Improve The Most Common Issues</li>
-      <li>Iterate</li>
-    </ol>
-  </div>
+<Image 
+  src="/images/BestPracticesCircular.png" 
+  alt="System Architecture" 
+  caption="Error Analysis Workflow"
+  width="600px"
+  height="400px"
+  bordered={true}
+  rounded={true}
+  clickable={true}
+/>
 
   <h4>Implement Observability</h4>
   <p>Error analysis builds on basic observability.  At a minimum, you need to collect the inputs and corresponding outputs that your application produces. The inputs consist of real-world examples of what users will ask your application.  The outputs are the results produced by your application. This can be done by a simple logging mechanism or using existing LLM observability tools that store full traces.</p>

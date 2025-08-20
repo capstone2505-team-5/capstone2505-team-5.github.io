@@ -73,8 +73,12 @@ const sections = [
 		id: "our-solution",
 		children: [
 			{
-				title: "The Solution",
-				id: "the-solution"
+				title: "Introducing LLMonade",
+				id: "introducing-llmonade"
+			},
+			{
+				title: "Fullstack Error Analysis Web Application",
+				id: "fullstack-error-analysis-web-application"
 			}
 		]
 	},
@@ -83,9 +87,21 @@ const sections = [
 		id: "architecture",
 		children: [
 			{
-				title: "The Architecture",
-				id: "the-architecture"
-			}
+				title: "Trace Generation",
+				id: "trace-generation"
+			},
+			{
+				title: "Root Spans ETL Pipeline",
+				id: "root-spans-etl-pipeline"
+			},
+			{
+				title: "Evaluation Data Persistence",
+				id: "evaluation-data-persistence"
+			},
+			{
+				title: "Error Analysis Fullstack Application",
+				id: "error-analysis-fullstack-application"
+			},
 		]
 	},
 	{
@@ -93,8 +109,8 @@ const sections = [
 		id: "engineering-challenges",
 		children: [
 			{
-				title: "Collecting Traces",
-				id: "collecting-traces"
+				title: "Collecting Root Spans",
+				id: "collecting-root-spans"
 			},
 			{
 				title: "Data Ingestion",
@@ -173,9 +189,19 @@ const sections = [
 <script>
 	// Intersection Observer for highlighting active navigation items
 	const observerOptions = {
-		rootMargin: '-20% 0px -70% 0px',
-		threshold: 0
+		rootMargin: '-20% 0px -60% 0px',
+		threshold: [0, 0.1, 0.5, 1]
 	};
+
+	let lastScrollY = window.scrollY;
+	let scrollDirection = 'down';
+	
+	// Track scroll direction
+	window.addEventListener('scroll', () => {
+		const currentScrollY = window.scrollY;
+		scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+		lastScrollY = currentScrollY;
+	});
 
 	const observer = new IntersectionObserver((entries) => {
 		entries.forEach(entry => {
@@ -206,14 +232,77 @@ const sections = [
 						subNavItem.classList.add('active');
 					}
 				} else {
-					// This is a main section, just highlight the main nav item
+					// This is a main section, highlight the main nav item and the closest sub-item
 					if (navItem) {
 						navItem.classList.add('active');
+						
+						// Find the closest subsection to current scroll position
+						const subList = navItem.nextElementSibling;
+						if (subList && subList.classList.contains('sidebar-nav-sub-list')) {
+							const subItems = subList.querySelectorAll('.sidebar-nav-sub-item');
+							let closestSubItem = null;
+							let closestDistance = Infinity;
+							
+							subItems.forEach(subItem => {
+								const targetId = subItem.getAttribute('href')?.substring(1);
+								const targetElement = document.getElementById(targetId || '');
+								if (targetElement) {
+									const distance = Math.abs(targetElement.offsetTop - window.scrollY);
+									if (distance < closestDistance) {
+										closestDistance = distance;
+										closestSubItem = subItem;
+									}
+								}
+							});
+							
+							if (closestSubItem) {
+								(closestSubItem as HTMLElement).classList.add('active');
+							}
+						}
 					}
 				}
 			}
 		});
 	}, observerOptions);
+
+	// Function to update sidebar expansion based on current scroll position
+	function updateSidebarExpansion() {
+		const sections = document.querySelectorAll('.content-section');
+		const sectionIds = Array.from(sections).map(section => section.getAttribute('id'));
+		
+		// Find which section is currently most visible
+		let currentSectionIndex = -1;
+		const scrollPosition = window.scrollY + 200; // Offset for better detection
+		
+		sections.forEach((section, index) => {
+			const rect = section.getBoundingClientRect();
+			const sectionTop = rect.top + window.scrollY;
+			const sectionBottom = sectionTop + rect.height;
+			
+			if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+				currentSectionIndex = index;
+			}
+		});
+		
+		// Update sidebar expansion
+		sectionIds.forEach((sectionId, index) => {
+			const navItem = document.querySelector(`[data-section="${sectionId}"]`);
+			const subList = navItem?.nextElementSibling;
+			
+			if (navItem && subList && subList.classList.contains('sidebar-nav-sub-list')) {
+				// Only expand the current section, collapse all others
+				const shouldExpand = index === currentSectionIndex;
+				
+				if (shouldExpand) {
+					(subList as HTMLElement).style.display = 'block';
+					navItem.classList.add('expanded');
+				} else {
+					(subList as HTMLElement).style.display = 'none';
+					navItem.classList.remove('expanded');
+				}
+			}
+		});
+	}
 
 	// Observe all sections and subsections
 	document.addEventListener('DOMContentLoaded', () => {
@@ -227,6 +316,19 @@ const sections = [
 		subsections.forEach(subsection => {
 			observer.observe(subsection);
 		});
+
+		// Initialize sidebar expansion state
+		updateSidebarExpansion();
+		
+		// Add scroll listener for dynamic sidebar expansion with debouncing
+		let scrollTimeout: ReturnType<typeof setTimeout>;
+		window.addEventListener('scroll', () => {
+			clearTimeout(scrollTimeout);
+			scrollTimeout = setTimeout(() => {
+				updateSidebarExpansion();
+			}, 50);
+		});
+	});
 
 		// Smooth scrolling for main navigation links
 		const navLinks = document.querySelectorAll('.sidebar-nav-item');
@@ -256,14 +358,36 @@ const sections = [
 				if (targetSubsection) {
 					const headerHeight = 80; // Height of the fixed header
 					const targetPosition = targetSubsection.offsetTop - headerHeight;
+					
+					// Temporarily disable observer to prevent interference
+					observer.disconnect();
+					
 					window.scrollTo({
 						top: targetPosition,
 						behavior: 'smooth'
 					});
+					
+					// Re-enable observer after scroll completes
+					setTimeout(() => {
+						// Re-observe all elements
+						const sections = document.querySelectorAll('.content-section');
+						const subsections = document.querySelectorAll('h3[id]');
+						
+						sections.forEach(section => {
+							observer.observe(section);
+						});
+						
+						subsections.forEach(subsection => {
+							observer.observe(subsection);
+						});
+						
+						// Force update the active state
+						updateSidebarExpansion();
+					}, 500);
 				}
 			});
 		});
-	});
+
 </script>
 
 <style>
@@ -323,7 +447,7 @@ const sections = [
 	.sidebar-nav-item.active {
 		background: var(--primary-blue);
 		color: white;
-		font-weight: 500;
+		font-weight: 600;
 	}
 
 	.sidebar-nav-sub-list {
@@ -356,9 +480,12 @@ const sections = [
 		color: var(--gray-800);
 	}
 
+
+
 	.main-content {
 		flex: 1;
 		margin-left: 320px;
+		margin-right: 4rem;
 		padding: 2rem 3rem;
 		max-width: calc(100vw - 320px);
 	}
