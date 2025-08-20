@@ -8,12 +8,14 @@ export interface Props {
     type: 'image' | 'video';
   }[];
   title?: string;
+  id?: string;
 }
 
-const { media, title } = Astro.props;
+const { media, title, id } = Astro.props;
+const modalId = id ? `carousel-modal-${id}` : 'carousel-modal';
 ---
 
-<div class="carousel-container">
+<div class="carousel-container" data-modal-id={modalId}>
   {title && <h3 class="carousel-title">{title}</h3>}
   
   <div class="carousel-wrapper">
@@ -66,7 +68,7 @@ const { media, title } = Astro.props;
 </div>
 
 <!-- Modal -->
-<div class="carousel-modal" id="carousel-modal">
+<div class="carousel-modal" id={modalId}>
   <div class="modal-overlay"></div>
   <div class="modal-content">
     <button class="modal-close" aria-label="Close modal">
@@ -152,7 +154,8 @@ const { media, title } = Astro.props;
       this.rightArrow = container.querySelector('.carousel-arrow-right') as HTMLButtonElement;
       
       // Modal elements
-      this.modal = document.getElementById('carousel-modal') as HTMLElement;
+      const modalId = container.getAttribute('data-modal-id');
+      this.modal = document.getElementById(modalId || 'carousel-modal') as HTMLElement;
       this.modalTrack = this.modal?.querySelector('.modal-carousel-track') as HTMLElement;
       this.modalSlides = Array.from(this.modal?.querySelectorAll('.modal-carousel-slide') || []) as HTMLElement[];
       this.modalIndicators = Array.from(this.modal?.querySelectorAll('.modal-carousel-indicator') || []) as HTMLElement[];
