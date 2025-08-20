@@ -189,9 +189,19 @@ const sections = [
 <script>
 	// Intersection Observer for highlighting active navigation items
 	const observerOptions = {
-		rootMargin: '-20% 0px -70% 0px',
-		threshold: 0
+		rootMargin: '-20% 0px -60% 0px',
+		threshold: [0, 0.1, 0.5, 1]
 	};
+
+	let lastScrollY = window.scrollY;
+	let scrollDirection = 'down';
+	
+	// Track scroll direction
+	window.addEventListener('scroll', () => {
+		const currentScrollY = window.scrollY;
+		scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+		lastScrollY = currentScrollY;
+	});
 
 	const observer = new IntersectionObserver((entries) => {
 		entries.forEach(entry => {
@@ -222,9 +232,33 @@ const sections = [
 						subNavItem.classList.add('active');
 					}
 				} else {
-					// This is a main section, just highlight the main nav item
+					// This is a main section, highlight the main nav item and the closest sub-item
 					if (navItem) {
 						navItem.classList.add('active');
+						
+						// Find the closest subsection to current scroll position
+						const subList = navItem.nextElementSibling;
+						if (subList && subList.classList.contains('sidebar-nav-sub-list')) {
+							const subItems = subList.querySelectorAll('.sidebar-nav-sub-item');
+							let closestSubItem = null;
+							let closestDistance = Infinity;
+							
+							subItems.forEach(subItem => {
+								const targetId = subItem.getAttribute('href')?.substring(1);
+								const targetElement = document.getElementById(targetId || '');
+								if (targetElement) {
+									const distance = Math.abs(targetElement.offsetTop - window.scrollY);
+									if (distance < closestDistance) {
+										closestDistance = distance;
+										closestSubItem = subItem;
+									}
+								}
+							});
+							
+							if (closestSubItem) {
+								(closestSubItem as HTMLElement).classList.add('active');
+							}
+						}
 					}
 				}
 			}
@@ -286,9 +320,13 @@ const sections = [
 		// Initialize sidebar expansion state
 		updateSidebarExpansion();
 		
-		// Add scroll listener for dynamic sidebar expansion
+		// Add scroll listener for dynamic sidebar expansion with debouncing
+		let scrollTimeout: ReturnType<typeof setTimeout>;
 		window.addEventListener('scroll', () => {
-			updateSidebarExpansion();
+			clearTimeout(scrollTimeout);
+			scrollTimeout = setTimeout(() => {
+				updateSidebarExpansion();
+			}, 50);
 		});
 	});
 
@@ -320,10 +358,32 @@ const sections = [
 				if (targetSubsection) {
 					const headerHeight = 80; // Height of the fixed header
 					const targetPosition = targetSubsection.offsetTop - headerHeight;
+					
+					// Temporarily disable observer to prevent interference
+					observer.disconnect();
+					
 					window.scrollTo({
 						top: targetPosition,
 						behavior: 'smooth'
 					});
+					
+					// Re-enable observer after scroll completes
+					setTimeout(() => {
+						// Re-observe all elements
+						const sections = document.querySelectorAll('.content-section');
+						const subsections = document.querySelectorAll('h3[id]');
+						
+						sections.forEach(section => {
+							observer.observe(section);
+						});
+						
+						subsections.forEach(subsection => {
+							observer.observe(subsection);
+						});
+						
+						// Force update the active state
+						updateSidebarExpansion();
+					}, 500);
 				}
 			});
 		});
@@ -387,7 +447,7 @@ const sections = [
 	.sidebar-nav-item.active {
 		background: var(--primary-blue);
 		color: white;
-		font-weight: 500;
+		font-weight: 600;
 	}
 
 	.sidebar-nav-sub-list {
