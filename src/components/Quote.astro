@@ -1,0 +1,198 @@
+---
+// Quote.astro - Stylized quotation component for case study
+export interface Props {
+  quote: string;
+  author?: string;
+  title?: string;
+  company?: string;
+  size?: 'small' | 'medium' | 'large';
+  variant?: 'default' | 'highlight' | 'minimal';
+}
+
+const { 
+  quote, 
+  author, 
+  title, 
+  company, 
+  size = 'medium',
+  variant = 'default'
+} = Astro.props;
+---
+
+<div class={`quote-component quote-${size} quote-${variant}`}>
+  <div class="quote-content">
+    <blockquote class="quote-text">
+      "{quote}"
+    </blockquote>
+    {(author || title || company) && (
+      <div class="quote-attribution">
+        {author && <cite class="quote-author">{author}</cite>}
+        {(title || company) && (
+          <div class="quote-meta">
+            {title && <span class="quote-title">{title}</span>}
+            {title && company && <span class="quote-separator">, </span>}
+            {company && <span class="quote-company">{company}</span>}
+          </div>
+        )}
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .quote-component {
+    margin: 3rem auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+    max-width: 600px; /* Less wide */
+    width: 100%;
+  }
+
+  .quote-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .quote-text {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--gray-800);
+    margin: 0 0 1.5rem 0;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .quote-attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .quote-author {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4a90a4; /* Lighter blue */
+    font-style: normal;
+  }
+
+  .quote-meta {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+  }
+
+  .quote-title {
+    font-weight: 500;
+  }
+
+  .quote-company {
+    font-weight: 400;
+  }
+
+  .quote-separator {
+    margin: 0 0.25rem;
+  }
+
+  /* Size variants */
+  .quote-small {
+    padding: 1.5rem;
+    max-width: 500px; /* Even less wide for small */
+  }
+
+  .quote-small .quote-text {
+    font-size: 1.1rem;
+  }
+
+  .quote-large {
+    padding: 3rem;
+    max-width: 700px; /* Slightly wider for large */
+  }
+
+  .quote-large .quote-text {
+    font-size: 1.5rem;
+  }
+
+  /* Style variants */
+  .quote-default {
+    background: linear-gradient(135deg, #f8fbfc 0%, #e8f4f8 100%); /* Lighter blue gradient */
+    border-left: 4px solid #4a90a4; /* Lighter blue border */
+    box-shadow: 0 4px 12px rgba(74, 144, 164, 0.1); /* Lighter blue shadow */
+  }
+
+  .quote-highlight {
+    background: linear-gradient(135deg, #4a90a4 0%, #3a7a8a 100%); /* Lighter blue gradient */
+    color: white;
+  }
+
+  .quote-highlight .quote-mark {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .quote-highlight .quote-text {
+    color: white;
+  }
+
+  .quote-highlight .quote-author {
+    color: var(--primary-yellow);
+  }
+
+  .quote-highlight .quote-meta {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .quote-minimal {
+    background: transparent;
+    border: 2px solid #e8f4f8; /* Lighter blue border */
+    padding: 2rem;
+  }
+
+  .quote-minimal .quote-mark {
+    color: #b8d4dc; /* Very light blue */
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .quote-component {
+      margin: 2rem auto;
+      padding: 1.5rem;
+      max-width: 90%; /* Responsive width */
+    }
+
+    .quote-mark {
+      font-size: 3rem;
+    }
+
+    .quote-text {
+      font-size: 1.1rem;
+    }
+
+    .quote-large {
+      padding: 2rem;
+      max-width: 95%;
+    }
+
+    .quote-large .quote-mark {
+      font-size: 4rem;
+    }
+
+    .quote-large .quote-text {
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .quote-component {
+      padding: 1rem;
+      max-width: 95%;
+    }
+
+    .quote-text {
+      font-size: 1rem;
+    }
+
+    .quote-author {
+      font-size: 1rem;
+    }
+  }
+</style>
