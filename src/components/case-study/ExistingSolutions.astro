@@ -1,10 +1,22 @@
 ---
 // Architecture.astro - Case Study Architecture Section
+import Image from "../Image.astro";
 ---
 
 <div class="case-study-content">
   <p>Two categories of tools can help with error analysis: AI evaluation software and data labeling platforms. AI evaluation software features a variety of options to observe, test, and evaluate traces from an AI based application. Data labeling platforms are focused on annotation of traces and organizing those annotations. They do not collect traces or provide automated evaluations.</p>
 
+
+  <Image 
+  src="/images/comparison_chart_cropped.png" 
+  alt="Comparison Chart" 
+  caption="Comparison Chart"
+  width="750px"
+  height="580px"
+  bordered={false}
+  rounded={true}
+  clickable={true}
+/>
   <h3 id="ai-evaluation-software">AI Evaluation Software</h3>
   <p>Langsmith and Phoenix are two popular tools that focus on observability and evaluation of AI software. The featuresets of both applications are massive, including the collection of traces, manual annotations, and automated evaluations with LLM-as-a-Judge. Langsmith is a closed source application that offers a free tier of usage. However, teams utilizing the free tier are not able to self host, and thus, do not have full ownership of their data. Phoenix is open source, has a free tier, and does allow self hosting.</p>
 

@@ -13,7 +13,7 @@ import Image from '../Image.astro';
   </ol>
 
   <Image 
-  src="/images/LLMonade-Architecture-Overview.png" 
+  src="/images/Architecture/LLMonade-Architecture-Overview-UPDATE.png" 
   alt="System Architecture" 
   caption="High Level System Architecture"
   width="600px"
@@ -39,6 +39,16 @@ import Image from '../Image.astro';
   <p>In addition to the API Lambda, we implemented a dedicated, asynchronous worker Lambda.  This Lambda function handles the time-intensive task of formatting spans. When a formatting job is initiated, our primary application API invokes multiple instances of this worker function. This offloads the heavy processing, ensuring the main API remains responsive and available for user requests.</p>
   <p>LLMonade leverages a serverless architecture, which is highly cost-effective for periodic workloads like error analysis. The pay-per-use model of AWS Lambda eliminates idle infrastructure costs, while its scalability seamlessly handles concurrent user activity.</p>
 
+  <Image 
+  src="/images/Architecture/_full-arch-detail-edit.png" 
+  alt="System Architecture" 
+  caption="Frontend Diagram"
+  width="800px"
+  height="400px"
+  bordered={true}
+  rounded={true}
+  clickable={true}
+/>
 </div>
 
 
