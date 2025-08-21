@@ -1,5 +1,5 @@
 ---
-// Image.astro - Reusable image component for diagrams and other images
+// Image.astro - Reusable image/video component for diagrams and other media
 export interface Props {
   src: string;
   alt: string;
@@ -11,6 +11,11 @@ export interface Props {
   bordered?: boolean;
   shadow?: boolean;
   rounded?: boolean;
+  isVideo?: boolean;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  controls?: boolean;
 }
 
 const { 
@@ -23,30 +28,55 @@ const {
   centered = true,
   bordered = false,
   shadow = true,
-  rounded = false
+  rounded = false,
+  isVideo = false,
+  autoplay = true,
+  loop = true,
+  muted = true,
+  controls = false
 } = Astro.props;
 
-// Generate unique ID for this image's modal
-const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
+// Generate unique ID for this media's modal
+const modalId = `media-modal-${Math.random().toString(36).substr(2, 9)}`;
+
+// Determine if it's a video based on file extension or explicit prop
+const isVideoFile = isVideo || src.toLowerCase().match(/\.(mp4|webm|ogg|mov|avi)$/);
 ---
 
-<div class={`image-container ${centered ? 'centered' : ''}`}>
-  <img 
-    src={src} 
-    alt={alt} 
-    class={`image-component ${clickable ? 'clickable' : ''} ${bordered ? 'bordered' : ''} ${shadow ? 'shadow' : ''} ${rounded ? 'rounded' : ''}`}
-    style={`width: ${width}; height: ${height};`}
-    data-modal-id={modalId}
-  />
+<div class={`media-container ${centered ? 'centered' : ''}`}>
+  {isVideoFile ? (
+    <video 
+      src={src}
+      class={`media-component ${clickable ? 'clickable' : ''} ${bordered ? 'bordered' : ''} ${shadow ? 'shadow' : ''} ${rounded ? 'rounded' : ''}`}
+      style={`width: ${width}; height: ${height};`}
+      data-modal-id={modalId}
+      autoplay={autoplay}
+      loop={loop}
+      muted={muted}
+      controls={controls}
+      playsinline
+    >
+      <track kind="captions" />
+      Your browser does not support the video tag.
+    </video>
+  ) : (
+    <img 
+      src={src} 
+      alt={alt} 
+      class={`media-component ${clickable ? 'clickable' : ''} ${bordered ? 'bordered' : ''} ${shadow ? 'shadow' : ''} ${rounded ? 'rounded' : ''}`}
+      style={`width: ${width}; height: ${height};`}
+      data-modal-id={modalId}
+    />
+  )}
   {caption && (
-    <div class="image-caption">
+    <div class="media-caption">
       <p>{caption}</p>
     </div>
   )}
 </div>
 
 <!-- Modal -->
-<div class="image-modal" id={modalId}>
+<div class="media-modal" id={modalId}>
   <div class="modal-overlay"></div>
   <div class="modal-content">
     <button class="modal-close" aria-label="Close modal">
@@ -55,8 +85,23 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
       </svg>
     </button>
     
-    <div class="modal-image-container">
-      <img src={src} alt={alt} class="modal-image" />
+    <div class="modal-media-container">
+      {isVideoFile ? (
+        <video 
+          src={src}
+          class="modal-media"
+          autoplay={autoplay}
+          loop={loop}
+          muted={muted}
+          controls={controls}
+          playsinline
+        >
+          <track kind="captions" />
+          Your browser does not support the video tag.
+        </video>
+      ) : (
+        <img src={src} alt={alt} class="modal-media" />
+      )}
       {caption && (
         <div class="modal-caption">
           <p>{caption}</p>
@@ -67,15 +112,15 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
 </div>
 
 <script>
-  class ImageModal {
-    private image: HTMLImageElement;
+  class MediaModal {
+    private media: HTMLImageElement | HTMLVideoElement;
     private modal: HTMLElement;
     private modalClose: HTMLButtonElement;
     private modalOverlay: HTMLElement;
 
-    constructor(image: HTMLImageElement) {
-      this.image = image;
-      const modalId = this.image.getAttribute('data-modal-id');
+    constructor(media: HTMLImageElement | HTMLVideoElement) {
+      this.media = media;
+      const modalId = this.media.getAttribute('data-modal-id');
       this.modal = document.getElementById(modalId!) as HTMLElement;
       this.modalClose = this.modal?.querySelector('.modal-close') as HTMLButtonElement;
       this.modalOverlay = this.modal?.querySelector('.modal-overlay') as HTMLElement;
@@ -84,8 +129,8 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
     }
     
     init() {
-      // Image click to open modal
-      this.image.addEventListener('click', () => this.openModal());
+      // Media click to open modal
+      this.media.addEventListener('click', () => this.openModal());
       
       // Modal close events
       this.modalClose?.addEventListener('click', () => this.closeModal());
@@ -112,58 +157,58 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
     }
   }
   
-  // Initialize all image modals on the page
+  // Initialize all media modals on the page
   document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('.image-component.clickable');
-    images.forEach(image => new ImageModal(image as HTMLImageElement));
+    const mediaElements = document.querySelectorAll('.media-component.clickable');
+    mediaElements.forEach(media => new MediaModal(media as HTMLImageElement | HTMLVideoElement));
   });
 </script>
 
 <style>
-  .image-container {
+  .media-container {
     margin: 2rem 0;
   }
 
-  .image-container.centered {
+  .media-container.centered {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .image-component {
+  .media-component {
     max-width: 100%;
     object-fit: contain;
     transition: all 0.2s ease;
   }
 
-  .image-component.shadow {
+  .media-component.shadow {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  .image-component.bordered {
+  .media-component.bordered {
     border: 1px solid var(--gray-200);
   }
 
-  .image-component.rounded {
+  .media-component.rounded {
     border-radius: 0.5rem;
   }
 
-  .image-component.clickable {
+  .media-component.clickable {
     cursor: pointer;
   }
 
-  .image-component.clickable:hover {
+  .media-component.clickable:hover {
     transform: scale(1.02);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   }
 
-  .image-caption {
+  .media-caption {
     margin-top: 0.75rem;
     text-align: center;
     max-width: 100%;
   }
 
-  .image-caption p {
+  .media-caption p {
     margin: 0;
     color: var(--gray-600);
     font-size: 0.9rem;
@@ -172,7 +217,7 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
   }
 
   /* Modal Styles */
-  .image-modal {
+  .media-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -184,7 +229,7 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
     transition: all 0.3s ease;
   }
 
-  .image-modal.active {
+  .media-modal.active {
     opacity: 1;
     visibility: visible;
   }
@@ -238,7 +283,7 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
     transform: scale(1.1);
   }
 
-  .modal-image-container {
+  .modal-media-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -247,7 +292,7 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
     max-height: 90vh;
   }
 
-  .modal-image {
+  .modal-media {
     width: 100%;
     max-width: 90vw;
     max-height: 80vh;
@@ -280,11 +325,11 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
 
   /* Responsive design */
   @media (max-width: 768px) {
-    .image-container {
+    .media-container {
       margin: 1.5rem 0;
     }
     
-    .image-caption p {
+    .media-caption p {
       font-size: 0.85rem;
     }
     
@@ -292,7 +337,7 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
       padding: 1rem;
     }
     
-    .modal-image {
+    .modal-media {
       max-height: 70vh;
     }
     
@@ -311,7 +356,7 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
   }
 
   @media (max-width: 480px) {
-    .image-container {
+    .media-container {
       margin: 1rem 0;
     }
     
@@ -319,7 +364,7 @@ const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
       padding: 0.75rem;
     }
     
-    .modal-image {
+    .modal-media {
       max-height: 60vh;
     }
     

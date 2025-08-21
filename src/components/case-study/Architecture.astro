@@ -29,6 +29,20 @@ import Image from '../Image.astro';
   <h3 id="root-spans-etl-pipeline">Root Spans ETL Pipeline</h3>
   <p>The Root Spans ETL Pipeline is a serverless workflow, powered by AWS Lambda, that ingests data from Phoenix and loads it into LLMonade’s database. When LLMonade is deployed, the data pipeline immediately performs API requests to Phoenix and starts ingesting the pre-existing root spans.</p>
 
+  <Image 
+  src="/images/Architecture/Copy of ETL-vid-8-edit.mp4" 
+  alt="ETL Pipeline" 
+  caption="ETL Pipeline in Action"
+  width="700px"
+  height="400px"
+  bordered={true}
+  rounded={true}
+  clickable={true}
+  autoplay={true}
+  loop={true}
+  muted={true}
+/>
+
   <h3 id="evaluation-data-persistence">Evaluation Data Persistence</h3>
 
   <p>All ingested root spans and associated evaluation data are persisted in a PostgreSQL database hosted on AWS Relational Database Service (RDS). The database stores both the raw trace data from Phoenix and associated data generated during LLMonade’s evaluation workflow.  This includes formatted span data, batch groupings, grading notes, and custom error categories. A relational model is well-suited for this use case due to the structured nature of spans and associated evaluation data.</p>
@@ -42,7 +56,7 @@ import Image from '../Image.astro';
   <Image 
   src="/images/Architecture/_full-arch-detail-edit.png" 
   alt="System Architecture" 
-  caption="Frontend Diagram"
+  caption="Fullstack Application Diagram"
   width="800px"
   height="400px"
   bordered={true}
