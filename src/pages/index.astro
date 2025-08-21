@@ -25,9 +25,6 @@ import Image from '../components/Image.astro';
 						<Image 
 							src="/images/WorkflowCarousel/3-FastManualReview-10s-edit.mp4" 
 							alt="Fast Manual Review Demo" 
-							caption="Fast Manual Review Process"
-							width="100%"
-							height="400px"
 							bordered={true}
 							rounded={true}
 							autoplay={true}
@@ -102,13 +99,14 @@ import Image from '../components/Image.astro';
 
 	.section-content {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 1.5fr; /* Give more space to images (1.5x) */
 		gap: 4rem;
 		align-items: center;
 	}
 
 	.section-content.reverse {
 		direction: rtl;
+		grid-template-columns: 1.5fr 1fr; /* Reverse for section 2 */
 	}
 
 	.section-content.reverse > * {
