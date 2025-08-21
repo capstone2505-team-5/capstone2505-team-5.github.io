@@ -97,17 +97,21 @@ a:hover {
 }
 
 /* ===== LAYOUT COMPONENTS ===== */
-.container {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 2rem;
-}
+	/* Global max-width for content areas */
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
 
-.container-sm {
-	max-width: 640px;
-	margin: 0 auto;
-	padding: 0 2rem;
-}
+	.container-sm {
+		max-width: 640px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	/* Remove max-width from main so backgrounds can extend full-width */
+	/* Content max-width is handled by .container class */
 
 .section {
 	padding: 5rem 0;
