@@ -16,6 +16,7 @@ export interface Props {
   loop?: boolean;
   muted?: boolean;
   controls?: boolean;
+  noShadow?: boolean;
 }
 
 const { 
@@ -33,7 +34,8 @@ const {
   autoplay = true,
   loop = true,
   muted = true,
-  controls = false
+  controls = false,
+  noShadow = false
 } = Astro.props;
 
 // Generate unique ID for this media's modal
@@ -47,7 +49,7 @@ const isVideoFile = isVideo || src.toLowerCase().match(/\.(mp4|webm|ogg|mov|avi)
   {isVideoFile ? (
     <video 
       src={src}
-      class={`media-component ${clickable ? 'clickable' : ''} ${bordered ? 'bordered' : ''} ${shadow ? 'shadow' : ''} ${rounded ? 'rounded' : ''}`}
+      class={`media-component ${clickable ? 'clickable' : ''} ${bordered ? 'bordered' : ''} ${shadow && !noShadow ? 'shadow' : ''} ${rounded ? 'rounded' : ''}`}
       style={`width: ${width}; height: ${height};`}
       data-modal-id={modalId}
       autoplay={autoplay}
@@ -63,7 +65,7 @@ const isVideoFile = isVideo || src.toLowerCase().match(/\.(mp4|webm|ogg|mov|avi)
     <img 
       src={src} 
       alt={alt} 
-      class={`media-component ${clickable ? 'clickable' : ''} ${bordered ? 'bordered' : ''} ${shadow ? 'shadow' : ''} ${rounded ? 'rounded' : ''}`}
+      class={`media-component ${clickable ? 'clickable' : ''} ${bordered ? 'bordered' : ''} ${shadow && !noShadow ? 'shadow' : ''} ${rounded ? 'rounded' : ''}`}
       style={`width: ${width}; height: ${height};`}
       data-modal-id={modalId}
     />
