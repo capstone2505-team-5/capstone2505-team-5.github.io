@@ -8,6 +8,20 @@ import Quote from '../Quote.astro';
   <h3 id="deterministic-applications">Deterministic Applications</h3>
   <p>In traditional applications, software that does not involve AI, developers work with systems that are deterministic. A deterministic application follows rule-based logic where the same input, under the same conditions, always produces the same output. The same URL will always route to the same endpoint. A function either returns the expected output, or it does not. Static templates render the same data every time the user logs in, or an error is returned. Observability and testing verify that deterministic systems are operating as expected.</p>
 
+
+  <Image 
+    src="/images/Background/blueberries.mov" 
+    alt="Deterministic Applications" 
+    width="600px"
+    height=100%
+    bordered={true}
+    rounded={true}
+    clickable={true}
+    autoplay={true}
+    loop={true}
+    muted={true}
+    shadow={false}
+  />
   <h4>Observability in Traditional Applications</h4>
   <p>Observability measures and infers the internal state of a complex system based solely on the data it produces. Traditionally, observability has three pillars:</p>
 
@@ -94,6 +108,19 @@ import Quote from '../Quote.astro';
   <p>How this differs from traditional applications becomes clear when considering a simple example. In a traditional application, a user profile query either returns the correct user data or fails with an error. With an LLM powered application, the same query might return a correct response, partially correct information, completely fabricated data (hallucination), properly formatted responses with incorrect content, or numerous other combinations of expected and unexpected responses.</p>
   <p>In each of these scenarios the LLM returns what looks like a valid response.  Thus, traditional monitoring tools would report all of them as "successful" requests, with acceptable latency and no error codes.  Consequently, new methods and tools are required to determine if an LLM-based application is behaving correctly.</p>
   
+  <Image 
+    src="/images/Background/non_deterministic.mov" 
+    alt="Non-Deterministic Nature of LLMs" 
+    width="700px"
+    height=100%
+    bordered={true}
+    rounded={true}
+    clickable={true}
+    autoplay={true}
+    loop={true}
+    muted={true}
+    shadow={false}
+  />
 
   <h3 id="observability-in-llm-powered-software">Observability in LLM-Powered Software</h3>
 
@@ -199,5 +226,65 @@ import Quote from '../Quote.astro';
 
 
 </div>
+
+<style>
+  .process-timeline {
+    margin: 2rem 0;
+  }
+
+  .timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+    padding-left: 1rem;
+    min-height: 3rem; /* Changed to min-height for responsiveness */
+  }
+
+  .timeline-marker {
+    background: transparent;
+    color: var(--primary-blue);
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid var(--primary-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-top: 0;
+  }
+
+  .timeline-content {
+    flex: 1;
+    display: flex;
+    align-items: flex-start; /* Changed back to flex-start for responsiveness */
+    padding-top: 0.25rem; /* Small padding to align with marker */
+  }
+
+  .timeline-content p {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--gray-700);
+  }
+
+  .timeline-content strong {
+    color: var(--gray-900);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .timeline-item {
+      min-height: auto; /* Allow natural height on mobile */
+      margin-bottom: 1.5rem; /* Slightly more space on mobile */
+    }
+    
+    .timeline-content {
+      padding-top: 0;
+    }
+  }
+</style>
 
 
