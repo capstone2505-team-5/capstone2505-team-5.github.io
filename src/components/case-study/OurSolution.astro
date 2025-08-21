@@ -6,36 +6,42 @@ const workflowImages: {
   alt: string;
   caption: string;
   type: 'image' | 'video';
+  heading?: string;
 }[] = [
   {
     src: '/images/WorkflowCarousel/1-SelectProjectNarrow.png',
     alt: 'Select Project',
-    caption: '1. Choose a Phoenix project to get started analyzing.',
-    type: 'image'
+    caption: 'Choose a Phoenix project to get started analyzing.',
+    type: 'image',
+    heading: '1. Select a Project'
   },
   {
     src: '/images/WorkflowCarousel/2-CreateBatchScreenshotFODMAP.png',
     alt: 'Create Batch',
-    caption: '2. Filter, sort, and select the root spans you want to review.',
-    type: 'image'
+    caption: 'Filter, sort, and select the root spans you want to review.',
+    type: 'image',
+    heading: '2. Create Batch'
   },
   {
     src: '/images/WorkflowCarousel/3-FastManualReview-10s-edit.mp4',
     alt: 'Fast Manual Review',
-    caption: '3. Rate with a binary score and add freeform notes to describe any errors found.',
-    type: 'video'
+    caption: 'Rate with a binary score and add freeform notes to describe any errors found.',
+    type: 'video',
+    heading: '3. Review Batch'
   },
   {
     src: '/images/WorkflowCarousel/4-CategorizeInspectFast-10s-edit.mp4',
     alt: 'Categorize and Inspect',
-    caption: '4. An LLM call automatically turns freeform notes into failure mode categories.',
-    type: 'video'
+    caption: 'An LLM call automatically turns freeform notes into failure mode categories.',
+    type: 'video',
+    heading: '4. Categorize Batch'
   },
   {
     src: '/images/WorkflowCarousel/5-InspectMutlipleBatch.png',
     alt: 'Inspect Multiple Batch',
-    caption: '5. Inspect multiple batches at once and view all categories across batches.',
-    type: 'image'
+    caption: 'Inspect multiple batches at once and view all categories across batches.',
+    type: 'image',
+    heading: '5. Inspect Results'
   }
   
 ]
