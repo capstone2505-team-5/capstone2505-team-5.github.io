@@ -25,6 +25,9 @@ const {
   shadow = true,
   rounded = false
 } = Astro.props;
+
+// Generate unique ID for this image's modal
+const modalId = `image-modal-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
 <div class={`image-container ${centered ? 'centered' : ''}`}>
@@ -33,6 +36,7 @@ const {
     alt={alt} 
     class={`image-component ${clickable ? 'clickable' : ''} ${bordered ? 'bordered' : ''} ${shadow ? 'shadow' : ''} ${rounded ? 'rounded' : ''}`}
     style={`width: ${width}; height: ${height};`}
+    data-modal-id={modalId}
   />
   {caption && (
     <div class="image-caption">
@@ -42,7 +46,7 @@ const {
 </div>
 
 <!-- Modal -->
-<div class="image-modal" id="image-modal">
+<div class="image-modal" id={modalId}>
   <div class="modal-overlay"></div>
   <div class="modal-content">
     <button class="modal-close" aria-label="Close modal">
@@ -71,7 +75,8 @@ const {
 
     constructor(image: HTMLImageElement) {
       this.image = image;
-      this.modal = document.getElementById('image-modal') as HTMLElement;
+      const modalId = this.image.getAttribute('data-modal-id');
+      this.modal = document.getElementById(modalId!) as HTMLElement;
       this.modalClose = this.modal?.querySelector('.modal-close') as HTMLButtonElement;
       this.modalOverlay = this.modal?.querySelector('.modal-overlay') as HTMLElement;
       
