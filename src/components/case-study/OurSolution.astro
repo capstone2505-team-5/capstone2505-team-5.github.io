@@ -116,13 +116,6 @@ const reviewImages: {
     </div>
   </div>
 
-  <h4>Deployment Command Line Interface</h4>
-  <p>The deployment Command Line Interface (CLI) is a tool that automatically spins up all required infrastructure to Amazon Web Services. It utilizes AWS Cloud Development Kit (CDK) to provision and connect the entire architecture without any manual configuration. LLMonade is an ideal solution for small teams to get started quickly with a self-hosted, AI evaluation workflow.</p>
-  
-  <h4>Root Spans Extract, Transform, Load Pipeline</h4>
-  <p>Looking at real application data is the foundation of manual error analysis.  LLMonade integrates seamlessly with the AI observability tool Phoenix.  Once deployed, the ETL pipeline automatically ingests existing traces from Phoenix and any new traces that get generated. The highest level spans, the root spans, are formatted and saved to a database. This guarantees that the latest application behavior is always available for error analysis and review in the web application.</p>
-
-
   <h3 id="fullstack-error-analysis-web-application">Fullstack Error Analysis Web Application</h3>
   <p>At the heart of LLMonade is a full-stack web application.  The application features a simplified error analysis workflow that walks developers through their first manual evaluations.  The error analysis is accomplished through an optimized human review interface. This facilitates the viewing, annotating, and analysis of their LLM-powered application outputs.</p>
   <Carousel media={workflowImages} title="Error Analysis Workflow" id="workflow"/>
@@ -130,6 +123,13 @@ const reviewImages: {
   <h4>Effective Human Review Interface</h4>
   <p>Human review of traces is essential for identifying the most common failure modes in an application. However, manually reviewing root spans can be tedious, creating a barrier to starting this critical process. LLMonade removes this barrier with an efficient platform for faster and easier annotation and analysis.</p>
   <Carousel media={reviewImages} title="Effective Review Interface" id="review"/>
+  
+  <h4>Root Spans Extract, Transform, Load Pipeline</h4>
+  <p>Looking at real application data is the foundation of manual error analysis.  LLMonade integrates seamlessly with the AI observability tool Phoenix.  Once deployed, the ETL pipeline automatically ingests existing traces from Phoenix and any new traces that get generated. The highest level spans, the root spans, are formatted and saved to a database. This guarantees that the latest application behavior is always available for error analysis and review in the web application.</p>
+
+  <h4>Deployment Command Line Interface</h4>
+  <p>The deployment Command Line Interface (CLI) is a tool that automatically spins up all required infrastructure to Amazon Web Services. It utilizes AWS Cloud Development Kit (CDK) to provision and connect the entire architecture without any manual configuration. LLMonade is an ideal solution for small teams to get started quickly with a self-hosted, AI evaluation workflow.</p>
+
 
 
 </div>
