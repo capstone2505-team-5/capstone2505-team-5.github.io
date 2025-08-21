@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import NavBar from '../components/NavBar.astro';
 import Hero from '../components/Hero.astro';
 import Team from '../components/Team.astro';
+import Image from '../components/Image.astro';
 ---
 
 <BaseLayout>
@@ -11,29 +12,76 @@ import Team from '../components/Team.astro';
 	<main class="main mt-20">
 		<Hero />
 
-		<section id="about" class="section features">
+		<!-- Section 1: Image Right, Text Left -->
+		<section class="section alternating-section">
 			<div class="container">
-				<h2 class="text-center mb-12">About This Project</h2>
-				<div class="features-grid">
-					<div class="feature-card">
-						<div class="feature-icon">📊</div>
-						<h3 class="feature-title">Research</h3>
-						<p class="feature-description">Comprehensive analysis and data collection to understand the problem space.</p>
+				<div class="section-content">
+					<div class="section-text">
+						<h2>Error Analysis Workflow</h2>
+						<p>LLMonade transforms how you evaluate and improve your LLM-powered applications. Our innovative approach combines automated trace analysis with intuitive manual review workflows, making error detection and categorization faster and more accurate than ever before.</p>
+						<a href="/case-study/#our-solution" class="btn btn-secondary">Learn More</a>
 					</div>
-					<div class="feature-card">
-						<div class="feature-icon">🎨</div>
-						<h3 class="feature-title">Design</h3>
-						<p class="feature-description">User-centered design process with multiple iterations and user testing.</p>
+					<div class="section-image">
+						<Image 
+							src="/images/WorkflowCarousel/3-FastManualReview-10s-edit.mp4" 
+							alt="Fast Manual Review Demo" 
+							caption="Fast Manual Review Process"
+							width="100%"
+							height="400px"
+							bordered={true}
+							rounded={true}
+							autoplay={true}
+							loop={true}
+							muted={true}
+						/>
 					</div>
-					<div class="feature-card">
-						<div class="feature-icon">⚙️</div>
-						<h3 class="feature-title">Development</h3>
-						<p class="feature-description">Implementation of the solution using modern technologies and best practices.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Section 2: Image Left, Text Right -->
+		<section class="section alternating-section">
+			<div class="container">
+				<div class="section-content reverse">
+					<div class="section-text">
+						<h2>Built-In Arize Phoenix Integration</h2>
+						<p>Automatically ingest existing traces from an industry leading AI observability tool into LLMonade’s infrastructure.</p>
+						<a href="/case-study#architecture" class="btn btn-secondary">See Workflow</a>
 					</div>
-					<div class="feature-card">
-						<div class="feature-icon">📈</div>
-						<h3 class="feature-title">Results</h3>
-						<p class="feature-description">Measurable outcomes and impact of the implemented solution.</p>
+					<div class="section-image">
+						<Image 
+							src="/images/LandingPage/landing_etl_pipeline_cropped.png" 
+							alt="LLMonade Platform Overview" 
+							width="100%"
+							height="400px"
+							bordered={false}
+							rounded={false}
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Section 3: Image Right, Text Left -->
+		<section class="section alternating-section">
+			<div class="container">
+				<div class="section-content">
+					<div class="section-text">
+						<h2>CLI Deployment</h2>
+						<p>LLMonade is built using AWS architecture and can be easily deployed in minutes with our CLI tool. It utilizes AWS CDK to provision and connect the entire serverless architecture without any manual configuration making it an ideal solution for small teams to get started quickly.</p>
+						<a href="/case-study#architecture" class="btn btn-secondary">View Architecture</a>
+					</div>
+					<div class="section-image">
+						<Image 
+							src="/images/Architecture/LLMonade-Architecture-Overview-UPDATE.png" 
+							alt="LLMonade Architecture" 
+							caption="System Architecture Overview"
+							width="100%"
+							height="400px"
+							bordered={true}
+							rounded={true}
+							clickable={true}
+						/>
 					</div>
 				</div>
 			</div>
@@ -42,4 +90,77 @@ import Team from '../components/Team.astro';
 		<Team />
 	</main>
 </BaseLayout>
+
+<style>
+	.alternating-section {
+		padding: 4rem 0;
+	}
+
+	.alternating-section:nth-child(even) {
+		background-color: var(--gray-50);
+	}
+
+	.section-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: center;
+	}
+
+	.section-content.reverse {
+		direction: rtl;
+	}
+
+	.section-content.reverse > * {
+		direction: ltr;
+	}
+
+	.section-text h2 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: var(--gray-900);
+		margin-bottom: 1.5rem;
+		line-height: 1.2;
+	}
+
+	.section-text p {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: var(--gray-700);
+		margin-bottom: 1.5rem;
+	}
+
+	.section-text .btn {
+		margin-top: 1rem;
+	}
+
+	.section-image {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	@media (max-width: 768px) {
+		.section-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.section-content.reverse {
+			direction: ltr;
+		}
+
+		.section-text h2 {
+			font-size: 2rem;
+		}
+
+		.section-text p {
+			font-size: 1rem;
+		}
+
+		.alternating-section {
+			padding: 2rem 0;
+		}
+	}
+</style>
 
