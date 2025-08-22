@@ -283,67 +283,88 @@ const sections = [
 		modalObserver.observe(globalModal, { attributes: true });
 	}
 
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach(entry => {
-			const id = entry.target.getAttribute('id');
-			const navItem = document.querySelector(`[data-section="${id}"]`);
-			const subNavItem = document.querySelector(`[data-section="${id}"]`);
-			
-			if (entry.isIntersecting) {
-				// Remove active class from all nav items and sub-items
-				document.querySelectorAll('.sidebar-nav-item, .sidebar-nav-sub-item').forEach(item => {
-					item.classList.remove('active');
-				});
-				
-				// Check if this is a subsection (h3 element)
-				if (entry.target.tagName === 'H3') {
-					// Find the parent section of this subsection
-					const parentSection = entry.target.closest('.content-section');
-					if (parentSection) {
-						const parentSectionId = parentSection.getAttribute('id');
-						const parentNavItem = document.querySelector(`[data-section="${parentSectionId}"]`);
-						if (parentNavItem) {
-							parentNavItem.classList.add('active');
-						}
-					}
-					
-					// Add active class to the subsection nav item
-					if (subNavItem) {
-						subNavItem.classList.add('active');
-					}
-				} else {
-					// This is a main section, highlight the main nav item and the closest sub-item
-					if (navItem) {
-						navItem.classList.add('active');
-						
-						// Find the closest subsection to current scroll position
-						const subList = navItem.nextElementSibling;
-						if (subList && subList.classList.contains('sidebar-nav-sub-list')) {
-							const subItems = subList.querySelectorAll('.sidebar-nav-sub-item');
-							let closestSubItem = null;
-							let closestDistance = Infinity;
-							
-							subItems.forEach(subItem => {
-								const targetId = subItem.getAttribute('href')?.substring(1);
-								const targetElement = document.getElementById(targetId || '');
-								if (targetElement) {
-									const distance = Math.abs(targetElement.offsetTop - window.scrollY);
-									if (distance < closestDistance) {
-										closestDistance = distance;
-										closestSubItem = subItem;
-									}
-								}
-							});
-							
-							if (closestSubItem) {
-								(closestSubItem as HTMLElement).classList.add('active');
-							}
-						}
-					}
-				}
-			}
+	// Simple scroll-based approach instead of complex intersection observer
+	function updateActiveNavigation() {
+		const headerHeight = 80;
+		const scrollPosition = window.scrollY + headerHeight + 50; // Small offset for better detection
+		
+		// Get all sections and subsections with their positions
+		const allElements: Array<{
+			element: Element;
+			id: string | null;
+			top: number;
+			isSubsection: boolean;
+			parentSection?: string | null;
+		}> = [];
+		
+		// Add main sections
+		document.querySelectorAll('.content-section').forEach(section => {
+			const rect = section.getBoundingClientRect();
+			const top = rect.top + window.scrollY;
+			allElements.push({
+				element: section,
+				id: section.getAttribute('id'),
+				top: top,
+				isSubsection: false
+			});
 		});
-	}, observerOptions);
+		
+		// Add subsections (h3 elements)
+		document.querySelectorAll('h3[id]').forEach(h3 => {
+			const rect = h3.getBoundingClientRect();
+			const top = rect.top + window.scrollY;
+			allElements.push({
+				element: h3,
+				id: h3.getAttribute('id'),
+				top: top,
+				isSubsection: true,
+				parentSection: h3.closest('.content-section')?.getAttribute('id')
+			});
+		});
+		
+		// Sort by position
+		allElements.sort((a, b) => a.top - b.top);
+		
+		// Find the current active element (last one that's above scroll position)
+		let activeElement = null;
+		for (const elem of allElements) {
+			if (elem.top <= scrollPosition) {
+				activeElement = elem;
+			} else {
+				break;
+			}
+		}
+		
+		// Clear all active states
+		document.querySelectorAll('.sidebar-nav-item, .sidebar-nav-sub-item').forEach(item => {
+			item.classList.remove('active');
+		});
+		
+		if (activeElement) {
+			if (activeElement.isSubsection) {
+				// Highlight both parent section and subsection
+				const parentNavItem = document.querySelector(`[data-section="${activeElement.parentSection}"]`);
+				const subNavItem = document.querySelector(`[data-section="${activeElement.id}"]`);
+				
+				if (parentNavItem) parentNavItem.classList.add('active');
+				if (subNavItem) subNavItem.classList.add('active');
+			} else {
+				// Highlight main section
+				const navItem = document.querySelector(`[data-section="${activeElement.id}"]`);
+				if (navItem) navItem.classList.add('active');
+			}
+		}
+	}
+
+	// Use scroll event instead of intersection observer
+	let scrollTimeout: ReturnType<typeof setTimeout>;
+	window.addEventListener('scroll', () => {
+		clearTimeout(scrollTimeout);
+		scrollTimeout = setTimeout(updateActiveNavigation, 10);
+	});
+	
+	// Initial call
+	updateActiveNavigation();
 
 	// Function to update sidebar expansion based on current scroll position
 	function updateSidebarExpansion() {
@@ -384,20 +405,8 @@ const sections = [
 		});
 	}
 
-	// Observe all sections and subsections
+	// Initialize sidebar expansion state and add scroll listener
 	document.addEventListener('DOMContentLoaded', () => {
-		const sections = document.querySelectorAll('.content-section');
-		const subsections = document.querySelectorAll('h3[id]'); // All h3 elements with IDs
-		
-		sections.forEach(section => {
-			observer.observe(section);
-		});
-		
-		subsections.forEach(subsection => {
-			observer.observe(subsection);
-		});
-
-		// Initialize sidebar expansion state
 		updateSidebarExpansion();
 		
 		// Add scroll listener for dynamic sidebar expansion with debouncing
@@ -439,31 +448,16 @@ const sections = [
 					const headerHeight = 80; // Height of the fixed header
 					const targetPosition = targetSubsection.getBoundingClientRect().top + window.scrollY - headerHeight;
 					
-					// Temporarily disable observer to prevent interference
-					observer.disconnect();
-					
 					window.scrollTo({
 						top: targetPosition,
 						behavior: 'smooth'
 					});
 					
-					// Re-enable observer after scroll completes
+					// Update active state after scroll
 					setTimeout(() => {
-						// Re-observe all elements
-						const sections = document.querySelectorAll('.content-section');
-						const subsections = document.querySelectorAll('h3[id]');
-						
-						sections.forEach(section => {
-							observer.observe(section);
-						});
-						
-						subsections.forEach(subsection => {
-							observer.observe(subsection);
-						});
-						
-						// Force update the active state
+						updateActiveNavigation();
 						updateSidebarExpansion();
-					}, 1000);
+					}, 500);
 				}
 			});
 		});
