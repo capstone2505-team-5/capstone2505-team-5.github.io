@@ -12,13 +12,36 @@ import Image from '../components/Image.astro';
 	<main class="main mt-20">
 		<Hero />
 
+		<section class="section alternating-section">
+			<div class="container">
+				<div class="section-content reverse">
+					<div class="section-text">
+						<h2>Guided Error Analysis Workflow</h2>
+						<p>Follow a proven 5-step process to systematically improve your LLM application. From selecting traces to categorizing failures, LLMonade guides you through each stage of manual error analysis with clear visual progress tracking and expert-recommended best practices.</p>
+						<a href="/case-study#our-solution" class="btn btn-secondary">See Workflow</a>
+					</div>
+					<div class="section-image">
+						<Image 
+							src="/images/OurSolution/WorkflowCarousel/3-AnnotateHighQualityFast.mp4" 
+							alt="Error Analysis Workflow"
+							bordered={true}
+							rounded={true}
+							autoplay={true}
+							loop={true}
+							muted={true}
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+
 		<!-- Section 1: Image Right, Text Left -->
 		<section class="section alternating-section">
 			<div class="container">
 				<div class="section-content">
 					<div class="section-text">
 						<h2>Frictionless Annotation Interface</h2>
-						<p>Move through your evaluation queue at lightning speed. Our annotation platform brings together a unified data display, AI-powered formatting, and convenient keyboard shortcuts. Spend less time hunting for information and more time making high-quality judgments.</p>
+						<p>Go from raw trace data to actionable insights in five simple steps. LLMonade walks you through the most impactful AI evaluation, manual error analysis. This powerful workflow surfaces the highest-ROI issues, so your development team can make targeted improvements with confidence.</p>
 						<a href="/case-study/#our-solution" class="btn btn-secondary">Learn More</a>
 					</div>
 					<div class="section-image">
@@ -93,20 +116,20 @@ import Image from '../components/Image.astro';
 		padding: 4rem 0;
 	}
 
-	.alternating-section:nth-child(even) {
+	.alternating-section:nth-child(odd) {
 		background-color: var(--gray-50);
 	}
 
 	.section-content {
 		display: grid;
-		grid-template-columns: 1fr 1.5fr; /* Give more space to images (1.5x) */
+		grid-template-columns: 1fr 1fr; /* Equal split - 50/50 */
 		gap: 4rem;
 		align-items: center;
 	}
 
 	.section-content.reverse {
 		direction: rtl;
-		grid-template-columns: 1.5fr 1fr; /* Reverse for section 2 */
+		grid-template-columns: 1fr 1fr; /* Equal split - 50/50 */
 	}
 
 	.section-content.reverse > * {
