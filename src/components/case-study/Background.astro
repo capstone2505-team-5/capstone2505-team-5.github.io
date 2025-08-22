@@ -25,24 +25,11 @@ import Quote from '../Quote.astro';
   <h4>Observability in Traditional Applications</h4>
   <p>Observability measures and infers the internal state of a complex system based solely on the data it produces. Traditionally, observability has three pillars:</p>
 
-
-  <!-- Option 1: 3 bubbles -->
-  <div class="business-metrics">
-    <div class="business-metric">
-      <h4>Metrics</h4>
-      <p>Represent numerical data points that quantify system performance over time. </p>      
-    </div>
-    
-    <div class="business-metric">
-      <h4>Logs</h4>
-      <p>Context-rich records of specific events within an application that include both user defined logs and uncaught exceptions. </p>
-    </div>
-    
-    <div class="business-metric business-metric-wide">
-      <h4>Traces</h4>
-      <p>A log of events, usually the end-to-end journey of a single request as it flows through multiple services in a distributed system. They are composed of a series of timed operations, where each individual operation is captured as a span. This end-to-end visibility of a single request is crucial for understanding where a problem has occurred.</p>
-    </div>
-  </div>
+  <ul>
+    <li><strong>Metrics</strong> - Represent numerical data points that quantify system performance over time.</li>
+    <li><strong>Logs</strong> - Context-rich records of specific events within an application that include both user defined logs and uncaught exceptions.</li>
+    <li><strong>Traces</strong> - A log of events, usually the end-to-end journey of a single request as it flows through multiple services in a distributed system. They are composed of a series of timed operations, where each individual operation is captured as a span. This end-to-end visibility of a single request is crucial for understanding where a problem has occurred.</li>
+  </ul>
 
   <p>Metrics, logs and traces work together to show a complete picture of where a developer can improve their application. Metrics identify what issues are occurring, logs provide context about specific events, and traces pinpoint where the problem originated.</p>
 
@@ -128,7 +115,7 @@ import Quote from '../Quote.astro';
 
   <p>Observability in LLM-based applications includes and expands on the metrics, logs, and traces used in deterministic applications. Metrics expand from system performance to include AI quality and cost, while logs shift from capturing system events to recording the multi-step journey of inputs and outputs. Traces and spans capture essential details about an LLM-based applications behavior.</p>
   
-  <!-- Traces/Spans/Root Spans Yellow Impact Section -->
+  <!-- Traces/Spans/Root Spans Yellow Impact Section
   <div class="business-metrics">
     <div class="business-metric">
       <h4>Traces</h4>
@@ -144,7 +131,13 @@ import Quote from '../Quote.astro';
       <h4>Root Spans</h4>
       <p>A root span is the topmost span. It encapsulates the request from start to finish. The input will be the initial input from the user, and the output of a root span will be the final output that is returned to the user after any intermediate steps or tasks are completed.</p>
     </div>
-  </div>
+  </div> -->
+
+  <ul>
+    <li><strong>Traces</strong> - A log of events, usually the end-to-end journey of a single request as it flows through multiple services in a distributed system. They are composed of a series of timed operations, where each individual operation is captured as a span. This end-to-end visibility of a single request is crucial for understanding where a problem has occurred.</li>
+    <li><strong>Spans</strong> - A span represents a single, distinct operation or unit of work within a trace.  In a request to an LLM-powered application, spans represent a single logical task in the sequence (e.g., a vector search, a call to an LLM, a data transformation).</li>
+    <li><strong>Root Spans</strong> - A root span is the topmost span. It encapsulates the request from start to finish. The input will be the initial input from the user, and the output of a root span will be the final output that is returned to the user after any intermediate steps or tasks are completed.</li>
+  </ul>
 
 
   <h4>Traditional Testing of LLM-Powered Software</h4>
