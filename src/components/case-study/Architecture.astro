@@ -13,15 +13,15 @@ import Image from '../Image.astro';
   </ol>
 
   <Image 
-  src="/images/Architecture/LLMonade-Architecture-Overview-UPDATE.png" 
-  alt="System Architecture" 
-  caption="High Level System Architecture"
-  width="600px"
-  height="100%"
-  bordered={true}
-  rounded={true}
-  clickable={true}
-/>
+    src="/images/Architecture/LLMonade-Architecture-Overview-UPDATE.png" 
+    alt="System Architecture" 
+    caption="High Level System Architecture"
+    width="600px"
+    height="100%"
+    bordered={true}
+    rounded={true}
+    clickable={true}
+  />
 
   <h3 id="trace-generation">Trace Generation with Phoenix</h3>
   <p>Traces are generated in a user’s LLM-powered application and are structured, organized, and stored by the observability platform Phoenix.  LLMonade builds upon this existing architecture to retrieve the highest level spans, the root spans, from the Phoenix database.</p>
@@ -30,7 +30,7 @@ import Image from '../Image.astro';
   <p>The Root Spans ETL Pipeline is a serverless workflow, powered by AWS Lambda, that ingests data from Phoenix and loads it into LLMonade’s database. When LLMonade is deployed, the data pipeline immediately performs API requests to Phoenix and starts ingesting the pre-existing root spans.</p>
 
   <Image 
-    src="/images/Architecture/Copy of ETL-vid-8-edit.mp4" 
+    src="/images/Architecture/ETL-vid-9.mp4" 
     alt="ETL Pipeline" 
     caption="ETL Pipeline in Action"
     width="700px"
