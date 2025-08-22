@@ -77,8 +77,8 @@ const sections = [
 				id: "introducing-llmonade"
 			},
 			{
-				title: "Fullstack Error Analysis Web Application",
-				id: "fullstack-error-analysis-web-application"
+				title: "Full-Stack Error Analysis Web Application",
+				id: "full-stack-error-analysis-web-application"
 			}
 		]
 	},
@@ -139,8 +139,16 @@ const sections = [
 				id: "expand-deployment-options"
 			},
 			{
-				title: "Provide More App Functionality",
-				id: "provide-more-app-functionality"
+				title: "Additional Metadata",
+				id: "additional-metadata"
+			},
+			{
+				title: "Synthetic Data",
+				id: "synthetic-data"
+			},
+			{
+				title: "Automated Evaluations with LLM-as-a-Judge",
+				id: "automated-evaluations-with-llm-as-a-judge"
 			}
 		]
 	},
@@ -196,7 +204,7 @@ const sections = [
 <script>
 	// Intersection Observer for highlighting active navigation items
 	const observerOptions = {
-		rootMargin: '-20% 0px -60% 0px',
+		rootMargin: '-100px 0px -100px 0px',
 		threshold: [0, 0.1, 0.5, 1]
 	};
 
@@ -411,7 +419,7 @@ const sections = [
 				const targetSection = document.getElementById(targetId || '');
 				if (targetSection) {
 					const headerHeight = 80; // Height of the fixed header
-					const targetPosition = targetSection.offsetTop - headerHeight;
+					const targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - headerHeight;
 					window.scrollTo({
 						top: targetPosition,
 						behavior: 'smooth'
@@ -429,7 +437,7 @@ const sections = [
 				const targetSubsection = document.getElementById(targetId || '');
 				if (targetSubsection) {
 					const headerHeight = 80; // Height of the fixed header
-					const targetPosition = targetSubsection.offsetTop - headerHeight;
+					const targetPosition = targetSubsection.getBoundingClientRect().top + window.scrollY - headerHeight;
 					
 					// Temporarily disable observer to prevent interference
 					observer.disconnect();
@@ -455,7 +463,7 @@ const sections = [
 						
 						// Force update the active state
 						updateSidebarExpansion();
-					}, 500);
+					}, 1000);
 				}
 			});
 		});
