@@ -47,7 +47,7 @@ import Quote from '../Quote.astro';
   <p>Metrics, logs and traces work together to show a complete picture of where a developer can improve their application. Metrics identify what issues are occurring, logs provide context about specific events, and traces pinpoint where the problem originated.</p>
 
   <h4>Testing Traditional Applications</h4>
-  <p>The deterministic nature of traditional applications enables developers to write precise assertions that definitively validate application behavior.  These assertions are built into test suites, which specify and enforce an application’s correct behavior. Correctness in traditional software is not a matter or opinion or quality; it is a binary proven state.</p>
+  <p>The deterministic nature of traditional applications enables developers to write precise assertions that definitively validate application behavior.  These assertions are built into test suites, which specify and enforce an application's correct behavior. Correctness in traditional software is not a matter or opinion or quality; it is a binary, proven state.</p>
 
   <h4>Improving Traditional Applications</h4>
 
@@ -91,6 +91,8 @@ import Quote from '../Quote.astro';
     </div>
   </div>
 
+  <p>The effectiveness of this entire cycle is fundamentally rooted in the deterministic nature of the software.</p>
+
   
   
   <h3 id="artificial-intelligence-and-large-language-models">Artificial Intelligence and Large Language Models</h3>
@@ -105,8 +107,8 @@ import Quote from '../Quote.astro';
 
   <h4>The Non-Deterministic Nature of LLMs</h4>
   <p>LLMs are non-deterministic, meaning that identical inputs can yield different responses.  At its heart, an LLM is a prediction engine. When you give it a prompt, it doesn't search a database for a pre-written answer. Instead, it randomly selects from the next most likely words, one after another, based on the vast amount of text it was trained on.  Think of it like a very advanced autocomplete.</p>
-  <p>How this differs from traditional applications becomes clear when considering a simple example. In a traditional application, a user profile query either returns the correct user data or fails with an error. With an LLM powered application, the same query might return a correct response, partially correct information, completely fabricated data (hallucination), properly formatted responses with incorrect content, or numerous other combinations of expected and unexpected responses.</p>
-  <p>In each of these scenarios the LLM returns what looks like a valid response.  Thus, traditional monitoring tools would report all of them as "successful" requests, with acceptable latency and no error codes.  Consequently, new methods and tools are required to determine if an LLM-based application is behaving correctly.</p>
+  <p>How this differs from traditional applications becomes clear when considering a simple example. In a traditional application, a user profile query either returns the correct user data or fails with an error. With an LLM-powered application, the same query might return a correct response, partially correct information, completely fabricated data (hallucination), properly formatted responses with incorrect content, or numerous other combinations of expected and unexpected responses.</p>
+  <p>In each of these scenarios, the LLM returns what looks like a valid response.  Thus, traditional monitoring tools would report all of them as "successful" requests, with acceptable latency and no error codes.  Consequently, new methods and tools are required to determine if an LLM-based application is behaving correctly.</p>
   
   <Image 
     src="/images/Background/non_deterministic.mov" 
@@ -135,12 +137,12 @@ import Quote from '../Quote.astro';
     
     <div class="business-metric">
       <h4>Spans</h4>
-      <p>A span represents a single, distinct operation or unit of work within a trace.  In a call to an LLM, spans represent a single logical task in the sequence (e.g., a vector search, a call to an LLM, a data transformation).</p>
+      <p>A span represents a single, distinct operation or unit of work within a trace.  In a request to an LLM-powered application, spans represent a single logical task in the sequence (e.g., a vector search, a call to an LLM, a data transformation).</p>
     </div>
     
     <div class="business-metric">
       <h4>Root Spans</h4>
-      <p>A root span is the topmost span which encapsulates the request from start to finish. The input will be the initial input from the user, and the output of a root span will be the final output that is returned to the user after any intermediate steps or tasks are completed.</p>
+      <p>A root span is the topmost span. It encapsulates the request from start to finish. The input will be the initial input from the user, and the output of a root span will be the final output that is returned to the user after any intermediate steps or tasks are completed.</p>
     </div>
   </div>
 
@@ -151,14 +153,14 @@ import Quote from '../Quote.astro';
 
   <h3 id="evaluating-llm-based-applications">Evaluating LLM-based Applications</h3>
 
-  <p>To understand if your LLM-integrated application is functioning “correctly”, traditional tests meant for deterministic software are not enough. Instead of a static, singular correct output, there are a variety of outputs that can all be considered correct. Thus, in addition to traditional binary tests, one must also judge the quality and acceptability of the application's probabilistic outputs. This type of test is called an evaluation.</p>
-  <p>The two most powerful ways to evaluate an LLM-based application are manual human error analysis and LLM-as-a-Judge. A large production application, with full test coverage, would likely include a combination of unit testing with assertions, manual error analysis, and LLM as a Judge evaluation.</p>
+  <p>To understand if your LLM-integrated application is functioning "correctly", traditional tests meant for deterministic software are not enough. Instead of a static, singular, correct output, there are a variety of outputs that can all be considered correct. Thus, in addition to traditional binary tests, one must also judge the quality and acceptability of the application's probabilistic outputs. This type of test is called an evaluation.</p>
+  <p>The two most powerful ways to evaluate an LLM-based application are manual human error analysis and LLM-as-a-Judge. A large production application, with full test coverage, would likely include a combination of unit testing with assertions, manual error analysis, and LLM-as-a-Judge evaluation.</p>
   
   <h4>Manual Human Error Analysis</h4>
-  <p>Manual human error analysis is the process of looking at real traces from an application, notating errors found in each trace, categorizing those errors into distinct categories, and finding the most common failures.  By finding the most common errors, developers can now make targeted improvements to their application.  Additionally, they can create custom LLM-as-a-Judge evaluation tests that are targeted to the most common errors.</p>
+  <p>Manual human error analysis is the process of looking at real traces from an application, annotating errors found in each trace, categorizing those errors into distinct categories, and finding the most common failures.  By finding the most common errors, developers can now make targeted improvements to their application.  Additionally, they can create custom LLM-as-a-Judge evaluation tests that are targeted to the most common errors.</p>
 
-  <h4>LLM as a Judge</h4>
-  <p>When evaluating LLM applications at scale, having a human annotator evaluating every output becomes infeasible. By using LLMs as evaluators, teams can automate quality control at scale. LLM-as-a-Judge is an evaluation technique that leverages LLMs to assess the quality, relevance, and reliability of outputs generated by an LLM powered application. </p>
+  <h4>LLM-as-a-Judge</h4>
+  <p>When evaluating LLM applications at scale, having a human annotator evaluating every output becomes infeasible. By using LLMs as evaluators, teams can automate quality control at scale. LLM-as-a-Judge is an evaluation technique that leverages LLMs to assess the quality, relevance, and reliability of outputs generated by an LLM-powered application.</p>
 
   <Quote 
     quote="Manual inspection of data has probably the highest value-to prestige ratio of any activity in machine learning."
@@ -169,9 +171,9 @@ import Quote from '../Quote.astro';
 
   <h3 id="emerging-best-practices">Emerging Best Practices</h3>
   <h4>Don't Skip Error Analysis!</h4>
-  <p>Hamel Husain is an ML Engineer and researcher with a proven track record shipping seminal LLM work and helping teams rapidly improve their AI powered applications. One of the recurring themes in Hamel's writing is the importance of manual error analysis. In his words, "Error analysis is the single most valuable activity in AI development and consistently the highest-ROI activity."  He elaborates, "In the projects we’ve worked on, we’ve spent 60-80% of our development time on error analysis and evaluation."</p>
-  <p>Error analysis is one of the most frequently skipped or superficially performed steps in the AI development lifecycle, especially by teams that are new to building with LLMs.  Hamel says, “Many vendors want to sell you tools that claim to eliminate the need for a human to look at the data … The tools first mindset is the most common mistake in AI development. Teams get caught up in architecture diagrams, frameworks, and dashboards while neglecting the process of actually understanding what’s working and what isn’t.”  </p>
-  <p>Hamel cautions against using generic solutions, like prebuilt LLM-as-a-judge evaluators, without spending the time to understand an application's specific domain and problems. He suggests beginning with manual error analysis.</p>
+  <p>Hamel Husain is an ML Engineer and researcher with a proven track record shipping seminal LLM work and helping teams rapidly improve their AI powered applications. One of the recurring themes in Hamel's writing is the importance of manual error analysis. In his words, "Error analysis is the single most valuable activity in AI development and consistently the highest-ROI activity."  He elaborates, "In the projects we've worked on, we've spent 60-80% of our development time on error analysis and evaluation."</p>
+  <p>Error analysis is one of the most frequently skipped or superficially performed steps in the AI development lifecycle, especially by teams that are new to building with LLMs.  Hamel says, "Many vendors want to sell you tools that claim to eliminate the need for a human to look at the data … The tools first mindset is the most common mistake in AI development. Teams get caught up in architecture diagrams, frameworks, and dashboards while neglecting the process of actually understanding what's working and what isn't."  </p>
+  <p>Hamel cautions against using generic solutions, like prebuilt LLM-as-a-judge evaluators, without spending the time to understand an application's specific domain and problems. He suggests beginning with manual error analysis. Here is his advised workflow:</p>
   
 <Image 
   src="/images/BestPracticesStyledUpdate.png" 
@@ -188,23 +190,23 @@ import Quote from '../Quote.astro';
   <p>Error analysis builds on basic observability.  At a minimum, you need to collect the inputs and corresponding outputs that your application produces. The inputs consist of real-world examples of what users will ask your application.  The outputs are the results produced by your application. This can be done by a simple logging mechanism or using existing LLM observability tools that store full traces.</p>
 
   <h4>Curate a Dataset</h4>
-  <p>Once traces are being collected, the next step is to select the specific traces that you want to analyze.   This should be anywhere from 10 to 100 traces. The more traces you look at, the more information you will glean from the process. The traces should be diverse and represent different parts of your system.  </p>
+  <p>Once traces are being collected, the next step is to select the specific traces that you want to analyze.   This should be anywhere from 10 to 100 traces. The more traces you look at, the more information you will glean from the process. The traces should be diverse and represent different parts of your system.</p>
 
   <h4>Human Review of the Data</h4>
-  <p>Next, each pair of inputs and outputs should be manually reviewed. The review captures whether the response is positive or negative and free form annotation describing the most significant error found in the set.  The reviewer needs to be someone that is capable of assessing the quality of the output.  Sometimes this may be the developer, but other times it will need to be a domain expert that knows more about the specific subject at hand.</p>
+  <p>Next, each pair of inputs and outputs should be manually reviewed. The review captures whether the response is positive or negative and includes free form annotation describing the most significant error found in the set.  The reviewer needs to be someone that is capable of assessing the quality of the output.  Sometimes this may be the developer, but other times it will need to be a domain expert that knows more about the specific subject at hand.</p>
 
   <h4>Categorize and Analyze The Data</h4>
   <p>Once all of the data has been reviewed, the annotations should be categorized by failure mode.  An LLM can be used to create the categories from the free form notes and then put each piece of feedback into the correct error category.  The result is a list of categories representing the errors found in the dataset and a count of how often they occur in the dataset.</p>
 
-  <h4>Fix And Improve The Most Common Issues</h4>
-  <p>Now that you have analyzed actual data from your application, you should have a much better idea of how it behaves. The failure modes that are most frequent in your dataset are a high ROI target for your application developers to fix.  Prompt engineering is the most straightforward way to make changes to an LLM based application.  Other options can include changes to your code or changes to more advanced AI systems within your software.</p>
+  <h4>Fix and Improve the Most Common Issues</h4>
+  <p>Now that you have analyzed actual data from your application, you should have a much better idea of how it behaves. The failure modes that are most frequent in your dataset are a high ROI target for your application developers to fix.  Prompt engineering is the most straightforward way to make changes to an LLM-based application.  Other options can include changes to your code or changes to more advanced AI systems within your software.</p>
 
   <h4>Iterate</h4>
   <p>The entire process, from viewing your data to implementing fixes, is a cycle.  Once an update has been made to your application, go back to the beginning, step 1, and start error analysis again.  You should test similar inputs again until you are happy with the improvements.  Then, continue working through this loop with new and varied inputs to find additional failure modes.</p>
 
   <h4>Post Error Analysis</h4>
-  <p>There is no exact science on when to move on from error analysis.  Shreya Shanker is an AI systems researcher in the UC Berkeley Data Systems and Foundations Group.  Regarding error analysis, she recommends,  “Collect representative examples and categorise failure modes. You must look at your data until you reach “theoretical saturation” - the point where reviewing additional examples reveals no new failure modes.” Both Hamel Husain and Shreya Shankar advocate for starting with this manual, in-depth analysis of your data before building complex evaluation infrastructure. </p>
-  <p>Once the error analysis cycle has hit “theoretical saturation”, the next step is setting up automated evaluations with LLM-as-a-Judge. You can now create custom evaluations that target the error categories that you have improved and/or fixed.  The goal of the automated tests is to "lock in" your progress and ensure that these specific problems don’t reappear in the future.  They become regression tests.</p>
+  <p>There is no exact science on when to move on from error analysis.  Shreya Shanker is an AI systems researcher in the UC Berkeley Data Systems and Foundations Group.  Regarding error analysis, she recommends,  "Collect representative examples and categorize failure modes. You must look at your data until you reach "theoretical saturation" - the point where reviewing additional examples reveals no new failure modes." Both Hamel Husain and Shreya Shankar advocate for starting with this manual, in-depth analysis of your data before building complex evaluation infrastructure.</p>
+  <p>Once the error analysis cycle has hit "theoretical saturation", the next step is setting up automated evaluations with LLM-as-a-Judge. You can now create custom evaluations that target the error categories that you have improved and/or fixed.  The goal of the automated tests is to "lock in" your progress and ensure that these specific problems don't reappear in the future. They become regression tests.</p>
 
   <h3 id="effective-human-review-interface">Effective Human Review Interface</h3>
   <p>When performing error analysis, both Hamel Husain and Shreya Shankar emphasize the need for a well-designed review interface. While the reviewer must be a subject matter expert, they may not always be technically savvy. Thus, the interface is not meant to be a complex, feature-bloated dashboard, but rather a purpose-built tool that removes all friction from data inspection. The interface is designed to help rapidly select data and provide feedback.</p>
@@ -222,7 +224,7 @@ import Quote from '../Quote.astro';
     </ul>
   </div>
 
-  <p>In essence, the ideal data viewer, as envisioned by experts like Husain and Shankar, is less of a generic logging tool and more of a bespoke, interactive workbench. It is built to be the fastest path to understanding where an LLM application is failing, empowering developers and domain experts to turn raw data into actionable insights. If you have the resources available, Husain and Shankar make the case for a custom review interface.  For teams that do not have the resources to make a custom interface, they suggest using existing solutions to get started.</p>
+  <p>The ideal data viewer, as envisioned by experts like Husain and Shankar, is less of a generic logging tool and more of a bespoke, interactive workbench. It is built to be the fastest path to understanding where an LLM application is failing, empowering developers and domain experts to turn raw data into actionable insights. If you have the resources available, Husain and Shankar make the case for a custom review interface.  For teams that do not have the resources to make a custom interface, they suggest using existing solutions to get started.</p>
 
 
 </div>
