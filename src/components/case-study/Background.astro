@@ -99,8 +99,8 @@ import Quote from '../Quote.astro';
 
   <p><strong>Artificial Intelligence (AI)</strong> is a broad field encompassing machines and software capable of performing tasks that typically require human intelligence, such as reasoning, learning, planning, perception, and understanding language.</p>
   <p><strong>Large Language Models (LLMs)</strong> are an increasingly popular and powerful subset of AI applications.  They are trained on an enormous amount of text to recognize patterns in language and generate human-like responses based on a given input. LLMs enable both new ways of interacting with existing applications through natural language and entirely new classes of applications. </p>
-  <p>The input provided to an LLM is called a prompt. A prompt is simply the instruction, question, or text you give to the model to get it to do something. It is the starting point that guides the AI toward the response you want.  The output is the response the LLM generates after processing your prompt. This is the text, code, or other content that the model creates for you.</p>
-  <p>Prompt engineering is the process of carefully crafting and refining the instructions given to an LLM to ensure it performs a task accurately, safely, and consistently.  It is the primary and most direct control surface for steering an LLM’s behavior.</p>
+  <p>The input provided to an LLM is called a <strong>prompt</strong>. A prompt is simply the instruction, question, or text you give to the model to get it to do something. It is the starting point that guides the AI toward the response you want.  The <strong>output</strong> is the response the LLM generates after processing your prompt. This is the text, code, or other content that the model creates for you.</p>
+  <p><strong>Prompt engineering</strong> is the process of carefully crafting and refining the instructions given to an LLM to ensure it performs a task accurately, safely, and consistently.  It is the primary and most direct control surface for steering an LLM’s behavior.</p>
 
   <h4>LLM-Powered Software</h4>
   <p>LLM-based applications integrate LLM capabilities into traditional software workflows.  The most popular use cases today include chatbots, content creation, and code generation.  The use of the LLM in the application can be as simple as a single request to an LLM. Alternatively, the use could be much more complex.  This could include calls to multiple LLMs, or even provide tools for an LLM to utilize at its own discretion.</p>
@@ -147,13 +147,13 @@ import Quote from '../Quote.astro';
   </div>
 
 
-  <h4>Traditional Testing of LLM Powered Software</h4>
+  <h4>Traditional Testing of LLM-Powered Software</h4>
   <p>In an LLM-powered application traditional unit tests are still an effective part of testing.  Unit tests can be used to test all of the deterministic code around the LLM piece of your application. Assertions can also be used to test the output of your LLM calls by checking the structure or format, checking the length of the output, checking for key phrases, and security checks for sensitive data.  Although they involve a network call, they can be referred to as unit tests because they test a specific piece or feature of your application.</p>
   
 
-  <h3 id="evaluating-llm-based-applications">Evaluating LLM-based Applications</h3>
+  <h3 id="evaluating-llm-based-applications">Evaluating LLM-Powered Software</h3>
 
-  <p>To understand if your LLM-integrated application is functioning "correctly", traditional tests meant for deterministic software are not enough. Instead of a static, singular, correct output, there are a variety of outputs that can all be considered correct. Thus, in addition to traditional binary tests, one must also judge the quality and acceptability of the application's probabilistic outputs. This type of test is called an evaluation.</p>
+  <p>To understand if your LLM-integrated application is functioning "correctly", traditional tests meant for deterministic software are not enough. Instead of a static, singular, correct output, there are a variety of outputs that can all be considered correct. Thus, in addition to traditional binary tests, one must also judge the quality and acceptability of the application's probabilistic outputs. This type of test is called an <strong>evaluation</strong>.</p>
   <p>The two most powerful ways to evaluate an LLM-based application are manual human error analysis and LLM-as-a-Judge. A large production application, with full test coverage, would likely include a combination of unit testing with assertions, manual error analysis, and LLM-as-a-Judge evaluation.</p>
   
   <h4>Manual Human Error Analysis</h4>
@@ -195,7 +195,7 @@ import Quote from '../Quote.astro';
   <h4>Human Review of the Data</h4>
   <p>Next, each pair of inputs and outputs should be manually reviewed. The review captures whether the response is positive or negative and includes free form annotation describing the most significant error found in the set.  The reviewer needs to be someone that is capable of assessing the quality of the output.  Sometimes this may be the developer, but other times it will need to be a domain expert that knows more about the specific subject at hand.</p>
 
-  <h4>Categorize and Analyze The Data</h4>
+  <h4>Categorize and Analyze the Data</h4>
   <p>Once all of the data has been reviewed, the annotations should be categorized by failure mode.  An LLM can be used to create the categories from the free form notes and then put each piece of feedback into the correct error category.  The result is a list of categories representing the errors found in the dataset and a count of how often they occur in the dataset.</p>
 
   <h4>Fix and Improve the Most Common Issues</h4>
