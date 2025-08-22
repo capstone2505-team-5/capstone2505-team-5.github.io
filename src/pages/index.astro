@@ -17,8 +17,8 @@ import Image from '../components/Image.astro';
 			<div class="container">
 				<div class="section-content">
 					<div class="section-text">
-						<h2>Error Analysis Workflow</h2>
-						<p>LLMonade transforms how you evaluate and improve your LLM-powered applications. Our innovative approach combines automated trace analysis with intuitive manual review workflows, making error detection and categorization faster and more accurate than ever before.</p>
+						<h2>Frictionless Annotation Interface</h2>
+						<p>Move through your evaluation queue at lightning speed. Our annotation platform brings together a unified data display, AI-powered formatting, and convenient keyboard shortcuts. Spend less time hunting for information and more time making high-quality judgments.</p>
 						<a href="/case-study/#our-solution" class="btn btn-secondary">Learn More</a>
 					</div>
 					<div class="section-image">
@@ -41,14 +41,14 @@ import Image from '../components/Image.astro';
 			<div class="container">
 				<div class="section-content reverse">
 					<div class="section-text">
-						<h2>Built-In Arize Phoenix Integration</h2>
-						<p>Automatically ingest existing traces from an industry leading AI observability tool into LLMonade’s infrastructure.</p>
+						<h2>Native Phoenix Integration</h2>
+						<p>Deploy with Phoenix integration out of the box.  LLMonade automatically synchronizes your entire trace history and stays updated with new data as it arrives. Focus on what matters: analyzing your application's behavior and shipping improvements, faster.</p>
 						<a href="/case-study#architecture" class="btn btn-secondary">See Workflow</a>
 					</div>
 					<div class="section-image">
 						<Image 
 							src="/images/LandingPage/landing_etl_pipeline_cropped.png" 
-							alt="LLMonade Platform Overview" 
+							alt="Phoenix Integration" 
 							width="100%"
 							height="400px"
 							bordered={false}
@@ -65,14 +65,14 @@ import Image from '../components/Image.astro';
 			<div class="container">
 				<div class="section-content">
 					<div class="section-text">
-						<h2>CLI Deployment</h2>
-						<p>LLMonade is built using AWS architecture and can be easily deployed in minutes with our CLI tool. It utilizes AWS CDK to provision and connect the entire serverless architecture without any manual configuration making it an ideal solution for small teams to get started quickly.</p>
+						<h2>Automated Deployment to AWS</h2>
+						<p>Deploy LLMonade in your AWS organization with ease. Our CLI tool leverages AWS CDK to automatically provision the entire serverless architecture for you. Set up the complete, self-hosted platform with a single command.</p>
 						<a href="/case-study#architecture" class="btn btn-secondary">View Architecture</a>
 					</div>
 					<div class="section-image">
 						<Image 
 							src="/images/LandingPage/cli-combined-bordered-transparent.png" 
-							alt="CloudFormation Template" 
+							alt="LLMonade CLI" 
 							width="100%"
 							height="500px"
 							bordered={false}
@@ -141,7 +141,7 @@ import Image from '../components/Image.astro';
 	@media (max-width: 768px) {
 		.section-content {
 			grid-template-columns: 1fr;
-			gap: 2rem;
+			gap: 1.5rem;
 		}
 
 		.section-content.reverse {
@@ -157,7 +157,11 @@ import Image from '../components/Image.astro';
 		}
 
 		.alternating-section {
-			padding: 2rem 0;
+			padding: 1.5rem 0;
+		}
+
+		.section-image {
+			margin: 0.5rem 0;
 		}
 	}
 </style>
