@@ -5,7 +5,6 @@ import Image from "../Image.astro";
 
 <div class="case-study-content">
   <h3 id="collecting-root-spans">Collecting Root Spans</h3>
-  <h4>The Challenge</h4>
   <p>We needed a reliable, automated way to collect root spans from a user's LLM-powered application. The collection method had to work across diverse environments, minimize integration complexity, and support both current and historical trace data for evaluation.</p>
 
   <h4>Options</h4>
@@ -31,7 +30,7 @@ import Image from "../Image.astro";
   <p>The downside of choosing Phoenix as our trace provider is that it becomes a single point of failure for our application. To ensure an uninterrupted workflow, our application maintains its own replica of the trace data. This decouples our core functionality from the availability of the Phoenix API, allowing users to continue their evaluation tasks even during a Phoenix service disruption. While Phoenix provides a robust foundation for observability, we still needed to bridge the gap between its data store and our application.</p>
 
   <h3 id="data-ingestion">Data Ingestion</h3>
-  <h4>The Challenge</h4>
+
   <p>Adopting Phoenix for observability introduced two ingestion challenges. First, we needed to perform a high-volume backfill of potentially tens of thousands of historical traces. Second, we had to establish a continuous pipeline to retrieve newly generated traces.</p>
   
   <h4>Options</h4>
@@ -48,7 +47,6 @@ import Image from "../Image.astro";
   <p>It is also important to note that our pull-based model leads to some inefficient API calls. The system periodically polls for new information which means it sometimes makes requests when no new data exists. We accepted this behavior because the API requests are free and have a low performance impact.</p>
 
   <h3 id="flexible-evaluation-platform">Flexible Evaluation Platform</h3>
-  <h4>The Challenge</h4>
   <p>We endeavored to create an evaluation tool that works immediately for common scenarios without requiring extensive setup or customization. There are many different types of LLM-powered applications, each with varying complexity and data flows. A simple chatbot involves just a query-response pair, a RAG system might have multiple retrieval steps, or an agentic workflow might involve tool calls and reasoning steps.</p>
   <p>Furthermore, depending on the goal of the user's application, the output could have many different content types. Outputs could be emails, code snippets, structured data, conversational text, cooking recipes, or anything else an LLM can generate.</p>
   <p>In manual error analysis, the reviewer often needs context beyond the input and output. For example, to review an LLM app that drafts emails for job applicants, the reviewer may need to look at the actual job posting. We needed a uniform way to display the context, even though it could come in many different shapes, sizes, and file types.</p>
@@ -65,7 +63,6 @@ import Image from "../Image.astro";
 
 
   <h3 id="serverless-architecture">Serverless Architecture</h3>
-  <h4>The Challenge</h4>
   <p>As a tool for small development teams, LLMonade needed to be highly cost-effective, especially for intermittent usage patterns. The system had to scale automatically if there were bursts of user traffic. It also must be secure because the trace data it handles often contains sensitive information. A final goal was to eliminate the operational burden of server provisioning and maintenance.</p>
 
   <h4>Options</h4>
