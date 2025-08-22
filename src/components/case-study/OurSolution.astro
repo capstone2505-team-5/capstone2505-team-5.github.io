@@ -88,9 +88,8 @@ const reviewImages: {
 
 <div class="case-study-content">
   <h3 id="introducing-llmonade">Introducing LLMonade</h3>
-  <p>LLMonade is a free, lightweight, self-hosted platform that guides developers of LLM-powered applications through their first evaluations.  Our software is designed for small engineering teams that have already instrumented their application with Phoenix.  Traces are being collected, but the developers don’t know where to start assessing and improving the quality of their application.  LLMonade pulls traces from Phoenix and provides an annotation interface inspired by Hamel Husain’s recommendations.  Then, guides the developer through the most important evaluation activity, manual error analysis.</p>
-
-
+  <p>LLMonade is a free, lightweight, self-hosted platform that guides developers of LLM-powered applications through their first evaluations. Our software is designed for small engineering teams that have already instrumented their application with Phoenix. Traces are being collected, but the developers don’t know where to start assessing and improving the quality of their application. LLMonade pulls traces from Phoenix and provides an annotation interface inspired by Hamel Husain’s recommendations. Then, guides the developer through the most important evaluation activity, manual error analysis.</p>
+  <p>LLMonade is composed of three components:</p>
   <div class="metrics-grid">
     <div class="metric-card">
       <div class="metric-icon">
@@ -118,18 +117,19 @@ const reviewImages: {
   </div>
 
   <h3 id="fullstack-error-analysis-web-application">Fullstack Error Analysis Web Application</h3>
-  <p>At the heart of LLMonade is a full-stack web application.  The application features a simplified error analysis workflow that walks developers through their first manual evaluations.  The error analysis is accomplished through an optimized human review interface. This facilitates the viewing, annotating, and analysis of their LLM-powered application outputs.</p>
+  <p>At the heart of LLMonade is a full-stack web application. The application features a simplified error analysis workflow that walks developers through their first manual evaluations. The error analysis is accomplished through an optimized human review interface. This facilitates the viewing, annotating, and analysis of their LLM-powered application outputs.</p>
+  <p>LLMonade walks users through a simplified five step workflow to quickly get started evaluating their application:</p>
   <Carousel media={workflowImages} id="workflow"/>
-  <p>LLMonade walks users through a simplified five step workflow to quickly get started evaluating their application. This simplified workflow reflects Hamel Husain’s best practices for error analysis.  The inspection results provide data driven targets for developers to focus on.  Progress through the workflow is visually tracked in a persistent footer. It highlights the current error analysis step and clearly indicates what comes next, ensuring users new to evaluations can navigate the process with ease. </p>
+  <p>This simplified workflow reflects Hamel Husain’s best practices for error analysis. The inspection results provide data-driven targets for developers to focus on. Progress through the workflow is visually tracked in a persistent footer. It highlights the current error analysis step and clearly indicates what comes next, ensuring users new to evaluations can navigate the process with ease.</p>
   <h4>Effective Human Review Interface</h4>
   <p>Human review of traces is essential for identifying the most common failure modes in an application. However, manually reviewing root spans can be tedious, creating a barrier to starting this critical process. LLMonade removes this barrier with an efficient platform for faster and easier annotation and analysis.</p>
   <Carousel media={reviewImages} id="review"/>
   
   <h4>Root Spans Extract, Transform, Load Pipeline</h4>
-  <p>Looking at real application data is the foundation of manual error analysis.  LLMonade integrates seamlessly with the AI observability tool Phoenix.  Once deployed, the ETL pipeline automatically ingests existing traces from Phoenix and any new traces that get generated. The highest level spans, the root spans, are formatted and saved to a database. This guarantees that the latest application behavior is always available for error analysis and review in the web application.</p>
+  <p>Looking at real application data is the foundation of manual error analysis. LLMonade integrates seamlessly with the AI observability tool Phoenix. Once deployed, the ETL pipeline automatically ingests existing traces from Phoenix and any new traces that get generated. The highest level spans, the root spans, are formatted and saved to a database. This guarantees that the latest application behavior is always available for error analysis and review in the web application.</p>
 
   <h4>Deployment Command Line Interface</h4>
-  <p>The deployment Command Line Interface (CLI) is a tool that automatically spins up all required infrastructure to Amazon Web Services. It utilizes AWS Cloud Development Kit (CDK) to provision and connect the entire architecture without any manual configuration. LLMonade is an ideal solution for small teams to get started quickly with a self-hosted, AI evaluation workflow.</p>
+  <p>The deployment Command Line Interface (CLI) is a tool that automatically spins up all required infrastructure to Amazon Web Services. It utilizes AWS Cloud Development Kit (CDK) to provision and connect the entire architecture without any manual configuration. This makes it an ideal solution for small teams to get started quickly with a self-hosted, AI evaluation workflow.</p>
 
 
 

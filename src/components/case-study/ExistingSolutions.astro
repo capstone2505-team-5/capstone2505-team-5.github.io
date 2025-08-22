@@ -4,7 +4,7 @@ import Image from "../Image.astro";
 ---
 
 <div class="case-study-content">
-  <p>Two categories of tools can help with error analysis: AI evaluation software and data labeling platforms. AI evaluation software features a variety of options to observe, test, and evaluate traces from an AI based application. Data labeling platforms are focused on annotation of traces and organizing those annotations. They do not collect traces or provide automated evaluations.</p>
+  <p>Two categories of tools can help with error analysis: AI evaluation software and data labeling platforms. AI evaluation software features a variety of options to observe, test, and evaluate traces from an AI-based application. Data labeling platforms are focused on annotation of traces and organizing those annotations. They do not collect traces or provide automated evaluations.</p>
 
 
   <Image 
@@ -17,25 +17,25 @@ import Image from "../Image.astro";
   clickable={true}
 />
   <h3 id="ai-evaluation-software">AI Evaluation Software</h3>
-  <p>Langsmith and Phoenix are two popular tools that focus on observability and evaluation of AI software. The featuresets of both applications are massive, including the collection of traces, manual annotations, and automated evaluations with LLM-as-a-Judge. Langsmith is a closed source application that offers a free tier of usage. However, teams utilizing the free tier are not able to self host, and thus, do not have full ownership of their data. Phoenix is open source, has a free tier, and does allow self hosting.</p>
+  <p>Langsmith and Phoenix are two popular tools that focus on observability and evaluation of AI software. The featuresets of both applications are massive, and include the collection of traces, manual annotations, and automated evaluations with LLM-as-a-Judge. Langsmith is a closed source application that offers a free tier of usage. However, teams utilizing the free tier are not able to self host, and thus, do not have full ownership of their data. Phoenix is open source, has a free tier, and does allow self hosting.</p>
 
   <h4>Trade-Offs</h4>
   <p>Despite being free and including many features, these tools have a steep learning curve.  They are ideal for power users and development teams that are experienced with evaluating AI applications.  A team newer to evaluations would have a difficult time knowing where to start and how to effectively test and improve their application.</p>
-  <p>Both software packages include features for annotation, but neither include the kind of human review interface described by Hamel Husain.  The annotation screens are busy with lots of extra metadata, the input and output are not shown together at all times, they do not automatically create error categories from free form annotations, and they present trace data as raw, unformatted text.</p>
+  <p>Both software packages include features for annotation, but neither include the kind of human review interface described by Hamel Husain. The annotation screens are busy with lots of extra metadata, the input and output are not shown together at all times, they do not automatically create error categories from free form annotations, and they present trace data as raw, unformatted text.</p>
 
 
   <h3 id="data-labeling-software">Data Labeling Software</h3>
-  <p>Label Studio is an open source, self hosted tool for data annotation that can be used for manual error analysis.   After importing your trace data into the application, you can evaluate and annotate using its existing templates.  A template is a pre-configured or custom-built layout that defines the entire visual interface an annotator uses to label data. Built-in dashboards display results or you can export to a separate tool for analysis.</p>
+  <p>Label Studio is an open source, self hosted tool for data annotation that can be used for manual error analysis. After importing your trace data into the application, you can evaluate and annotate using its existing templates. A template is a pre-configured or custom-built layout that defines the entire visual interface an annotator uses to label data. Built-in dashboards display results or you can export to a separate tool for analysis.</p>
 
   <h4>Trade-Offs</h4>
-  <p>One downside to evaluating an application with Label Studio is acquiring the trace data.  Users need to collect their trace data manually (or with an additional tool), export that trace data, and manually import it into Label Studio.  This differs from the AI evaluation tools above that automatically observe and import traces with their SDKs.</p>
-  <p>Additionally, the out-of-the-box evaluation template is missing key features from Hamel’s recommended review interface.  The evaluations are done on a rating system instead of free form annotation, the outputs are not formatted automatically, and categories are not created automatically from noted errors.</p>
-  <p>Data Label Studio also offers the option to fully customize a review interface. However, this requires learning Label Studio’s XML-like configuration methods.  Implementing Hamel’s recommended interface features from scratch would be time consuming.</p>
+  <p>One downside to evaluating an application with Label Studio is acquiring the trace data. Users need to collect their trace data manually (or with an additional tool), export that trace data, and manually import it into Label Studio. This differs from the AI evaluation tools above that automatically observe and import traces with their SDKs.</p>
+  <p>Additionally, the out-of-the-box evaluation template is missing key features from Hamel's recommended review interface. The evaluations are done on a rating system instead of free form annotation, the outputs are not formatted automatically, and categories are not created automatically from noted errors.</p>
+  <p>Data Label Studio also offers the option to fully customize a review interface. However, this requires learning Label Studio's XML-like configuration methods. Implementing Hamel's recommended interface features from scratch would be time consuming.</p>
 
 <!-- Image for the Table of Alternatives -->
   
   <h3 id="gap-in-service">Gap in Service</h3>
-  <p>Existing AI evaluation tools provide the vast feature set needed for large companies and large teams.  These teams have the expertise to navigate the complex applications and they know exactly where and how to perform the evaluations.  Additionally, they have the resources to connect their existing infrastructure to a specialized data labelling tool or build a custom effective review interface.  What is missing is a free, self hosted tool that automatically pulls in trace data, guides the user through the most effective initial evaluation process, and helps the user analyze that data.  To bridge this gap, we created LLMonade for small teams to efficiently evaluate and improve their LLM-powered applications.</p>
+  <p>Existing AI evaluation tools provide the vast feature set needed for large companies and large teams. These teams have the expertise to navigate the complex applications and they know exactly where and how to perform the evaluations. Additionally, they have the resources to connect their existing infrastructure to a specialized data labelling tool or build a custom effective review interface. What is missing is a free, self hosted tool that automatically pulls in trace data, guides the user through the most effective initial evaluation process, and helps the user analyze that data. To bridge this gap, we created LLMonade for small teams to efficiently evaluate and improve their LLM-powered applications.</p>
 </div>
 
 

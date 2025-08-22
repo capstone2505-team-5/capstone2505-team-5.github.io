@@ -4,12 +4,12 @@ import Image from '../Image.astro';
 ---
 
 <div class="case-study-content">
-  <p>The architecture of LLMonade can be best understood by following the lifecycle of a root span as it moves through the ingestion stage and evaluation workflow. This will highlight how each component fits together and how the serverless architecture minimizes operational overhead and ensures scalability.</p>
+  <p>The architecture of LLMonade can be best understood by following the lifecycle of a root span as it moves through the ingestion stage and evaluation workflow. This highlights how each component fits together and how serverless architecture minimizes operational overhead and ensures scalability.</p>
   <ol>
     <li>Trace Generation with Phoenix</li>
     <li>Root Spans ETL Pipeline</li>
     <li>Evaluation Data Persistence</li>
-    <li>Error Analysis Fullstack Application</li>
+    <li>Error Analysis Full-Stack Application</li>
   </ol>
 
   <Image 
@@ -30,26 +30,33 @@ import Image from '../Image.astro';
   <p>The Root Spans ETL Pipeline is a serverless workflow, powered by AWS Lambda, that ingests data from Phoenix and loads it into LLMonade’s database. When LLMonade is deployed, the data pipeline immediately performs API requests to Phoenix and starts ingesting the pre-existing root spans.</p>
 
   <Image 
-  src="/images/Architecture/Copy of ETL-vid-8-edit.mp4" 
-  alt="ETL Pipeline" 
-  caption="ETL Pipeline in Action"
-  width="700px"
-  height="400px"
-  bordered={true}
-  rounded={true}
-  clickable={true}
-  autoplay={true}
-  loop={true}
-  muted={true}
-/>
+    src="/images/Architecture/Copy of ETL-vid-8-edit.mp4" 
+    alt="ETL Pipeline" 
+    caption="ETL Pipeline in Action"
+    width="700px"
+    height="400px"
+    bordered={true}
+    rounded={true}
+    clickable={true}
+    autoplay={true}
+    loop={true}
+    muted={true}
+  />
+  <p>To efficiently and reliably handle this ingestion at scale, the pipeline is structured as a two-step process:</p>
+  <ol>
+    <li><strong>Project Seeding:</strong> Phoenix groups traces related to a single application into “projects”.  On initial deployment of LLMonade, the pipeline queries Phoenix for all available projects and records them in the LLMonade database.</li>
+    <li><strong>Per Project Fan-Out:</strong> A new Lambda function is invoked for each project, running independently to ingest that project’s root spans. Each Lambda retrieves spans in pages of 2,000 using GraphQL cursor-based pagination. This ensures sequential progress, prevents re-scanning the entire history of spans, and enables projects to be processed in parallel.</li>
+  </ol>
+
+  <p>Each page of spans is written to the database in a single batched insert. After a successful insert, the pipeline updates the project’s last cursor position, making the process idempotent and resumable in case of timeouts or failures. After the initial ingestion of root spans, a scheduled EventBridge job runs every 5 minutes, checking for and ingesting new spans. The per project cursor state guarantees that only new spans are fetched, preventing the ETL pipeline from issuing redundant queries.</p>
 
   <h3 id="evaluation-data-persistence">Evaluation Data Persistence</h3>
 
-  <p>All ingested root spans and associated evaluation data are persisted in a PostgreSQL database hosted on AWS Relational Database Service (RDS). The database stores both the raw trace data from Phoenix and associated data generated during LLMonade’s evaluation workflow.  This includes formatted span data, batch groupings, grading notes, and custom error categories. A relational model is well-suited for this use case due to the structured nature of spans and associated evaluation data.</p>
+  <p>All ingested root spans and associated evaluation data are persisted in a PostgreSQL database hosted on Amazon Relational Database Service (RDS). The database stores both the raw trace data from Phoenix and associated data generated during LLMonade’s evaluation workflow.  This includes formatted span data, batch groupings, grading notes, and custom error categories. A relational model is well-suited for this use case due to the structured nature of spans and associated evaluation data.</p>
 
-  <h3 id="error-analysis-fullstack-application">Error Analysis Fullstack Application</h3>
+  <h3 id="error-analysis-fullstack-application">Error Analysis Full-Stack Application</h3>
 
-  <p>When users access LLMonade, they connect through a CloudFront endpoint. On first access, requests are redirected through Lambda@Edge and Cognito, which enforce authentication and issue valid tokens. Once authenticated, users are served the React frontend from Amazon S3 via CloudFront, ensuring fast and secure delivery. From there, authenticated requests from the frontend are routed via the API Gateway to the backend API hosted on AWS Lambda. </p>
+  <p>When users access LLMonade, they connect through an Amazon CloudFront endpoint. On first access, requests are redirected through Lambda@Edge and Amazon Cognito, which enforce authentication and issue valid tokens. Once authenticated, users are served the React frontend from Amazon S3 via CloudFront, ensuring fast and secure delivery. From there, authenticated requests from the frontend are routed via Amazon API Gateway to the backend API hosted on Lambda.</p>
   <p>In addition to the API Lambda, we implemented a dedicated, asynchronous worker Lambda.  This Lambda function handles the time-intensive task of formatting spans. When a formatting job is initiated, our primary application API invokes multiple instances of this worker function. This offloads the heavy processing, ensuring the main API remains responsive and available for user requests.</p>
   <p>LLMonade leverages a serverless architecture, which is highly cost-effective for periodic workloads like error analysis. The pay-per-use model of AWS Lambda eliminates idle infrastructure costs, while its scalability seamlessly handles concurrent user activity.</p>
 
