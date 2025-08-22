@@ -23,7 +23,7 @@ import Image from "../Image.astro";
   alt="Phoenix vs SDK" 
   caption="Phoenix vs SDK"
   width="600px"
-  height="325px"
+  height="100%"
   bordered={true}
   rounded={true}
   clickable={false}/>
@@ -75,14 +75,15 @@ import Image from "../Image.astro";
   <h4>Our Solution</h4>
   <p>We implemented a serverless architecture using AWS Lambda functions paired with API Gateway for backend processing. This is complemented by S3 and CloudFront for frontend delivery. API Gateway handles authentication through AWS Cognito integrations. This provides robust security for users' sensitive trace data while maintaining ease of access for authorized users. This serverless approach delivers a true pay-per-use model that automatically scales to meet user demand. The architecture eliminates the need for capacity planning, server provisioning, or infrastructure maintenance while ensuring high availability and performance.</p>
   <Image 
-  src="/images/EngineeringChallenges/_serverless-comparison-edit.png" 
-  alt="Serverless Architecture" 
-  caption="Serverless Architecture"
-  width="600px"
-  height="325px"
-  bordered={true}
-  rounded={true}
-  clickable={false}/>
+    src="/images/EngineeringChallenges/_serverless-comparison-edit.png" 
+    alt="Serverless Architecture" 
+    caption="Serverless Architecture"
+    width="600px"
+    height="100%"
+    bordered={true}
+    rounded={true}
+    clickable={false}
+  />
   <h4>Trade-Offs</h4>
   <p>Lambda cold starts can introduce additional latency for the first request after periods of inactivity. However, for developers using an evaluation tool, a 2-second cold start is acceptable. The analysis on LLMonade is done asynchronously from the customer facing AI product and thus does not need to be instant. The slight delay is well worth the cost savings from a serverless architecture.</p>
   <p>The serverless model also limits our ability to maintain persistent state or long-running processes. This specifically applies to our AI-powered content formatting, which can take up to a minute. To accommodate this within Lambda and API Gateway execution time limits, we designed an asynchronous workflow. It also requires the frontend to poll for status updates rather than maintaining a continuous connection. This adds some complexity to our frontend logic but keeps the backend architecture simple and cost-effective.</p>
