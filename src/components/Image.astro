@@ -38,9 +38,6 @@ const {
   noShadow = false
 } = Astro.props;
 
-// Generate unique ID for this media's modal
-const modalId = `media-modal-${Math.random().toString(36).substr(2, 9)}`;
-
 // Determine if it's a video based on file extension or explicit prop
 const isVideoFile = isVideo || src.toLowerCase().match(/\.(mp4|webm|ogg|mov|avi)$/);
 ---
@@ -51,7 +48,10 @@ const isVideoFile = isVideo || src.toLowerCase().match(/\.(mp4|webm|ogg|mov|avi)
       src={src}
       class={`media-component ${clickable ? 'clickable' : ''} ${bordered ? 'bordered' : ''} ${shadow && !noShadow ? 'shadow' : ''} ${rounded ? 'rounded' : ''}`}
       style={`width: ${width}; height: ${height};`}
-      data-modal-id={modalId}
+      data-src={src}
+      data-alt={alt}
+      data-caption={caption}
+      data-is-video="true"
       autoplay={autoplay}
       loop={loop}
       muted={muted}
@@ -67,7 +67,10 @@ const isVideoFile = isVideo || src.toLowerCase().match(/\.(mp4|webm|ogg|mov|avi)
       alt={alt} 
       class={`media-component ${clickable ? 'clickable' : ''} ${bordered ? 'bordered' : ''} ${shadow && !noShadow ? 'shadow' : ''} ${rounded ? 'rounded' : ''}`}
       style={`width: ${width}; height: ${height};`}
-      data-modal-id={modalId}
+      data-src={src}
+      data-alt={alt}
+      data-caption={caption}
+      data-is-video="false"
     />
   )}
   {caption && (
@@ -77,92 +80,27 @@ const isVideoFile = isVideo || src.toLowerCase().match(/\.(mp4|webm|ogg|mov|avi)
   )}
 </div>
 
-<!-- Modal -->
-<div class="media-modal" id={modalId}>
-  <div class="modal-overlay"></div>
-  <div class="modal-content">
-    <button class="modal-close" aria-label="Close modal">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-      </svg>
-    </button>
-    
-    <div class="modal-media-container">
-      {isVideoFile ? (
-        <video 
-          src={src}
-          class="modal-media"
-          autoplay={autoplay}
-          loop={loop}
-          muted={muted}
-          controls={controls}
-          playsinline
-        >
-          <track kind="captions" />
-          Your browser does not support the video tag.
-        </video>
-      ) : (
-        <img src={src} alt={alt} class="modal-media" />
-      )}
-      {caption && (
-        <div class="modal-caption">
-          <p>{caption}</p>
-        </div>
-      )}
-    </div>
-  </div>
-</div>
-
 <script>
-  class MediaModal {
-    private media: HTMLImageElement | HTMLVideoElement;
-    private modal: HTMLElement;
-    private modalClose: HTMLButtonElement;
-    private modalOverlay: HTMLElement;
-
-    constructor(media: HTMLImageElement | HTMLVideoElement) {
-      this.media = media;
-      const modalId = this.media.getAttribute('data-modal-id');
-      this.modal = document.getElementById(modalId!) as HTMLElement;
-      this.modalClose = this.modal?.querySelector('.modal-close') as HTMLButtonElement;
-      this.modalOverlay = this.modal?.querySelector('.modal-overlay') as HTMLElement;
-      
-      this.init();
-    }
-    
-    init() {
-      // Media click to open modal
-      this.media.addEventListener('click', () => this.openModal());
-      
-      // Modal close events
-      this.modalClose?.addEventListener('click', () => this.closeModal());
-      this.modalOverlay?.addEventListener('click', () => this.closeModal());
-      
-      // Keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (this.modal?.classList.contains('active')) {
-          if (e.key === 'Escape') {
-            this.closeModal();
-          }
+  // Global modal functionality - will be handled by separate modal component
+  document.addEventListener('DOMContentLoaded', () => {
+    // Attach click handlers to all clickable media
+    const mediaElements = document.querySelectorAll('.media-component.clickable');
+    mediaElements.forEach(media => {
+      media.addEventListener('click', () => {
+        const src = media.getAttribute('data-src');
+        const alt = media.getAttribute('data-alt');
+        const caption = media.getAttribute('data-caption');
+        const isVideo = media.getAttribute('data-is-video') === 'true';
+        
+        if (src) {
+          // Dispatch custom event for global modal
+          const event = new CustomEvent('openMediaModal', {
+            detail: { src, alt: alt || '', caption: caption || '', isVideo }
+          });
+          document.dispatchEvent(event);
         }
       });
-    }
-    
-    openModal() {
-      this.modal?.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    
-    closeModal() {
-      this.modal?.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  }
-  
-  // Initialize all media modals on the page
-  document.addEventListener('DOMContentLoaded', () => {
-    const mediaElements = document.querySelectorAll('.media-component.clickable');
-    mediaElements.forEach(media => new MediaModal(media as HTMLImageElement | HTMLVideoElement));
+    });
   });
 </script>
 
@@ -216,171 +154,5 @@ const isVideoFile = isVideo || src.toLowerCase().match(/\.(mp4|webm|ogg|mov|avi)
     font-size: 0.9rem;
     line-height: 1.4;
     font-style: italic;
-  }
-
-  /* Modal Styles */
-  .media-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-  }
-
-  .media-modal.active {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    cursor: pointer;
-  }
-
-  .modal-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: rgba(0, 0, 0, 0.7);
-    border: none;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: white;
-    transition: all 0.2s ease;
-    z-index: 10;
-    backdrop-filter: blur(10px);
-  }
-
-  .modal-close:hover {
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    transform: scale(1.1);
-  }
-
-  .modal-media-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 90vw;
-    max-height: 90vh;
-  }
-
-  .modal-media {
-    width: 100%;
-    max-width: 90vw;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .modal-caption {
-    padding: 1rem 1.5rem;
-    background: transparent;
-    width: 100%;
-    max-width: 90vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.5rem;
-    min-height: 60px;
-  }
-
-  .modal-caption p {
-    margin: 0;
-    color: white;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    text-align: center;
-    font-weight: 500;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.5);
-  }
-
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .media-container {
-      margin: 1.5rem 0;
-    }
-    
-    .media-caption p {
-      font-size: 0.85rem;
-    }
-    
-    .modal-content {
-      padding: 1rem;
-    }
-    
-    .modal-media {
-      max-height: 70vh;
-    }
-    
-    .modal-caption {
-      padding: 0.75rem 1rem;
-    }
-    
-    .modal-caption p {
-      font-size: 1rem;
-    }
-    
-    .modal-close {
-      width: 40px;
-      height: 40px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .media-container {
-      margin: 1rem 0;
-    }
-    
-    .modal-content {
-      padding: 0.75rem;
-    }
-    
-    .modal-media {
-      max-height: 60vh;
-    }
-    
-    .modal-caption {
-      padding: 0.5rem 0.75rem;
-    }
-    
-    .modal-caption p {
-      font-size: 0.9rem;
-    }
-    
-    .modal-close {
-      width: 36px;
-      height: 36px;
-    }
   }
 </style>

@@ -29,9 +29,7 @@ const {
         {author && <cite class="quote-author">{author}</cite>}
         {(title || company) && (
           <div class="quote-meta">
-            {title && <span class="quote-title">{title}</span>}
-            {title && company && <span class="quote-separator">, </span>}
-            {company && <span class="quote-company">{company}</span>}
+            {title && <span class="quote-title">{title}</span>}{title && company && <span class="quote-separator">, </span>}{company && <span class="quote-company">{company}</span>}
           </div>
         )}
       </div>
@@ -91,7 +89,7 @@ const {
   }
 
   .quote-separator {
-    margin: 0 0.25rem;
+    margin: 0;
   }
 
   /* Size variants */

@@ -1,0 +1,258 @@
+---
+// MediaModal.astro - Global modal component for images and videos
+---
+
+<!-- Global Media Modal -->
+<div class="global-media-modal" id="global-media-modal">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Close modal">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+    
+    <div class="modal-media-container">
+      <img id="modal-image" class="modal-media" style="display: none;" />
+      <video id="modal-video" class="modal-media" style="display: none;" controls playsinline>
+        <track kind="captions" />
+        Your browser does not support the video tag.
+      </video>
+      <div id="modal-caption" class="modal-caption" style="display: none;">
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Global modal functionality
+  let globalModal: HTMLElement;
+  let modalImage: HTMLImageElement;
+  let modalVideo: HTMLVideoElement;
+  let modalCaption: HTMLElement;
+  let modalClose: HTMLButtonElement;
+  let modalOverlay: HTMLElement;
+
+  function initGlobalModal() {
+    globalModal = document.getElementById('global-media-modal') as HTMLElement;
+    modalImage = document.getElementById('modal-image') as HTMLImageElement;
+    modalVideo = document.getElementById('modal-video') as HTMLVideoElement;
+    modalCaption = document.getElementById('modal-caption') as HTMLElement;
+    modalClose = globalModal?.querySelector('.modal-close') as HTMLButtonElement;
+    modalOverlay = globalModal?.querySelector('.modal-overlay') as HTMLElement;
+
+    // Modal close events
+    modalClose?.addEventListener('click', closeGlobalModal);
+    modalOverlay?.addEventListener('click', closeGlobalModal);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (globalModal?.classList.contains('active')) {
+        if (e.key === 'Escape') {
+          closeGlobalModal();
+        }
+      }
+    });
+
+    // Listen for custom events from Image components
+    document.addEventListener('openMediaModal', (e: any) => {
+      const { src, alt, caption, isVideo } = e.detail;
+      openGlobalModal(src, alt, caption, isVideo);
+    });
+  }
+
+  function openGlobalModal(src: string, alt: string, caption: string, isVideo: boolean) {
+    if (isVideo) {
+      modalVideo.src = src;
+      modalVideo.style.display = 'block';
+      modalImage.style.display = 'none';
+    } else {
+      modalImage.src = src;
+      modalImage.alt = alt;
+      modalImage.style.display = 'block';
+      modalVideo.style.display = 'none';
+    }
+
+    if (caption) {
+      modalCaption.querySelector('p')!.textContent = caption;
+      modalCaption.style.display = 'block';
+    } else {
+      modalCaption.style.display = 'none';
+    }
+
+    globalModal?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGlobalModal() {
+    globalModal?.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // Pause video when closing
+    if (modalVideo) {
+      modalVideo.pause();
+    }
+  }
+
+  // Initialize global modal
+  document.addEventListener('DOMContentLoaded', () => {
+    initGlobalModal();
+  });
+</script>
+
+<style>
+  /* Global Modal Styles */
+  .global-media-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .global-media-modal.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+  }
+
+  .modal-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.2s ease;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+  }
+
+  .modal-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    transform: scale(1.1);
+  }
+
+  .modal-media-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+
+  .modal-media {
+    width: 100%;
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .modal-caption {
+    padding: 1rem 1.5rem;
+    background: transparent;
+    width: 100%;
+    max-width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    min-height: 60px;
+  }
+
+  .modal-caption p {
+    margin: 0;
+    color: white;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: center;
+    font-weight: 500;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .modal-content {
+      padding: 1rem;
+    }
+    
+    .modal-media {
+      max-height: 70vh;
+    }
+    
+    .modal-caption {
+      padding: 0.75rem 1rem;
+    }
+    
+    .modal-caption p {
+      font-size: 1rem;
+    }
+    
+    .modal-close {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .modal-content {
+      padding: 0.75rem;
+    }
+    
+    .modal-media {
+      max-height: 60vh;
+    }
+    
+    .modal-caption {
+      padding: 0.5rem 0.75rem;
+    }
+    
+    .modal-caption p {
+      font-size: 0.9rem;
+    }
+    
+    .modal-close {
+      width: 36px;
+      height: 36px;
+    }
+  }
+</style>
