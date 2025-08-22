@@ -8,6 +8,7 @@ import Introduction from '../components/case-study/Introduction.astro';
 import EngineeringChallenges from '../components/case-study/EngineeringChallenges.astro';
 import FutureWork from '../components/case-study/FutureWork.astro';
 import ExistingSolutions from '../components/case-study/ExistingSolutions.astro';
+import References from '../components/case-study/References.astro';
 
 const sections = [
 	{
@@ -152,6 +153,10 @@ const sections = [
 			}
 		]
 	},
+	{
+		title: "References",
+		id: "references"
+	}
 ];
 
 ---
@@ -174,7 +179,7 @@ const sections = [
 						<li>
 							<a href={`#${section.id}`} class="sidebar-nav-item" data-section={section.id}>{section.title}</a>
 							<ul class="sidebar-nav-sub-list">
-								{section.children.map((child) => (
+								{section.children?.map((child) => (
 									<li><a href={`#${child.id}`} class="sidebar-nav-sub-item" data-section={child.id}>{child.title}</a></li>
 								))}
 							</ul>
@@ -195,6 +200,7 @@ const sections = [
 					{section.id === 'architecture' && <Architecture />}
 					{section.id === 'engineering-challenges' && <EngineeringChallenges />}
 					{section.id === 'future-work' && <FutureWork />}
+					{section.id === 'references' && <References />}
 				</section>
 			))}
 		</main>

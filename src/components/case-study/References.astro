@@ -1,0 +1,73 @@
+---
+// References.astro - Case Study References Section
+---
+
+<div class="case-study-content">
+  <h3 id="references">References</h3>
+  <ol>
+    <li>
+      <a href="https://www.sh-reya.com/blog/ai-engineering-flywheel/" target="_blank" rel="noopener noreferrer">
+        Data Flywheels for LLM Applications: Shreya Shankar
+      </a>
+    </li>
+    <li>
+      <a href="https://hamel.dev/blog/posts/field-guide" target="_blank" rel="noopener noreferrer">
+        A Field Guide to Rapidly Improving AI Products: Hamel Husain
+      </a>
+    </li>
+    <li>
+      <a href="https://eugeneyan.com/writing/eval-process/" target="_blank" rel="noopener noreferrer">
+        An LLM-as-Judge Won't Save The Product—Fixing Your Process Will: Eugene Yan
+      </a>
+    </li>
+    <li>
+      <a href="https://arize.com/docs/phoenix/tracing/concepts-tracing/what-are-traces" target="_blank" rel="noopener noreferrer">
+        What are Traces?: Phoenix by Arize AI
+      </a>
+    </li>
+    <li>
+      <a href="https://docs.anthropic.com/en/docs/test-and-evaluate/develop-tests" target="_blank" rel="noopener noreferrer">
+        Create Strong Empirical Evaluations: Anthropic AI
+      </a>
+    </li>
+    <li>
+      <a href="https://applied-llms.org/" target="_blank" rel="noopener noreferrer">
+        What We've Learned From A Year of Building with LLMs: Eugene Yan, Bryan Bischof, Charles Frye, Hamel Husain, Jason Liu, Shreya Shankar
+      </a>
+    </li>
+  </ol>
+</div>
+
+<style>
+  .case-study-content ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+  }
+  
+  .case-study-content ol li {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .case-study-content ol li a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .case-study-content ol li a:hover {
+    color: var(--primary-green);
+    border-bottom: 1px solid var(--primary-green);
+    cursor: pointer;
+  }
+  
+  .case-study-content ol li a:visited {
+    color: var(--primary-blue);
+  }
+  
+  .case-study-content ol li a:visited:hover {
+    color: var(--primary-green);
+  }
+</style>
