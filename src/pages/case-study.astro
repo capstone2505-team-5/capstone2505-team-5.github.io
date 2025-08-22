@@ -253,6 +253,28 @@ const sections = [
 			item.addEventListener('click', closeSidebar);
 		});
 
+	// Hide hamburger menu when modal is open
+	document.addEventListener('openMediaModal', () => {
+		hamburgerMenu?.classList.add('modal-open');
+	});
+
+	// Show hamburger menu when modal is closed
+	const globalModal = document.getElementById('global-media-modal');
+	const modalObserver = new MutationObserver((mutations) => {
+		mutations.forEach((mutation) => {
+			if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+				const modal = mutation.target as HTMLElement;
+				if (!modal.classList.contains('active')) {
+					hamburgerMenu?.classList.remove('modal-open');
+				}
+			}
+		});
+	});
+
+	if (globalModal) {
+		modalObserver.observe(globalModal, { attributes: true });
+	}
+
 	const observer = new IntersectionObserver((entries) => {
 		entries.forEach(entry => {
 			const id = entry.target.getAttribute('id');
@@ -501,6 +523,13 @@ const sections = [
 	.hamburger-menu.active .hamburger-line:nth-child(3) {
 		top: 19px;
 		transform: translateX(-50%) rotate(-45deg);
+	}
+
+	/* Hide hamburger when modal is open */
+	.hamburger-menu.modal-open {
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
 	}
 
 	/* Sidebar Overlay */
