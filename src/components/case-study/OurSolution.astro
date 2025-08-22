@@ -23,7 +23,7 @@ const workflowImages: {
     heading: '2. Create Batch'
   },
   {
-    src: '/images/WorkflowCarousel/3-FastManualReview-10s-edit.mp4',
+    src: '/images/LandingPage/AnnotateHighQualityFast.mp4',
     alt: 'Fast Manual Review',
     caption: 'Rate with a binary score and add freeform notes to describe any errors found.',
     type: 'video',
@@ -51,6 +51,7 @@ const reviewImages: {
   alt: string;
   caption: string;
   type: 'image' | 'video';
+  heading?: string;
 }[] = [
   {
     src: '/images/ReviewCarousel/HotkeyNavHighQuality.mp4',
@@ -118,11 +119,11 @@ const reviewImages: {
 
   <h3 id="fullstack-error-analysis-web-application">Fullstack Error Analysis Web Application</h3>
   <p>At the heart of LLMonade is a full-stack web application.  The application features a simplified error analysis workflow that walks developers through their first manual evaluations.  The error analysis is accomplished through an optimized human review interface. This facilitates the viewing, annotating, and analysis of their LLM-powered application outputs.</p>
-  <Carousel media={workflowImages} title="Error Analysis Workflow" id="workflow"/>
+  <Carousel media={workflowImages} id="workflow"/>
   <p>LLMonade walks users through a simplified five step workflow to quickly get started evaluating their application. This simplified workflow reflects Hamel Husain’s best practices for error analysis.  The inspection results provide data driven targets for developers to focus on.  Progress through the workflow is visually tracked in a persistent footer. It highlights the current error analysis step and clearly indicates what comes next, ensuring users new to evaluations can navigate the process with ease. </p>
   <h4>Effective Human Review Interface</h4>
   <p>Human review of traces is essential for identifying the most common failure modes in an application. However, manually reviewing root spans can be tedious, creating a barrier to starting this critical process. LLMonade removes this barrier with an efficient platform for faster and easier annotation and analysis.</p>
-  <Carousel media={reviewImages} title="Effective Review Interface" id="review"/>
+  <Carousel media={reviewImages} id="review"/>
   
   <h4>Root Spans Extract, Transform, Load Pipeline</h4>
   <p>Looking at real application data is the foundation of manual error analysis.  LLMonade integrates seamlessly with the AI observability tool Phoenix.  Once deployed, the ETL pipeline automatically ingests existing traces from Phoenix and any new traces that get generated. The highest level spans, the root spans, are formatted and saved to a database. This guarantees that the latest application behavior is always available for error analysis and review in the web application.</p>
