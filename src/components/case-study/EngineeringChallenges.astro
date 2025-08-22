@@ -19,7 +19,7 @@ import Image from "../Image.astro";
   <p>Many AI teams have already instrumented Phoenix for observability. This allows us to integrate into existing workflows and create a consistent, dependable ecosystem for LLM observability and evaluation. All of this is achieved without building our own tracing infrastructure. Retaining the users' trace data in Phoenix is a perk of this solution. As our users' applications scale, the detailed findings from error analysis in LLMonade act as a direct blueprint for creating automated evaluations in Phoenix.</p>
 
   <Image 
-  src="/images/_phoenix-vs-sdk-edit.png" 
+  src="/images/EngineeringChallenges/_phoenix-vs-sdk-edit.png" 
   alt="Phoenix vs SDK" 
   caption="Phoenix vs SDK"
   width="600px"
@@ -75,7 +75,7 @@ import Image from "../Image.astro";
   <h4>Our Solution</h4>
   <p>We implemented a serverless architecture using AWS Lambda functions paired with API Gateway for backend processing. This is complemented by S3 and CloudFront for frontend delivery. API Gateway handles authentication through AWS Cognito integrations. This provides robust security for users' sensitive trace data while maintaining ease of access for authorized users. This serverless approach delivers a true pay-per-use model that automatically scales to meet user demand. The architecture eliminates the need for capacity planning, server provisioning, or infrastructure maintenance while ensuring high availability and performance.</p>
   <Image 
-  src="/images/_serverless-comparison-edit.png" 
+  src="/images/EngineeringChallenges/_serverless-comparison-edit.png" 
   alt="Serverless Architecture" 
   caption="Serverless Architecture"
   width="600px"
