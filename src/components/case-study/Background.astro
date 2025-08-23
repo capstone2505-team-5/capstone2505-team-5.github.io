@@ -207,7 +207,24 @@ import FeatureMapDiagram from '../FeatureMapDiagram';
 
   <div>
     <h4>Essential Components</h4>
-    <FeatureMapDiagram client:load />
+    
+    <!-- Desktop: Show interactive diagram -->
+    <div class="desktop-only">
+      <FeatureMapDiagram client:load />
+    </div>
+    
+    <!-- Mobile: Show simple list -->
+    <div class="mobile-only">
+      <ul>
+        <li><strong>Unified Data View -</strong> All relevant information is displayed in one place, so an analyst doesn't have to hunt for context.</li>
+        <li><strong>Keyboard Shortcuts:</strong> Hotkeys should be built in to allow users to submit feedback and move quickly between traces.</li>
+        <li><strong>Binary Scoring:</strong> A straightforward thumbs-up/thumbs-down or pass/fail button to quickly gauge the quality of the output.</li>
+        <li><strong>Free-Form Notes:</strong> Open ended feedback lets the analyst capture nuanced issues that can later be categorized.</li>
+        <li><strong>Filtering and Sorting:</strong> Allows filtering and sorting to help the analyst select which data to review.</li>
+        <li><strong>Progress Indicator:</strong> When analyzing a set of traces, a progress bar shows how many input and output sets have been reviewed and how many are left.</li>
+        <li><strong>Context-Dependent Formatted Data:</strong> The inputs and outputs should be formatted similarly to how the user would view the data in production.</li>
+      </ul>
+    </div>
   </div>
 
   <p>The ideal data viewer, as envisioned by experts like Husain and Shankar, is less of a generic logging tool and more of a bespoke, interactive workbench. It is built to be the fastest path to understanding where an LLM application is failing, empowering developers and domain experts to turn raw data into actionable insights. If you have the resources available, Husain and Shankar make the case for a custom review interface.  For teams that do not have the resources to make a custom interface, they suggest using existing solutions to get started.</p>
@@ -262,6 +279,15 @@ import FeatureMapDiagram from '../FeatureMapDiagram';
     color: var(--gray-900);
   }
 
+  /* Responsive display classes */
+  .desktop-only {
+    display: block;
+  }
+  
+  .mobile-only {
+    display: none;
+  }
+
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .timeline-item {
@@ -271,6 +297,15 @@ import FeatureMapDiagram from '../FeatureMapDiagram';
     
     .timeline-content {
       padding-top: 0;
+    }
+
+    /* Show mobile content, hide desktop content */
+    .desktop-only {
+      display: none;
+    }
+    
+    .mobile-only {
+      display: block;
     }
   }
 </style>
