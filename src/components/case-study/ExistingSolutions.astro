@@ -6,16 +6,6 @@ import Image from "../Image.astro";
 <div class="case-study-content">
   <p>Two categories of tools can help with error analysis: AI evaluation software and data labeling platforms. AI evaluation software features a variety of options to observe, test, and evaluate traces from an AI-based application. Data labeling platforms are focused on annotation of traces and organizing those annotations. They do not collect traces or provide automated evaluations.</p>
 
-
-  <Image 
-  src="/images/comparison_chart_cropped.png" 
-  alt="Comparison Chart" 
-  width="750px"
-  height="100%"
-  bordered={false}
-  rounded={true}
-  clickable={true}
-/>
   <h3 id="ai-evaluation-software">AI Evaluation Software</h3>
   <p>Langsmith and Phoenix are two popular tools that focus on observability and evaluation of AI software. The featuresets of both applications are massive, and include the collection of traces, manual annotations, and automated evaluations with LLM-as-a-Judge. Langsmith is a closed source application that offers a free tier of usage. However, teams utilizing the free tier are not able to self host, and thus, do not have full ownership of their data. Phoenix is open source, has a free tier, and does allow self hosting.</p>
 
@@ -36,6 +26,17 @@ import Image from "../Image.astro";
   
   <h3 id="gap-in-service">Gap in Service</h3>
   <p>Existing AI evaluation tools provide the vast feature set needed for large companies and large teams. These teams have the expertise to navigate the complex applications and they know exactly where and how to perform the evaluations. Additionally, they have the resources to connect their existing infrastructure to a specialized data labelling tool or build a custom effective review interface. What is missing is a free, self hosted tool that automatically pulls in trace data, guides the user through the most effective initial evaluation process, and helps the user analyze that data. To bridge this gap, we created LLMonade for small teams to efficiently evaluate and improve their LLM-powered applications.</p>
+  <p>The evaluation of an LLM-powered application is built upon observability of traces. LLMonade complements the existing evaluation tool, Phoenix, by providing an enhanced manual error analysis interface.  We leverage the robust observability of Phoenix to collect the data for LLMonade’s guided evaluations.</p>
+
+  <Image 
+    src="/images/OurSolution/comparison_updated_cropped.png" 
+    alt="Comparison Chart"
+    width="600px"
+    height="100%"
+    bordered={false}
+    rounded={true}
+    clickable={true}
+  />
 </div>
 
 

@@ -13,6 +13,7 @@
       A refreshingly simple process to evaluate and improve your LLM-powered applications.		</p>
 		<div class="hero-actions">
 			<a href="/case-study" class="btn btn-primary">View Case Study</a>
+			<a href="https://github.com/capstone2505-team-5/CLI" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-outline-blue">Download on Github</a>
 		</div>
 	</div>
 </section>
@@ -42,6 +43,24 @@
 		font-weight: 600;
 	}
 
+	/* Blue outline button styling */
+	.btn-outline-blue {
+		background-color: transparent !important;
+		color: var(--primary-blue) !important;
+		border: 2px solid var(--primary-blue) !important;
+		padding: 1rem 2rem;
+		font-size: 1.1rem;
+		font-weight: 600;
+	}
+
+	.btn-outline-blue:hover {
+		background-color: var(--primary-green) !important;
+		color: white !important;
+		border-color: var(--primary-green) !important;
+		transform: translateY(-1px);
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
 	@media (max-width: 768px) {
 		.hero-symbol {
 			width: 150px;
@@ -52,6 +71,11 @@
 		}
 
 		.hero-actions .btn-primary {
+			padding: 0.875rem 1.75rem;
+			font-size: 1rem;
+		}
+
+		.btn-outline-blue {
 			padding: 0.875rem 1.75rem;
 			font-size: 1rem;
 		}

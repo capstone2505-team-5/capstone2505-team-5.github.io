@@ -1,6 +1,7 @@
 ---
 // OurSolution.astro - Case Study Our Solution Section
 import Carousel from '../Carousel.astro';
+import Image from "../Image.astro";
 const workflowImages: {
   src: string;
   alt: string;
@@ -89,24 +90,10 @@ const reviewImages: {
 <div class="case-study-content">
   <h3 id="introducing-llmonade">Introducing LLMonade</h3>
   <p>LLMonade is a free, lightweight, self-hosted platform that guides developers of LLM-powered applications through their first evaluations. Our software is designed for small engineering teams that have already instrumented their application with Phoenix. Traces are being collected, but the developers don’t know where to start assessing and improving the quality of their application. LLMonade pulls traces from Phoenix and provides an annotation interface inspired by Hamel Husain’s recommendations. Then, guides the developer through the most important evaluation activity, manual error analysis.</p>
+  
   <p>LLMonade is composed of three components:</p>
   <div class="metrics-grid">
-    <div class="metric-card">
-      <div class="metric-icon">
-        <img src="/icons/cli-icon.png" alt="CLI Icon" />
-      </div>
-      <div class="metric-label">Deployment Command Line Interface (CLI)</div>
-      <div class="metric-description">Quickly deploys required infrastructure to AWS.</div>
-    </div>
-    
-    <div class="metric-card">
-      <div class="metric-icon">
-        <img src="/icons/etl-icon-new.png" alt="ETL Icon" />
-      </div>
-      <div class="metric-label">Root Spans Extract, Transform, Load Pipeline (ETL)</div>
-      <div class="metric-description">Automatically ingests root spans from Phoenix.</div>
-    </div>
-    
+
     <div class="metric-card">
       <div class="metric-icon">
         <img src="/icons/risk-analysis.png" alt="App Icon" />
@@ -114,6 +101,23 @@ const reviewImages: {
       <div class="metric-label">Full-Stack Error Analysis Web Application</div>
       <div class="metric-description">Guides error analysis on an ideal review interface</div>
     </div>
+
+    <div class="metric-card">
+      <div class="metric-icon">
+        <img src="/icons/etl-icon-new.png" alt="ETL Icon" />
+      </div>
+      <div class="metric-label">Root Spans Extract, Transform, Load Pipeline (ETL)</div>
+      <div class="metric-description">Automatically ingests root spans from Phoenix.</div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-icon">
+        <img src="/icons/cli-icon.png" alt="CLI Icon" />
+      </div>
+      <div class="metric-label">Deployment Command Line Interface (CLI)</div>
+      <div class="metric-description">Quickly deploys required infrastructure to AWS.</div>
+    </div>
+  
   </div>
 
   <h3 id="full-stack-error-analysis-web-application">Full-Stack Error Analysis Web Application</h3>
