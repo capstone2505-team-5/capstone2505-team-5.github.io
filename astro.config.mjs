@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 export default defineConfig({
-  site: 'https://capstone2505-team-5.github.io/',
+  site: 'https://llmonade.github.io/',
   integrations: [react()],
 });
 // https://astro.build/config
